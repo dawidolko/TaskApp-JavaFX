@@ -1,4 +1,4 @@
-# TaskApp-JavaFX
+# TaskApp-JavaFX 
 
 > 🚀 **Comprehensive Task Management System for IT Companies** - Build enterprise-grade project management applications with JavaFX, role-based access control, and advanced reporting
 
