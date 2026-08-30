@@ -1,0 +1,41 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: taskapp-db
+    environment:
+      MYSQL_DATABASE: taskapp
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: taskapp
+      MYSQL_PASSWORD: taskapp
+    ports:
+      - "3307:3306"
+    volumes:
+      - taskapp-db-data:/var/lib/mysql
+      # Montujemy pojedyncze pliki .sql, a nie caly katalog SQL/ — leza w nim
+      # takze diagramy (.drawio, .png), ktore MySQL probowalby wykonac.
+      # Prefiks numeryczny wymusza kolejnosc: schemat przed danymi.
+      - ../../SQL/migration.sql:/docker-entrypoint-initdb.d/01-migration.sql:ro
+      - ../../SQL/seeder.sql:/docker-entrypoint-initdb.d/02-seeder.sql:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-proot"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  app:
+    build:
+      context: ../../
+      dockerfile: .tools/docker/Dockerfile
+    container_name: taskapp
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      # DISPLAY musi wskazywac na serwer X hosta, inaczej JavaFX nie wystartuje.
+      - DISPLAY=${DISPLAY:-:0}
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+    network_mode: host
+
+volumes:
+  taskapp-db-data:
