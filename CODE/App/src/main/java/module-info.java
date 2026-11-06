@@ -4,7 +4,7 @@ module pl.rozowi.app {
     requires java.sql;
 
 
-    requires transitive itextpdf;
+    requires transitive com.github.librepdf.openpdf;
     requires java.desktop;
 //    requires task.app.reports;
 

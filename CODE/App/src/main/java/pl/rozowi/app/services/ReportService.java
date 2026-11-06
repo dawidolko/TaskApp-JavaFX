@@ -1,13 +1,13 @@
 package pl.rozowi.app.services;
 
-import com.itextpdf.text.*;
-import com.itextpdf.text.pdf.BaseFont;
-import com.itextpdf.text.pdf.ColumnText;
-import com.itextpdf.text.pdf.PdfContentByte;
-import com.itextpdf.text.pdf.PdfPageEventHelper;
-import com.itextpdf.text.pdf.PdfPTable;
-import com.itextpdf.text.pdf.PdfPCell;
-import com.itextpdf.text.pdf.PdfWriter;
+import com.lowagie.text.*;
+import com.lowagie.text.pdf.BaseFont;
+import com.lowagie.text.pdf.ColumnText;
+import com.lowagie.text.pdf.PdfContentByte;
+import com.lowagie.text.pdf.PdfPageEventHelper;
+import com.lowagie.text.pdf.PdfPTable;
+import com.lowagie.text.pdf.PdfPCell;
+import com.lowagie.text.pdf.PdfWriter;
 import pl.rozowi.app.models.Team;
 
 import java.io.FileOutputStream;
@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
+import java.awt.Color;
 
 /**
  * Klasa służąca do generowania raportów w formacie PDF.
@@ -36,9 +37,9 @@ public class ReportService {
     private Font TABLE_DATA_FONT;
     private Font FILTER_FONT;
 
-    private BaseColor PRIMARY_COLOR = new BaseColor(0, 123, 255);
-    private BaseColor SECONDARY_COLOR = new BaseColor(30, 30, 47);
-    private BaseColor LIGHT_COLOR = new BaseColor(240, 240, 245);
+    private Color PRIMARY_COLOR = new Color(0, 123, 255);
+    private Color SECONDARY_COLOR = new Color(30, 30, 47);
+    private Color LIGHT_COLOR = new Color(240, 240, 245);
 
     /**
      * Konstruktor inicjalizujący czcionki używane w raportach.
@@ -52,18 +53,18 @@ public class ReportService {
             SECTION_FONT = new Font(base, 12, Font.BOLD);
             NORMAL_FONT = new Font(base, 10, Font.NORMAL);
             SMALL_FONT = new Font(base, 8, Font.NORMAL);
-            TABLE_HEADER_FONT = new Font(base, 10, Font.BOLD, BaseColor.WHITE);
+            TABLE_HEADER_FONT = new Font(base, 10, Font.BOLD, Color.WHITE);
             TABLE_DATA_FONT = new Font(base, 9, Font.NORMAL);
-            FILTER_FONT = new Font(base, 10, Font.ITALIC, new BaseColor(100, 100, 100));
+            FILTER_FONT = new Font(base, 10, Font.ITALIC, new Color(100, 100, 100));
         } catch (Exception e) {
-            TITLE_FONT = new Font(Font.FontFamily.HELVETICA, 18, Font.BOLD, PRIMARY_COLOR);
-            SUBTITLE_FONT = new Font(Font.FontFamily.HELVETICA, 14, Font.BOLD, PRIMARY_COLOR);
-            SECTION_FONT = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD);
-            NORMAL_FONT = new Font(Font.FontFamily.HELVETICA, 10, Font.NORMAL);
-            SMALL_FONT = new Font(Font.FontFamily.HELVETICA, 8, Font.NORMAL);
-            TABLE_HEADER_FONT = new Font(Font.FontFamily.HELVETICA, 10, Font.BOLD, BaseColor.WHITE);
-            TABLE_DATA_FONT = new Font(Font.FontFamily.HELVETICA, 9, Font.NORMAL);
-            FILTER_FONT = new Font(Font.FontFamily.HELVETICA, 10, Font.ITALIC, new BaseColor(100, 100, 100));
+            TITLE_FONT = new Font(Font.HELVETICA, 18, Font.BOLD, PRIMARY_COLOR);
+            SUBTITLE_FONT = new Font(Font.HELVETICA, 14, Font.BOLD, PRIMARY_COLOR);
+            SECTION_FONT = new Font(Font.HELVETICA, 12, Font.BOLD);
+            NORMAL_FONT = new Font(Font.HELVETICA, 10, Font.NORMAL);
+            SMALL_FONT = new Font(Font.HELVETICA, 8, Font.NORMAL);
+            TABLE_HEADER_FONT = new Font(Font.HELVETICA, 10, Font.BOLD, Color.WHITE);
+            TABLE_DATA_FONT = new Font(Font.HELVETICA, 9, Font.NORMAL);
+            FILTER_FONT = new Font(Font.HELVETICA, 10, Font.ITALIC, new Color(100, 100, 100));
         }
     }
 
@@ -277,7 +278,7 @@ public class ReportService {
      * @throws DocumentException w przypadku problemów z dodaniem zawartości do dokumentu
      */
     private void addSeparator(Document doc) throws DocumentException {
-        Chunk line = new Chunk(new com.itextpdf.text.pdf.draw.LineSeparator(0.5f, 100, PRIMARY_COLOR, Element.ALIGN_CENTER, -2));
+        Chunk line = new Chunk(new com.lowagie.text.pdf.draw.LineSeparator(0.5f, 100, PRIMARY_COLOR, Element.ALIGN_CENTER, -2));
         Paragraph para = new Paragraph();
         para.add(line);
         doc.add(para);

@@ -4,14 +4,14 @@
 
 **TaskApp** manages projects, teams and tasks for an IT company. An administrator, a manager, a team leader and an employee each sign into the same application and get a different interface: separate FXML trees, separate controllers, separate dashboards. A role does not simply hide buttons — it loads a different view.
 
-Underneath sits a MariaDB schema reached through hand-written DAOs, with migration and seeder scripts in the repository, an activity log for every task, and PDF reports generated with iText.
+Underneath sits a MariaDB schema reached through hand-written DAOs, with migration and seeder scripts in the repository, an activity log for every task, and PDF reports generated with OpenPDF.
 
 ![Java](https://img.shields.io/badge/Java-17%2B-ED8B00?logo=openjdk&logoColor=white)
 ![JavaFX](https://img.shields.io/badge/JavaFX-21-5382A1?logo=openjdk&logoColor=white)
 ![MariaDB](https://img.shields.io/badge/MariaDB-JDBC-003545?logo=mariadb&logoColor=white)
 ![Maven](https://img.shields.io/badge/Maven-build-C71A36?logo=apachemaven&logoColor=white)
 ![JUnit 5](https://img.shields.io/badge/JUnit-5.10-25A162?logo=junit5&logoColor=white)
-![iText](https://img.shields.io/badge/iText-PDF%20reports-008000)
+![OpenPDF](https://img.shields.io/badge/OpenPDF-PDF%20reports-008000)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
 ---
@@ -21,7 +21,7 @@ Underneath sits a MariaDB schema reached through hand-written DAOs, with migrati
 - **A separate interface per role** — `fxml/admin`, `fxml/manager`, `fxml/teamleader` and `fxml/user` are four view trees with their own controllers. Sign-in decides which one loads.
 - **Tasks with a history** — every change is written to a task activity log, so a task carries its own audit trail rather than just a current status.
 - **Projects, teams and members as real relations** — `ProjectDAO`, `TeamDAO`, `TeamMemberDAO` and `TaskAssignmentDAO` each own their queries, which is why the schema is visible in the code rather than buried in one god-class.
-- **PDF reports** — iText and xmlworker turn the reporting views into documents the manager can send on.
+- **PDF reports** — OpenPDF turns the reporting views into documents the manager can send on.
 - **Migration and seeder scripts included** — `SQL/migration.sql` builds the schema, `SQL/seeder.sql` fills it, so a working instance is two commands away.
 - **DAOs covered by tests** — JUnit 5 tests for every DAO plus the database manager, run against H2 so they need no live server.
 - **The design is documented** — ERDs in `SQL/`, UML in `UML/`, generated Javadoc in `JAVA_DOCS/`, and twenty-three interface screenshots in `GUI/IMG`.
@@ -64,7 +64,7 @@ Underneath sits a MariaDB schema reached through hand-written DAOs, with migrati
 | **FormsFX**           | 11.6    | Form construction.                                      |
 | **MariaDB JDBC**      | 3.x     | Database connection.                                    |
 | **H2**                | —       | In-memory database for the DAO tests.                   |
-| **iText + xmlworker** | 5.5     | PDF report generation.                                  |
+| **OpenPDF**           | 1.3     | PDF report generation.                                  |
 | **JUnit 5**           | 5.10    | DAO and model tests.                                    |
 | **Maven**             | —       | Build and dependency management.                        |
 
@@ -143,4 +143,4 @@ TaskApp-JavaFX/
 
 ## 📄 License
 
-MIT © [Dawid Olko](https://dawidolko.pl)
+The application code is MIT © [Dawid Olko](https://dawidolko.pl). Dependencies keep their own licences, listed in [CREDITS.md](CREDITS.md).

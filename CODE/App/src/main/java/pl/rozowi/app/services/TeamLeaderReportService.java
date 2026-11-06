@@ -1,7 +1,7 @@
 package pl.rozowi.app.services;
 
-import com.itextpdf.text.*;
-import com.itextpdf.text.pdf.*;
+import com.lowagie.text.*;
+import com.lowagie.text.pdf.*;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
+import java.awt.Color;
 
 /**
  * Klasa odpowiedzialna za generowanie raportów PDF dla lidera zespołu.
@@ -28,7 +29,7 @@ public class TeamLeaderReportService {
     private Font tableDataFont;
     private Font filterFont;
 
-    private BaseColor primaryColor = new BaseColor(0, 123, 255);
+    private Color primaryColor = new Color(0, 123, 255);
 
     /**
      * Inicjalizuje czcionki wykorzystywane w dokumencie PDF.
@@ -42,18 +43,18 @@ public class TeamLeaderReportService {
             sectionFont = new Font(base, 12, Font.BOLD);
             normalFont = new Font(base, 10, Font.NORMAL);
             smallFont = new Font(base, 8, Font.NORMAL);
-            tableHeaderFont = new Font(base, 10, Font.BOLD, BaseColor.WHITE);
+            tableHeaderFont = new Font(base, 10, Font.BOLD, Color.WHITE);
             tableDataFont = new Font(base, 9, Font.NORMAL);
-            filterFont = new Font(base, 10, Font.ITALIC, new BaseColor(100, 100, 100));
+            filterFont = new Font(base, 10, Font.ITALIC, new Color(100, 100, 100));
         } catch (Exception e) {
-            titleFont = new Font(Font.FontFamily.HELVETICA, 18, Font.BOLD, primaryColor);
-            subtitleFont = new Font(Font.FontFamily.HELVETICA, 14, Font.BOLD, primaryColor);
-            sectionFont = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD);
-            normalFont = new Font(Font.FontFamily.HELVETICA, 10, Font.NORMAL);
-            smallFont = new Font(Font.FontFamily.HELVETICA, 8, Font.NORMAL);
-            tableHeaderFont = new Font(Font.FontFamily.HELVETICA, 10, Font.BOLD, BaseColor.WHITE);
-            tableDataFont = new Font(Font.FontFamily.HELVETICA, 9, Font.NORMAL);
-            filterFont = new Font(Font.FontFamily.HELVETICA, 10, Font.ITALIC, new BaseColor(100, 100, 100));
+            titleFont = new Font(Font.HELVETICA, 18, Font.BOLD, primaryColor);
+            subtitleFont = new Font(Font.HELVETICA, 14, Font.BOLD, primaryColor);
+            sectionFont = new Font(Font.HELVETICA, 12, Font.BOLD);
+            normalFont = new Font(Font.HELVETICA, 10, Font.NORMAL);
+            smallFont = new Font(Font.HELVETICA, 8, Font.NORMAL);
+            tableHeaderFont = new Font(Font.HELVETICA, 10, Font.BOLD, Color.WHITE);
+            tableDataFont = new Font(Font.HELVETICA, 9, Font.NORMAL);
+            filterFont = new Font(Font.HELVETICA, 10, Font.ITALIC, new Color(100, 100, 100));
         }
     }
 
@@ -314,7 +315,7 @@ public class TeamLeaderReportService {
      * @throws DocumentException w przypadku błędu dodawania do dokumentu
      */
     private void addSeparator(Document doc) throws DocumentException {
-        Chunk line = new Chunk(new com.itextpdf.text.pdf.draw.LineSeparator(0.5f, 100, primaryColor, Element.ALIGN_CENTER, -2));
+        Chunk line = new Chunk(new com.lowagie.text.pdf.draw.LineSeparator(0.5f, 100, primaryColor, Element.ALIGN_CENTER, -2));
         Paragraph para = new Paragraph();
         para.add(line);
         doc.add(para);
