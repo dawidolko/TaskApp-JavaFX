@@ -160,7 +160,7 @@ INSERT INTO teams (id, team_name, project_id) VALUES
   (7, 'Zespół Eta', 7),
   (8, 'Zespół Theta', 8),
   (9, 'Zespół Iota', 9),
-  (10, 'Zespół Downa', 10),
+  (10, 'Zespół Developerski', 10),
   (11, 'Zespół Kappa', 11),
   (12, 'Zespół Lambda', 12),
   (13, 'Zespół Mu', 13),
