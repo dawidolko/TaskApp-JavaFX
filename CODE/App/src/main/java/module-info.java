@@ -6,7 +6,6 @@ module pl.rozowi.app {
 
     requires transitive com.github.librepdf.openpdf;
     requires java.desktop;
-//    requires task.app.reports;
 
     opens pl.rozowi.app.controllers to javafx.fxml;
     exports pl.rozowi.app;

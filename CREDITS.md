@@ -8,4 +8,4 @@ The MIT licence in `LICENSE` covers the application code only. Dependencies keep
 | [MariaDB Connector/J](https://mariadb.com/kb/en/about-mariadb-connector-j/) | Database access | LGPL-2.1 |
 | [OpenJFX](https://openjfx.io/) | Desktop interface | GPL-2.0 with the Classpath Exception |
 
-Versions before this file was added used iText 5, which is AGPL-3.0 or paid. The current code no longer depends on it.
+The application no longer uses iText 5, which is AGPL-3.0 or paid. `PDF/INF_ROZOWI-module-raports*` is an older report module kept as a project deliverable. It is built against iText 5, the application does not use it, and the MIT statement does not cover it.

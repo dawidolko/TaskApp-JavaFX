@@ -49,13 +49,6 @@
             <artifactId>h2</artifactId>
             <version>2.2.224</version>
         </dependency>
-        <dependency>
-            <groupId>pl.rozowi</groupId>
-            <artifactId>task-app-reports</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/task-app-reports-1.0-SNAPSHOT.jar</systemPath>
-        </dependency>
 
         <dependency>
             <groupId>org.junit.jupiter</groupId>
