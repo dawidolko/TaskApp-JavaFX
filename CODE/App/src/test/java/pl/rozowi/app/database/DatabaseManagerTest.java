@@ -10,8 +10,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class DatabaseManagerTest {
 
     /**
-     * Test sprawdzający, czy można nawiązać połączenie z bazą danych.
-     * Połączenie nie powinno być null i powinno być otwarte.
+     * Tests whether a database connection can be established.
+     * The connection should not be null and should be open.
      */
     @Test
     void testGetConnection() {
@@ -24,8 +24,9 @@ class DatabaseManagerTest {
     }
 
     /**
-     * Test sprawdzający, czy istnieje konkretna (oczekiwana) baza danych/schema.
-     * Ten test zakłada, że schema `it_task_management` istnieje — jeśli nie, test nie przejdzie.
+     * Tests whether a specific (expected) database/schema exists.
+     * This test assumes that the schema `it_task_management` exists; if it does
+     * not, the test fails.
      */
     @Test
     void testSchemaExists_ExistingSchema() {
@@ -34,8 +35,9 @@ class DatabaseManagerTest {
     }
 
     /**
-     * Test sprawdzający, czy nieistniejąca schema jest poprawnie rozpoznana jako brakująca.
-     * Nazwa `some_random_schema_123` powinna być unikalna, aby test był wiarygodny.
+     * Tests whether a non-existent schema is correctly recognized as missing.
+     * The name `some_random_schema_123` should be unique for the test to be
+     * reliable.
      */
     @Test
     void testSchemaExists_NonExistingSchema() {

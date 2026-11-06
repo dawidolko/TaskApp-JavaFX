@@ -5,18 +5,19 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
- * Klasa odpowiedzialna za zmianę hasła użytkownika.
- * Zapewnia walidację nowego hasła oraz jego hashowanie.
+ * Class that handles changing a user's password.
+ * Provides validation of the new password and its hashing.
  */
 public class PasswordChangeService {
 
     /**
-     * Weryfikuje i haszuje nowe hasło użytkownika.
+     * Validates and hashes the user's new password.
      *
-     * @param newPassword nowe hasło
-     * @param confirmPassword potwierdzenie nowego hasła
-     * @return zahashowane hasło jako ciąg znaków hex
-     * @throws IllegalArgumentException jeśli hasła są puste, nie są identyczne lub nie spełniają wymagań
+     * @param newPassword new password
+     * @param confirmPassword confirmation of the new password
+     * @return the hashed password as a hex string
+     * @throws IllegalArgumentException if the passwords are empty, do not match or do
+     *         not meet the requirements
      */
     public String validateAndHashPassword(String newPassword, String confirmPassword) throws IllegalArgumentException {
         if (newPassword == null || confirmPassword == null ||
@@ -32,11 +33,11 @@ public class PasswordChangeService {
     }
 
     /**
-     * Haszuje podane hasło algorytmem SHA-256.
+     * Hashes the given password with SHA-256.
      *
-     * @param password hasło do zaszyfrowania
-     * @return zahashowane hasło jako ciąg znaków hex
-     * @throws RuntimeException jeśli algorytm hashowania nie jest dostępny
+     * @param password password to hash
+     * @return the hashed password as a hex string
+     * @throws RuntimeException if the hashing algorithm is not available
      */
     public String hashPassword(String password) {
         try {

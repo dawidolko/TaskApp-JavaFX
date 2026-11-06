@@ -3,8 +3,8 @@ package pl.rozowi.app.models;
 import java.sql.Timestamp;
 
 /**
- * Rozszerzona wersja klasy TaskActivity, która zawiera dodatkowe informacje
- * potrzebne do efektywnego wyświetlania aktywności w interfejsie użytkownika
+ * Extended version of the TaskActivity class containing the additional information
+ * needed to display activities efficiently in the user interface.
  */
 public class EnhancedTaskActivity extends TaskActivity {
 
@@ -59,8 +59,8 @@ public class EnhancedTaskActivity extends TaskActivity {
     }
 
     /**
-     * Zwraca pełne imię i nazwisko użytkownika
-     * @return String w formacie "Imię Nazwisko"
+     * Returns the user's full name.
+     * @return String in the format "First Last"
      */
     public String getFullUserName() {
         if (userName != null && userLastName != null) {
@@ -75,8 +75,8 @@ public class EnhancedTaskActivity extends TaskActivity {
     }
 
     /**
-     * Zwraca informacje o użytkowniku w formie przyjaznej do wyświetlenia
-     * @return String w formacie "Imię Nazwisko (email)"
+     * Returns user information in a display-friendly form.
+     * @return String in the format "First Last (email)"
      */
     public String getUserDisplayString() {
         String name = getFullUserName();
@@ -88,8 +88,8 @@ public class EnhancedTaskActivity extends TaskActivity {
     }
 
     /**
-     * Zwraca tytuł zadania lub informację o braku zadania
-     * @return Tytuł zadania lub informacja o braku
+     * Returns the task title, or a message that there is no task.
+     * @return task title, or a no-task message
      */
     public String getTaskTitleOrDefault() {
         if (getTaskId() == 0) {
@@ -104,8 +104,8 @@ public class EnhancedTaskActivity extends TaskActivity {
     }
 
     /**
-     * Przetwarza typ aktywności na bardziej przyjazną dla użytkownika nazwę
-     * @return Nazwa typu aktywności w języku polskim
+     * Converts the activity type to a more user-friendly name.
+     * @return activity type name in Polish
      */
     public String getActivityTypeDisplayName() {
         String type = getActivityType();
@@ -138,8 +138,8 @@ public class EnhancedTaskActivity extends TaskActivity {
     }
 
     /**
-     * Formatuje datę aktywności do wyświetlenia
-     * @return Sformatowana data i czas
+     * Formats the activity date for display.
+     * @return the formatted date and time
      */
     public String getFormattedDate() {
         Timestamp date = getActivityDate();
@@ -150,17 +150,17 @@ public class EnhancedTaskActivity extends TaskActivity {
     }
 
     /**
-     * Określa, czy aktywność jest systemowa czy związana z zadaniem
-     * @return true dla zdarzeń systemowych, false dla aktywności związanych z zadaniami
+     * Determines whether the activity is a system event or task-related.
+     * @return true for system events, false for task-related activities
      */
     public boolean isSystemEvent() {
         return getTaskId() == 0;
     }
 
     /**
-     * Zwraca dodatkowe klasy CSS odpowiednie dla danego typu aktywności
-     * dla użycia w stylowaniu UI
-     * @return String z klasami CSS
+     * Returns the additional CSS classes appropriate for the given activity type,
+     * for use in UI styling.
+     * @return String with CSS classes
      */
     public String getActivityCssClasses() {
         String type = getActivityType();

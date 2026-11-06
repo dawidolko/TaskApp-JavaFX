@@ -3,13 +3,13 @@ package pl.rozowi.app.controllers;
 import pl.rozowi.app.models.User;
 
 /**
- * Interfejs dla kontrolerów, które potrzebują dostępu do obiektu użytkownika
+ * Interface for controllers that need access to the user object.
  */
 public interface UserAwareController {
 
     /**
-     * Ustawia obiekt użytkownika w kontrolerze
-     * @param user Obiekt użytkownika
+     * Sets the user object in the controller.
+     * @param user user object
      */
     void setUser(User user);
 }

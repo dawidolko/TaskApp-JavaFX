@@ -18,9 +18,9 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Kontroler zarządzania projektami dla użytkowników z rolą Kierownika.
- * Umożliwia przeglądanie, dodawanie, edycję i usuwanie projektów,
- * wraz z powiązanymi zadaniami i zespołami.
+ * Project management controller for users with the Manager role.
+ * Allows browsing, adding, editing and deleting projects, along with their
+ * related tasks and teams.
  */
 public class ManagerProjectsController {
 
@@ -42,7 +42,7 @@ public class ManagerProjectsController {
     private final ObservableList<Project> data = FXCollections.observableArrayList();
 
     /**
-     * Inicjalizuje kontroler, konfigurując tabelę projektów i ładując dane.
+     * Initializes the controller, configuring the project table and loading the data.
      */
     @FXML
     public void initialize() {
@@ -58,7 +58,7 @@ public class ManagerProjectsController {
     }
 
     /**
-     * Ładuje wszystkie projekty przypisane do aktualnego kierownika.
+     * Loads all projects assigned to the current manager.
      */
     private void loadAll() {
         data.clear();
@@ -68,8 +68,8 @@ public class ManagerProjectsController {
     }
 
     /**
-     * Obsługuje dodawanie nowego projektu.
-     * Wyświetla okno dialogowe do wprowadzenia danych projektu.
+     * Handles adding a new project.
+     * Shows a dialog for entering the project data.
      */
     @FXML
     private void onAddProject() {
@@ -87,8 +87,8 @@ public class ManagerProjectsController {
     }
 
     /**
-     * Obsługuje edycję istniejącego projektu.
-     * Wyświetla okno dialogowe z danymi wybranego projektu.
+     * Handles editing an existing project.
+     * Shows a dialog with the selected project's data.
      */
     @FXML
     private void onEditProject() {
@@ -104,8 +104,8 @@ public class ManagerProjectsController {
     }
 
     /**
-     * Obsługuje usuwanie projektu.
-     * Wyświetla ostrzeżenie jeśli projekt zawiera powiązane zadania.
+     * Handles deleting a project.
+     * Shows a warning if the project has related tasks.
      */
     @FXML
     private void onDeleteProject() {
@@ -148,8 +148,8 @@ public class ManagerProjectsController {
     }
 
     /**
-     * Wyświetla okno dialogowe z informacją.
-     * @param message Treść wiadomości do wyświetlenia
+     * Shows an information dialog.
+     * @param message message text to display
      */
     private void showInfo(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -160,8 +160,8 @@ public class ManagerProjectsController {
     }
 
     /**
-     * Wyświetla okno dialogowe z ostrzeżeniem.
-     * @param message Treść ostrzeżenia do wyświetlenia
+     * Shows a warning dialog.
+     * @param message warning text to display
      */
     private void showWarning(String message) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -172,9 +172,9 @@ public class ManagerProjectsController {
     }
 
     /**
-     * Wyświetla okno dialogowe z błędem.
-     * @param title Tytuł okna dialogowego
-     * @param message Treść błędu do wyświetlenia
+     * Shows an error dialog.
+     * @param title dialog title
+     * @param message error text to display
      */
     private void showError(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -185,7 +185,7 @@ public class ManagerProjectsController {
     }
 
     /**
-     * Wewnętrzna klasa okna dialogowego do tworzenia/edycji projektu.
+     * Inner dialog class for creating/editing a project.
      */
 
     private static class ProjectFormDialog extends Dialog<Project> {
@@ -195,8 +195,8 @@ public class ManagerProjectsController {
         private final DatePicker dpEnd = new DatePicker();
 
         /**
-         * Tworzy nowe okno dialogowe do edycji projektu.
-         * @param p Projekt do edycji lub null dla nowego projektu
+         * Creates a new project editing dialog.
+         * @param p project to edit, or null for a new project
          */
         public ProjectFormDialog(Project p) {
             setTitle(p == null ? "Nowy projekt" : "Edytuj projekt");
@@ -249,8 +249,8 @@ public class ManagerProjectsController {
         }
 
         /**
-         * Sprawdza poprawność danych w formularzu.
-         * @param okButton Przycisk OK do aktywacji/dezaktywacji
+         * Validates the form data.
+         * @param okButton OK button to enable/disable
          */
         private void validateForm(Button okButton) {
             boolean nameValid = !nameField.getText().trim().isEmpty();

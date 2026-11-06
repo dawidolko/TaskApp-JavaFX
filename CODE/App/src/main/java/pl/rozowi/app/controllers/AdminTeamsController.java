@@ -20,9 +20,9 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * Kontroler odpowiedzialny za zarządzanie zespołami w panelu administracyjnym.
- * Umożliwia tworzenie, edycję, usuwanie zespołów oraz przypisywanie członków i liderów.
- * Zapewnia również podgląd zadań przypisanych do wybranego zespołu.
+ * Controller that manages teams in the administration panel.
+ * Allows creating, editing and deleting teams and assigning members and leaders.
+ * Also provides a view of the tasks assigned to the selected team.
  */
 public class AdminTeamsController {
 
@@ -77,7 +77,7 @@ public class AdminTeamsController {
     private final ObservableList<Task> taskData = FXCollections.observableArrayList();
 
     /**
-     * Klasa pomocnicza reprezentująca użytkownika z przypisaną rolą w zespole.
+     * Helper class representing a user with an assigned role in a team.
      */
     public static class UserWithRole {
         private final User user;
@@ -124,7 +124,7 @@ public class AdminTeamsController {
     }
 
     /**
-     * Model wyboru użytkownika z możliwością oznaczenia jako lider zespołu.
+     * User selection model with the option of marking the user as team leader.
      */
     public static class UserSelectionModel {
         private final User user;
@@ -203,9 +203,9 @@ public class AdminTeamsController {
     }
 
     /**
-     * Inicjalizuje kontroler. Ładuje dane zespołów, konfiguruje tabele
-     * oraz ustawia podstawowe parametry. Wywoływana automatycznie po załadowaniu FXML.
-     * @throws SQLException w przypadku błędu dostępu do bazy danych
+     * Initializes the controller. Loads team data, configures the tables and sets basic
+     * parameters. Called automatically after the FXML is loaded.
+     * @throws SQLException on a database access error
      */
     @FXML
     public void initialize() throws SQLException {
@@ -276,8 +276,8 @@ public class AdminTeamsController {
     }
 
     /**
-     * Ładuje nazwy ról użytkowników z bazy danych.
-     * W przypadku błędu używa domyślnych nazw ról.
+     * Loads user role names from the database.
+     * Falls back to default role names on error.
      */
     private void loadRoleNames() {
         try {
@@ -308,8 +308,8 @@ public class AdminTeamsController {
     }
 
     /**
-     * Ładuje listę wszystkich zespołów z bazy danych.
-     * @throws SQLException w przypadku błędu dostępu do bazy danych
+     * Loads the list of all teams from the database.
+     * @throws SQLException on a database access error
      */
     private void loadAll() throws SQLException {
         List<Team> allTeams = teamDAO.getAllTeams();
@@ -317,9 +317,10 @@ public class AdminTeamsController {
     }
 
     /**
-     * Obsługuje wybór zespołu z tabeli. Ładuje członków i zadania wybranego zespołu.
-     * @param team Wybrany zespół lub null, jeśli wybór został anulowany
-     * @throws SQLException w przypadku błędu dostępu do bazy danych
+     * Handles selecting a team in the table. Loads the selected team's members and
+     * tasks.
+     * @param team the selected team, or null if the selection was cleared
+     * @throws SQLException on a database access error
      */
     private void onTeamSelected(Team team) throws SQLException {
         if (team == null) {
@@ -332,9 +333,9 @@ public class AdminTeamsController {
     }
 
     /**
-     * Ładuje listę członków wybranego zespołu.
-     * @param teamId ID zespołu, którego członkowie mają zostać załadowani
-     * @throws SQLException w przypadku błędu dostępu do bazy danych
+     * Loads the list of members of the selected team.
+     * @param teamId ID of the team whose members are to be loaded
+     * @throws SQLException on a database access error
      */
     private void loadTeamMembers(int teamId) throws SQLException {
         memberData.clear();
@@ -351,9 +352,9 @@ public class AdminTeamsController {
     }
 
     /**
-     * Obsługuje akcję dodawania nowego zespołu.
-     * Wyświetla okno dialogowe do wprowadzenia danych nowego zespołu.
-     * @throws SQLException w przypadku błędu dostępu do bazy danych
+     * Handles adding a new team.
+     * Shows a dialog for entering the new team's data.
+     * @throws SQLException on a database access error
      */
     @FXML
     private void onAddTeam() throws SQLException {
@@ -414,9 +415,9 @@ public class AdminTeamsController {
     }
 
     /**
-     * Obsługuje akcję edycji istniejącego zespołu.
-     * Wyświetla okno dialogowe z danymi wybranego zespołu do modyfikacji.
-     * @throws SQLException w przypadku błędu dostępu do bazy danych
+     * Handles editing an existing team.
+     * Shows a dialog with the selected team's data for modification.
+     * @throws SQLException on a database access error
      */
     @FXML
     private void onEditTeam() throws SQLException {
@@ -476,9 +477,9 @@ public class AdminTeamsController {
     }
 
     /**
-     * Obsługuje akcję przypisywania członków do zespołu.
-     * Wyświetla okno dialogowe z listą dostępnych użytkowników.
-     * @throws SQLException w przypadku błędu dostępu do bazy danych
+     * Handles assigning members to a team.
+     * Shows a dialog with the list of available users.
+     * @throws SQLException on a database access error
      */
     @FXML
     private void onAssignMembers() throws SQLException {
@@ -653,7 +654,7 @@ public class AdminTeamsController {
     }
 
     /**
-     * Filtruje listę zespołów na podstawie wprowadzonego tekstu w polu wyszukiwania.
+     * Filters the team list by the text entered in the search field.
      */
     @FXML
     private void handleSearch() {
@@ -673,7 +674,7 @@ public class AdminTeamsController {
     }
 
     /**
-     * Odświeża dane, ponownie ładując listę zespołów z bazy danych.
+     * Refreshes the data by reloading the team list from the database.
      */
     @FXML
     private void handleRefresh() {
@@ -689,8 +690,8 @@ public class AdminTeamsController {
     }
 
     /**
-     * Wyświetla okno dialogowe z informacją.
-     * @param message Treść wiadomości do wyświetlenia
+     * Shows an information dialog.
+     * @param message message text to display
      */
     private void showInfo(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -701,8 +702,8 @@ public class AdminTeamsController {
     }
 
     /**
-     * Wyświetla okno dialogowe z ostrzeżeniem.
-     * @param message Treść ostrzeżenia do wyświetlenia
+     * Shows a warning dialog.
+     * @param message warning text to display
      */
     private void showWarning(String message) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -713,9 +714,9 @@ public class AdminTeamsController {
     }
 
     /**
-     * Wyświetla okno dialogowe z błędem.
-     * @param title Tytuł okna dialogowego
-     * @param message Treść błędu do wyświetlenia
+     * Shows an error dialog.
+     * @param title dialog title
+     * @param message error text to display
      */
     private void showError(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);

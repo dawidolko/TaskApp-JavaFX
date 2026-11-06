@@ -16,9 +16,9 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
 /**
- * Testy jednostkowe dla klasy TeamDAO z wykorzystaniem Mockito.
- * Klasa testuje operacje na zespołach w bazie danych,
- * stosując mocki do symulacji zachowania warstwy bazy danych.
+ * Unit tests for TeamDAO using Mockito.
+ * Tests operations on teams in the database, using mocks to simulate the
+ * behavior of the database layer.
  */
 public class TeamDAOTest {
 
@@ -36,9 +36,8 @@ public class TeamDAOTest {
     private TeamDAO teamDAO;
 
     /**
-     * Inicjalizacja statycznych mocków przed uruchomieniem wszystkich testów.
-     * Tworzy statyczny mock dla klasy DatabaseManager, który będzie używany
-     * we wszystkich testach.
+     * Initializes static mocks before all tests run.
+     * Creates a static mock of DatabaseManager that is used in all tests.
      */
     @BeforeClass
     public static void initStaticMock() throws SQLException {
@@ -46,8 +45,8 @@ public class TeamDAOTest {
     }
 
     /**
-     * Czyszczenie statycznych mocków po zakończeniu wszystkich testów.
-     * Zamyka statyczny mock DatabaseManager, aby uniknąć wycieków pamięci.
+     * Cleans up static mocks after all tests finish.
+     * Closes the DatabaseManager static mock to avoid memory leaks.
      */
     @AfterClass
     public static void closeStaticMock() {
@@ -55,9 +54,9 @@ public class TeamDAOTest {
     }
 
     /**
-     * Inicjalizacja środowiska testowego przed każdym testem.
-     * Inicjalizuje mocki, konfiguruje ich zachowanie i tworzy
-     * instancję testowanej klasy TeamDAO.
+     * Initializes the test environment before each test.
+     * Initializes the mocks, configures their behavior and creates an instance of
+     * the tested TeamDAO class.
      */
     @Before
     public void setUp() throws SQLException {
@@ -72,9 +71,9 @@ public class TeamDAOTest {
     }
 
     /**
-     * Test sprawdzający metodę getAllTeams.
-     * Symuluje zwrócenie dwóch zespołów z bazy danych i weryfikuje,
-     * czy zostały poprawnie przetworzone na obiekty Team.
+     * Tests getAllTeams.
+     * Simulates two teams returned from the database and verifies that they were
+     * correctly converted to Team objects.
      */
     @Test
     public void testGetAllTeams() throws SQLException {
@@ -96,9 +95,9 @@ public class TeamDAOTest {
     }
 
     /**
-     * Test sprawdzający metodę getTeamById dla istniejącego zespołu.
-     * Symuluje znalezienie zespołu o podanym ID i weryfikuje,
-     * czy został poprawnie przetworzony na obiekt Team.
+     * Tests getTeamById for an existing team.
+     * Simulates finding a team with the given ID and verifies that it was
+     * correctly converted to a Team object.
      */
     @Test
     public void testGetTeamById_teamExists() throws SQLException {
@@ -120,9 +119,9 @@ public class TeamDAOTest {
     }
 
     /**
-     * Test sprawdzający metodę getTeamById dla nieistniejącego zespołu.
-     * Symuluje brak zespołu o podanym ID i weryfikuje,
-     * czy metoda poprawnie zwraca null w takim przypadku.
+     * Tests getTeamById for a non-existent team.
+     * Simulates no team with the given ID and verifies that the method correctly
+     * returns null in that case.
      */
     @Test
     public void testGetTeamById_teamDoesNotExist() throws SQLException {
@@ -138,9 +137,9 @@ public class TeamDAOTest {
     }
 
     /**
-     * Test sprawdzający metodę getTeamNameById dla istniejącego zespołu.
-     * Symuluje znalezienie nazwy zespołu o podanym ID i weryfikuje,
-     * czy została poprawnie zwrócona.
+     * Tests getTeamNameById for an existing team.
+     * Simulates finding the name of the team with the given ID and verifies that
+     * it was returned correctly.
      */
     @Test
     public void testGetTeamNameById() throws SQLException {
@@ -157,9 +156,9 @@ public class TeamDAOTest {
     }
 
     /**
-     * Test sprawdzający metodę getTeamNameById dla nieistniejącego zespołu.
-     * Symuluje brak zespołu o podanym ID i weryfikuje,
-     * czy metoda poprawnie zwraca symbol "–" w takim przypadku.
+     * Tests getTeamNameById for a non-existent team.
+     * Simulates no team with the given ID and verifies that the method correctly
+     * returns an en dash symbol in that case.
      */
     @Test
     public void testGetTeamNameById_teamDoesNotExist() throws SQLException {
@@ -175,9 +174,9 @@ public class TeamDAOTest {
     }
 
     /**
-     * Test sprawdzający metodę insertTeam w przypadku powodzenia.
-     * Symuluje pomyślne dodanie zespołu do bazy danych,
-     * w tym generację ID, i weryfikuje poprawność operacji.
+     * Tests insertTeam on success.
+     * Simulates successfully adding a team to the database, including ID
+     * generation, and verifies that the operation is correct.
      */
     @Test
     public void testInsertTeam_success() throws SQLException {
@@ -202,9 +201,9 @@ public class TeamDAOTest {
     }
 
     /**
-     * Test sprawdzający metodę updateTeam w przypadku powodzenia.
-     * Symuluje pomyślną aktualizację danych zespołu w bazie
-     * i weryfikuje poprawność przekazanych parametrów.
+     * Tests updateTeam on success.
+     * Simulates a successful update of team data in the database and verifies
+     * the passed parameters.
      */
     @Test
     public void testUpdateTeam_success() throws SQLException {
@@ -226,9 +225,9 @@ public class TeamDAOTest {
     }
 
     /**
-     * Test sprawdzający metodę getTeamMembers.
-     * Symuluje pobranie członków zespołu z bazy danych
-     * i weryfikuje poprawne przetworzenie ich na obiekty User.
+     * Tests getTeamMembers.
+     * Simulates fetching team members from the database and verifies that they
+     * are correctly converted to User objects.
      */
     @Test
     public void testGetTeamMembers() throws SQLException {
@@ -259,9 +258,9 @@ public class TeamDAOTest {
     }
 
     /**
-     * Test sprawdzający metodę insertTeamMember w przypadku powodzenia.
-     * Symuluje pomyślne dodanie członka do zespołu i weryfikuje,
-     * czy parametry zapytania zostały poprawnie ustawione.
+     * Tests insertTeamMember on success.
+     * Simulates successfully adding a member to a team and verifies that the
+     * query parameters were set correctly.
      */
     @Test
     public void testInsertTeamMember_success() throws SQLException {
@@ -282,9 +281,9 @@ public class TeamDAOTest {
     }
 
     /**
-     * Test sprawdzający metodę deleteTeamMember w przypadku powodzenia.
-     * Symuluje pomyślne usunięcie członka z zespołu i weryfikuje,
-     * czy parametry zapytania zostały poprawnie ustawione.
+     * Tests deleteTeamMember on success.
+     * Simulates successfully removing a member from a team and verifies that the
+     * query parameters were set correctly.
      */
     @Test
     public void testDeleteTeamMember_success() throws SQLException {
@@ -303,9 +302,9 @@ public class TeamDAOTest {
     }
 
     /**
-     * Test sprawdzający metodę getTeamsForUser.
-     * Symuluje pobranie zespołów, do których należy dany użytkownik,
-     * i weryfikuje poprawne przetworzenie ich na obiekty Team.
+     * Tests getTeamsForUser.
+     * Simulates fetching the teams the given user belongs to and verifies that
+     * they are correctly converted to Team objects.
      */
     @Test
     public void testGetTeamsForUser() throws SQLException {
@@ -329,10 +328,9 @@ public class TeamDAOTest {
     }
 
     /**
-     * Test sprawdzający metodę getTeamsForManager.
-     * Symuluje pobranie zespołów, które są przypisane do projektów
-     * zarządzanych przez danego kierownika, i weryfikuje poprawne
-     * przetworzenie ich na obiekty Team.
+     * Tests getTeamsForManager.
+     * Simulates fetching teams assigned to projects managed by the given manager
+     * and verifies that they are correctly converted to Team objects.
      */
     @Test
     public void testGetTeamsForManager() throws SQLException {
@@ -356,9 +354,9 @@ public class TeamDAOTest {
     }
 
     /**
-     * Test sprawdzający metodę getTeamsByLeaderId.
-     * Symuluje pobranie identyfikatorów zespołów, których liderem
-     * jest dany użytkownik, i weryfikuje poprawność zwróconych danych.
+     * Tests getTeamsByLeaderId.
+     * Simulates fetching the IDs of teams led by the given user and verifies the
+     * returned data.
      */
     @Test
     public void testGetTeamsByLeaderId() throws SQLException {
@@ -378,10 +376,9 @@ public class TeamDAOTest {
     }
 
     /**
-     * Test sprawdzający metodę getTeamsByLeaderIdAsList.
-     * Symuluje pobranie pełnych obiektów zespołów, których liderem
-     * jest dany użytkownik, i weryfikuje poprawność przetworzenia
-     * danych na obiekty Team.
+     * Tests getTeamsByLeaderIdAsList.
+     * Simulates fetching full team objects for teams led by the given user and
+     * verifies that the data is correctly converted to Team objects.
      */
     @Test
     public void testGetTeamsByLeaderIdAsList() throws SQLException {

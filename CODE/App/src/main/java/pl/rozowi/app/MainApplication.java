@@ -16,9 +16,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 /**
- * Główna klasa aplikacji zarządzającej zadaniami (TaskApp).
- * Rozszerza klasę Application z JavaFX i odpowiada za inicjalizację aplikacji,
- * zarządzanie scenami oraz użytkownikiem obecnie zalogowanym.
+ * Main class of the task management application (TaskApp).
+ * Extends the JavaFX Application class and handles application initialization,
+ * scene management and the currently logged-in user.
  */
 public class MainApplication extends Application {
 
@@ -26,11 +26,11 @@ public class MainApplication extends Application {
     private static User currentUser;
 
     /**
-     * Główna metoda startowa aplikacji JavaFX.
-     * Inicjalizuje bazę danych, ładuje ekran startowy i konfiguruje główne okno aplikacji.
+     * Main JavaFX startup method.
+     * Initializes the database, loads the start screen and configures the main window.
      *
-     * @param stage główne okno aplikacji
-     * @throws IOException jeśli wystąpi błąd podczas ładowania pliku FXML
+     * @param stage the main application window
+     * @throws IOException if loading the FXML file fails
      */
     @Override
     public void start(Stage stage) throws IOException {
@@ -65,11 +65,11 @@ public class MainApplication extends Application {
     }
 
     /**
-     * Przełącza aktualną scenę na nową scenę załadowaną z pliku FXML.
+     * Switches the current scene to a new scene loaded from an FXML file.
      *
-     * @param fxmlPath ścieżka do pliku FXML nowej sceny
-     * @param title tytuł okna po przełączeniu sceny
-     * @throws IOException jeśli wystąpi błąd podczas ładowania pliku FXML
+     * @param fxmlPath path to the FXML file of the new scene
+     * @param title window title after the scene switch
+     * @throws IOException if loading the FXML file fails
      */
     public static void switchScene(String fxmlPath, String title) throws IOException {
         FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource(fxmlPath));
@@ -99,10 +99,10 @@ public class MainApplication extends Application {
     }
 
     /**
-     * Ustawia aktualnie zalogowanego użytkownika i ładuje jego ustawienia.
-     * Automatycznie aktualizuje motyw interfejsu użytkownika.
+     * Sets the currently logged-in user and loads their settings.
+     * Automatically updates the UI theme.
      *
-     * @param user obiekt User reprezentujący zalogowanego użytkownika
+     * @param user User object representing the logged-in user
      */
     public static void setCurrentUser(User user) {
         currentUser = user;
@@ -117,9 +117,9 @@ public class MainApplication extends Application {
     }
 
     /**
-     * Ładuje ustawienia użytkownika z bazy danych i aplikuje je do obiektu User.
+     * Loads user settings from the database and applies them to the User object.
      *
-     * @param user obiekt User, dla którego mają zostać załadowane ustawienia
+     * @param user User object to load the settings for
      */
     private static void loadUserSettings(User user) {
         SettingsDAO settingsDAO = new SettingsDAO();
@@ -136,29 +136,14 @@ public class MainApplication extends Application {
         }
     }
 
-    /**
-     * Zwraca aktualnie zalogowanego użytkownika.
-     *
-     * @return obiekt User reprezentujący zalogowanego użytkownika
-     */
     public static User getCurrentUser() {
         return currentUser;
     }
 
-    /**
-     * Zwraca główne okno aplikacji.
-     *
-     * @return obiekt Stage reprezentujący główne okno aplikacji
-     */
     public static Stage getPrimaryStage() {
         return primaryStage;
     }
 
-    /**
-     * Punkt wejścia aplikacji.
-     *
-     * @param args argumenty wiersza poleceń
-     */
     public static void main(String[] args) {
         launch();
     }

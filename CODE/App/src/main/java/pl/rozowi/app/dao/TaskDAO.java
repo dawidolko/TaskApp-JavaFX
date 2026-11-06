@@ -8,17 +8,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Obiekt dostępu do danych do obsługi operacji związanych z zadaniami w bazie danych.
- * Zawiera metody do pobierania, tworzenia, aktualizowania i usuwania zadań,
- * a także do zarządzania przypisaniami zadań do użytkowników.
+ * Data access object handling task-related database operations.
+ * Contains methods for fetching, creating, updating and deleting tasks, as well as
+ * managing task assignments to users.
  */
 public class TaskDAO {
 
     /**
-     * Pobiera wszystkie zadania dla określonego projektu wraz z informacjami o przypisanych użytkownikach.
+     * Gets all tasks for the given project along with information about assigned users.
      *
-     * @param projectId ID projektu, dla którego pobierane są zadania
-     * @return Lista obiektów Task należących do określonego projektu
+     * @param projectId ID of the project to fetch tasks for
+     * @return list of Task objects belonging to the given project
      */
     public List<Task> getTasksByProjectId(int projectId) {
         List<Task> tasks = new ArrayList<>();
@@ -65,10 +65,10 @@ public class TaskDAO {
     }
 
     /**
-     * Pobiera wszystkie zadania dla określonego zespołu wraz z informacjami o przypisanych użytkownikach.
+     * Gets all tasks for the given team along with information about assigned users.
      *
-     * @param teamId ID zespołu, dla którego pobierane są zadania
-     * @return Lista obiektów Task należących do określonego zespołu
+     * @param teamId ID of the team to fetch tasks for
+     * @return list of Task objects belonging to the given team
      */
     public List<Task> getTasksByTeamId(int teamId) {
         List<Task> tasks = new ArrayList<>();
@@ -115,10 +115,10 @@ public class TaskDAO {
     }
 
     /**
-     * Pobiera zadania dla zespołów, w których określony użytkownik jest liderem.
+     * Gets the tasks for teams in which the given user is the leader.
      *
-     * @param leaderId ID użytkownika będącego liderem zespołu
-     * @return Lista obiektów Task dla zespołów, gdzie użytkownik jest liderem
+     * @param leaderId ID of the user who is the team leader
+     * @return list of Task objects for teams where the user is the leader
      */
     public List<Task> getTasksForLeader(int leaderId) {
         List<Task> tasks = new ArrayList<>();
@@ -167,10 +167,10 @@ public class TaskDAO {
     }
 
     /**
-     * Dodaje nowe zadanie do bazy danych.
+     * Adds a new task to the database.
      *
-     * @param task Obiekt Task zawierający dane zadania do wstawienia
-     * @return true jeśli operacja się powiodła, false w przeciwnym wypadku
+     * @param task Task object containing the data to insert
+     * @return true if the operation succeeded, false otherwise
      */
     public boolean insertTask(Task task) {
         String sql =
@@ -204,11 +204,11 @@ public class TaskDAO {
     }
 
     /**
-     * Aktualizuje status zadania.
+     * Updates a task's status.
      *
-     * @param taskId ID zadania do aktualizacji
-     * @param newStatus Nowy status zadania
-     * @return true jeśli operacja się powiodła, false w przeciwnym wypadku
+     * @param taskId ID of the task to update
+     * @param newStatus new task status
+     * @return true if the operation succeeded, false otherwise
      */
     public boolean updateTaskStatus(int taskId, String newStatus) {
         String sql = "UPDATE tasks SET status = ? WHERE id = ?";
@@ -224,10 +224,10 @@ public class TaskDAO {
     }
 
     /**
-     * Pobiera zadania przypisane do określonego użytkownika.
+     * Gets the tasks assigned to the given user.
      *
-     * @param userId ID użytkownika, dla którego pobierane są zadania
-     * @return Lista obiektów Task przypisanych do użytkownika
+     * @param userId ID of the user to fetch tasks for
+     * @return list of Task objects assigned to the user
      */
     public List<Task> getTasksForUser(int userId) {
         List<Task> tasks = new ArrayList<>();
@@ -268,10 +268,10 @@ public class TaskDAO {
     }
 
     /**
-     * Pobiera nazwę zespołu na podstawie jego ID.
+     * Gets a team's name by its ID.
      *
-     * @param teamId ID zespołu
-     * @return Nazwa zespołu lub null jeśli nie znaleziono
+     * @param teamId team ID
+     * @return team name, or null if not found
      */
     private String getTeamNameById(int teamId) {
         String sql = "SELECT team_name FROM teams WHERE id = ?";
@@ -289,11 +289,11 @@ public class TaskDAO {
     }
 
     /**
-     * Pobiera zadania współpracowników w tym samym zespole.
+     * Gets the tasks of colleagues in the same team.
      *
-     * @param userId ID użytkownika wykluczanego z wyników
-     * @param teamId ID zespołu, dla którego pobierane są zadania
-     * @return Lista obiektów Task przypisanych do innych członków zespołu
+     * @param userId ID of the user excluded from the results
+     * @param teamId ID of the team to fetch tasks for
+     * @return list of Task objects assigned to other team members
      */
     public List<Task> getColleagueTasks(int userId, int teamId) {
         List<Task> tasks = new ArrayList<>();
@@ -340,10 +340,10 @@ public class TaskDAO {
     }
 
     /**
-     * Aktualizuje wszystkie pola zadania w bazie danych.
+     * Updates all task fields in the database.
      *
-     * @param task Obiekt Task zawierający zaktualizowane dane
-     * @return true jeśli operacja się powiodła, false w przeciwnym wypadku
+     * @param task Task object containing the updated data
+     * @return true if the operation succeeded, false otherwise
      */
     public boolean updateTask(Task task) {
         String sql = "UPDATE tasks SET title = ?, description = ?, status = ?, priority = ?, " +
@@ -369,10 +369,10 @@ public class TaskDAO {
     }
 
     /**
-     * Pobiera ID użytkownika przypisanego do zadania.
+     * Gets the ID of the user assigned to a task.
      *
-     * @param taskId ID zadania
-     * @return ID przypisanego użytkownika lub 0 jeśli brak przypisania
+     * @param taskId task ID
+     * @return ID of the assigned user, or 0 if there is no assignment
      */
     public int getAssignedUserId(int taskId) {
         String sql = "SELECT user_id FROM task_assignments WHERE task_id = ?";
@@ -390,10 +390,10 @@ public class TaskDAO {
     }
 
     /**
-     * Pobiera email użytkownika przypisanego do zadania.
+     * Gets the email of the user assigned to a task.
      *
-     * @param taskId ID zadania
-     * @return Email przypisanego użytkownika lub pusty string jeśli brak przypisania
+     * @param taskId task ID
+     * @return email of the assigned user, or an empty string if there is no assignment
      */
     public String getAssignedUserEmail(int taskId) {
         String sql = "SELECT u.email FROM task_assignments ta " +
@@ -413,11 +413,11 @@ public class TaskDAO {
     }
 
     /**
-     * Przypisuje zadanie do użytkownika, aktualizując tabelę łączącą.
+     * Assigns a task to a user by updating the join table.
      *
-     * @param taskId ID zadania do przypisania
-     * @param userId ID użytkownika, któremu przypisujemy zadanie
-     * @return true jeśli operacja się powiodła, false w przeciwnym wypadku
+     * @param taskId ID of the task to assign
+     * @param userId ID of the user the task is assigned to
+     * @return true if the operation succeeded, false otherwise
      */
     public boolean assignTask(int taskId, int userId) {
         try (Connection conn = DatabaseManager.getConnection()) {
@@ -452,10 +452,10 @@ public class TaskDAO {
     }
 
     /**
-     * Usuwa zadanie i wszystkie powiązane rekordy z bazy danych.
+     * Deletes a task and all related records from the database.
      *
-     * @param taskId ID zadania do usunięcia
-     * @return true jeśli operacja się powiodła, false w przeciwnym wypadku
+     * @param taskId ID of the task to delete
+     * @return true if the operation succeeded, false otherwise
      */
     public boolean deleteTask(int taskId) {
         try (Connection conn = DatabaseManager.getConnection()) {

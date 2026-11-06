@@ -23,9 +23,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Kontroler odpowiedzialny za zarządzanie i wyświetlanie aktywności w systemie
- * z perspektywy administratora. Zawiera funkcjonalności przeglądania, filtrowania
- * i eksportowania historii aktywności użytkowników.
+ * Controller that manages and displays system activity from the administrator's
+ * perspective. Provides browsing, filtering and exporting of the user activity
+ * history.
  */
 public class AdminActivitiesController {
 
@@ -67,8 +67,8 @@ public class AdminActivitiesController {
     private Map<Integer, String> taskTitleCache = new HashMap<>();
 
     /**
-     * Metoda inicjalizująca kontroler. Konfiguruje tabelę aktywności,
-     * ładuje dane i ustawia filtry.
+     * Initializes the controller. Configures the activity table, loads the data and
+     * sets up the filters.
      */
     @FXML
     private void initialize() {
@@ -99,7 +99,7 @@ public class AdminActivitiesController {
     }
 
     /**
-     * Ładuje wszystkie aktywności z bazy danych i przygotowuje je do wyświetlenia.
+     * Loads all activities from the database and prepares them for display.
      */
     private void loadActivities() {
         try {
@@ -148,10 +148,10 @@ public class AdminActivitiesController {
     }
 
     /**
-     * Pobiera pełną nazwę użytkownika na podstawie ID z cache lub bazy danych.
+     * Gets the user's full name by ID from the cache or the database.
      *
-     * @param userId ID użytkownika
-     * @return pełna nazwa użytkownika w formacie "Imię Nazwisko (email)"
+     * @param userId user ID
+     * @return full user name in the format "First Last (email)"
      */
     private String getUserName(int userId) {
         if (userNameCache.containsKey(userId)) {
@@ -173,10 +173,10 @@ public class AdminActivitiesController {
     }
 
     /**
-     * Pobiera tytuł zadania na podstawie ID z cache lub bazy danych.
+     * Gets the task title by ID from the cache or the database.
      *
-     * @param taskId ID zadania
-     * @return tytuł zadania lub "Zadanie ID: X" jeśli nie znaleziono
+     * @param taskId task ID
+     * @return task title, or "Zadanie ID: X" if not found
      */
     private String getTaskTitle(int taskId) {
         if (taskTitleCache.containsKey(taskId)) {
@@ -200,14 +200,14 @@ public class AdminActivitiesController {
     }
 
     /**
-     * Konfiguruje filtry dla listy aktywności.
+     * Configures the filters for the activity list.
      */
     private void setupFilters() {
         searchField.textProperty().addListener((obs, oldVal, newVal) -> applyFilters());
     }
 
     /**
-     * Stosuje aktualne filtry do listy aktywności.
+     * Applies the current filters to the activity list.
      */
     private void applyFilters() {
         String searchText = searchField.getText().toLowerCase().trim();
@@ -224,10 +224,10 @@ public class AdminActivitiesController {
     }
 
     /**
-     * Konwertuje typ aktywności z angielskiego na polski.
+     * Converts an activity type from English to Polish.
      *
-     * @param englishType typ aktywności w języku angielskim
-     * @return przetłumaczony typ aktywności
+     * @param englishType activity type in English
+     * @return translated activity type
      */
     private String mapTypeToPolish(String englishType) {
         return switch (englishType.toUpperCase()) {
@@ -246,10 +246,10 @@ public class AdminActivitiesController {
     }
 
     /**
-     * Konwertuje typ aktywności z polskiego na angielski.
+     * Converts an activity type from Polish to English.
      *
-     * @param polishType typ aktywności w języku polskim
-     * @return przetłumaczony typ aktywności
+     * @param polishType activity type in Polish
+     * @return translated activity type
      */
     private String mapTypeToEnglish(String polishType) {
         return switch (polishType.toUpperCase()) {
@@ -268,9 +268,9 @@ public class AdminActivitiesController {
     }
 
     /**
-     * Wyświetla szczegóły wybranej aktywności w panelu detali.
+     * Shows the details of the selected activity in the details panel.
      *
-     * @param activity wybrana aktywność do wyświetlenia
+     * @param activity selected activity to display
      */
     private void displayActivityDetails(ActivityEntry activity) {
         detailTimestamp.setText(activity.getTimestamp());
@@ -296,9 +296,6 @@ public class AdminActivitiesController {
         detailDescription.setText(activity.getDescription());
     }
 
-    /**
-     * Czyści panel szczegółów aktywności.
-     */
     private void clearActivityDetails() {
         detailTimestamp.setText("-");
         detailUser.setText("-");
@@ -310,26 +307,17 @@ public class AdminActivitiesController {
         detailDescription.setText("");
     }
 
-    /**
-     * Obsługuje akcję wyszukiwania aktywności.
-     */
     @FXML
     private void handleSearch() {
         applyFilters();
     }
 
-    /**
-     * Obsługuje akcję czyszczenia filtrów.
-     */
     @FXML
     private void handleClearFilters() {
         searchField.clear();
         filteredActivities.setPredicate(p -> true);
     }
 
-    /**
-     * Obsługuje akcję odświeżania listy aktywności.
-     */
     @FXML
     private void handleRefresh() {
         allActivities.clear();
@@ -341,7 +329,7 @@ public class AdminActivitiesController {
     }
 
     /**
-     * Obsługuje akcję eksportu aktywności do pliku.
+     * Handles exporting activities to a file.
      */
     @FXML
     private void handleExportActivities() {
@@ -387,10 +375,10 @@ public class AdminActivitiesController {
     }
 
     /**
-     * Wyświetla okno dialogowe z informacją.
+     * Shows an information dialog.
      *
-     * @param title tytuł okna dialogowego
-     * @param message treść wiadomości
+     * @param title dialog title
+     * @param message message text
      */
     private void showInfo(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -401,9 +389,9 @@ public class AdminActivitiesController {
     }
 
     /**
-     * Wyświetla okno dialogowe z ostrzeżeniem.
+     * Shows a warning dialog.
      *
-     * @param message treść ostrzeżenia
+     * @param message warning text
      */
     private void showWarning(String message) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -414,10 +402,10 @@ public class AdminActivitiesController {
     }
 
     /**
-     * Wyświetla okno dialogowe z błędem.
+     * Shows an error dialog.
      *
-     * @param title tytuł okna dialogowego
-     * @param message treść błędu
+     * @param title dialog title
+     * @param message error text
      */
     private void showError(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -428,7 +416,7 @@ public class AdminActivitiesController {
     }
 
     /**
-     * Klasa wewnętrzna reprezentująca pojedynczy wpis aktywności w tabeli.
+     * Inner class representing a single activity entry in the table.
      */
     public static class ActivityEntry {
         private final int id;
@@ -441,16 +429,16 @@ public class AdminActivitiesController {
         private final String timestamp;
 
         /**
-         * Tworzy nowy wpis aktywności.
+         * Creates a new activity entry.
          *
-         * @param id ID aktywności
-         * @param taskId ID zadania
-         * @param taskTitle tytuł zadania
-         * @param userId ID użytkownika
-         * @param userName nazwa użytkownika
-         * @param activityType typ aktywności
-         * @param description opis aktywności
-         * @param timestamp data i czas aktywności
+         * @param id activity ID
+         * @param taskId task ID
+         * @param taskTitle task title
+         * @param userId user ID
+         * @param userName user name
+         * @param activityType activity type
+         * @param description activity description
+         * @param timestamp activity date and time
          */
         public ActivityEntry(int id, int taskId, String taskTitle, int userId, String userName,
                              String activityType, String description, Timestamp timestamp) {

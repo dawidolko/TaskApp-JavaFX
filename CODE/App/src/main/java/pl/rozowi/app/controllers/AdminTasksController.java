@@ -21,9 +21,9 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Kontroler odpowiedzialny za zarządzanie zadaniami w panelu administracyjnym.
- * Pozwala na wyświetlanie, dodawanie, edycję, usuwanie oraz filtrowanie zadań.
- * Zapewnia również funkcjonalność przypisywania użytkowników do zadań oraz zmianę ich statusów.
+ * Controller that manages tasks in the administration panel.
+ * Allows displaying, adding, editing, deleting and filtering tasks.
+ * Also provides assigning users to tasks and changing task statuses.
  */
 public class AdminTasksController {
 
@@ -98,8 +98,8 @@ public class AdminTasksController {
     private ObservableList<Task> filteredTasks = FXCollections.observableArrayList();
 
     /**
-     * Inicjalizuje kontroler. Ładuje zadania, konfiguruje tabelę oraz ustawia filtry.
-     * Wywoływana automatycznie po załadowaniu pliku FXML.
+     * Initializes the controller. Loads tasks, configures the table and sets up the
+     * filters. Called automatically after the FXML file is loaded.
      */
     @FXML
     private void initialize() {
@@ -143,8 +143,8 @@ public class AdminTasksController {
     }
 
     /**
-     * Konfiguruje dostępne filtry dla listy zadań.
-     * Ustawia wartości domyślne dla filtrów projektów, zespołów, statusów i priorytetów.
+     * Configures the filters available for the task list.
+     * Sets default values for the project, team, status and priority filters.
      */
     private void setupFilters() {
         try {
@@ -205,7 +205,7 @@ public class AdminTasksController {
     }
 
     /**
-     * Ładuje listę wszystkich zadań z bazy danych i wyświetla je w tabeli.
+     * Loads the list of all tasks from the database and shows them in the table.
      */
     private void loadTasks() {
         try {
@@ -228,8 +228,8 @@ public class AdminTasksController {
     }
 
     /**
-     * Wyświetla szczegółowe informacje o wybranym zadaniu.
-     * @param task Zadanie, którego szczegóły mają zostać wyświetlone
+     * Shows detailed information about the selected task.
+     * @param task task whose details are to be displayed
      */
     private void displayTaskDetails(Task task) {
         if (task == null) {
@@ -264,9 +264,6 @@ public class AdminTasksController {
         detailLastUpdate.setText("2025-04-24 12:34:56");
     }
 
-    /**
-     * Czyści panel ze szczegółowymi informacjami o zadaniu.
-     */
     private void clearTaskDetails() {
         detailId.setText("-");
         detailTitle.setText("-");
@@ -282,7 +279,7 @@ public class AdminTasksController {
     }
 
     /**
-     * Obsługuje akcję wyszukiwania zadań na podstawie wprowadzonego tekstu i ustawionych filtrów.
+     * Handles searching tasks by the entered text and the set filters.
      */
     @FXML
     private void handleSearch() {
@@ -350,7 +347,7 @@ public class AdminTasksController {
     }
 
     /**
-     * Stosuje ustawione filtry do listy zadań.
+     * Applies the set filters to the task list.
      */
     @FXML
     private void handleApplyFilters() {
@@ -358,7 +355,7 @@ public class AdminTasksController {
     }
 
     /**
-     * Czyści wszystkie ustawione filtry i przywraca pełną listę zadań.
+     * Clears all set filters and restores the full task list.
      */
     @FXML
     private void handleClearFilters() {
@@ -375,8 +372,8 @@ public class AdminTasksController {
     }
 
     /**
-     * Obsługuje akcję dodawania nowego zadania.
-     * Wyświetla okno dialogowe do wprowadzenia danych nowego zadania.
+     * Handles adding a new task.
+     * Shows a dialog for entering the new task's data.
      */
     @FXML
     private void handleAddTask() {
@@ -402,8 +399,8 @@ public class AdminTasksController {
     }
 
     /**
-     * Obsługuje akcję edycji istniejącego zadania.
-     * Wyświetla okno dialogowe z danymi wybranego zadania do modyfikacji.
+     * Handles editing an existing task.
+     * Shows a dialog with the selected task's data for modification.
      */
     @FXML
     private void handleEditTask() {
@@ -434,8 +431,8 @@ public class AdminTasksController {
     }
 
     /**
-     * Obsługuje akcję usuwania wybranego zadania.
-     * Wyświetla okno potwierdzenia przed usunięciem zadania.
+     * Handles deleting the selected task.
+     * Shows a confirmation dialog before the task is deleted.
      */
     @FXML
     private void handleDeleteTask() {
@@ -475,8 +472,8 @@ public class AdminTasksController {
     }
 
     /**
-     * Obsługuje akcję przypisywania użytkownika do wybranego zadania.
-     * Wyświetla okno dialogowe z listą dostępnych użytkowników.
+     * Handles assigning a user to the selected task.
+     * Shows a dialog with the list of available users.
      */
     @FXML
     private void handleAssignUser() {
@@ -575,8 +572,8 @@ public class AdminTasksController {
     }
 
     /**
-     * Obsługuje akcję zmiany statusu wybranego zadania.
-     * Wyświetla okno dialogowe z dostępnymi statusami do wyboru.
+     * Handles changing the status of the selected task.
+     * Shows a dialog with the available statuses to choose from.
      */
     @FXML
     private void handleChangeStatus() {
@@ -639,7 +636,7 @@ public class AdminTasksController {
     }
 
     /**
-     * Odświeża listę zadań, ponownie ładując dane z bazy danych.
+     * Refreshes the task list by reloading the data from the database.
      */
     @FXML
     private void handleRefresh() {
@@ -652,9 +649,9 @@ public class AdminTasksController {
     }
 
     /**
-     * Tworzy i konfiguruje okno dialogowe do dodawania/edycji zadania.
-     * @param task Zadanie do edycji lub null w przypadku dodawania nowego zadania
-     * @return Skonfigurowane okno dialogowe
+     * Creates and configures the dialog for adding/editing a task.
+     * @param task task to edit, or null when adding a new task
+     * @return the configured dialog
      */
     private Dialog<Task> createTaskDialog(Task task) {
         Dialog<Task> dialog = new Dialog<>();
@@ -918,13 +915,13 @@ public class AdminTasksController {
     }
 
     /**
-     * Sprawdza poprawność danych w formularzu zadania.
-     * @param saveButton Przycisk zapisu, który ma być włączony/wyłączony
-     * @param titleField Pole tytułu zadania
-     * @param projectComboBox ComboBox z listą projektów
-     * @param teamComboBox ComboBox z listą zespołów
-     * @param startDatePicker Data rozpoczęcia zadania
-     * @param endDatePicker Data zakończenia zadania
+     * Validates the data in the task form.
+     * @param saveButton save button to enable/disable
+     * @param titleField task title field
+     * @param projectComboBox ComboBox with the project list
+     * @param teamComboBox ComboBox with the team list
+     * @param startDatePicker task start date
+     * @param endDatePicker task end date
      */
     private void validateTaskForm(Button saveButton, TextField titleField, ComboBox<Project> projectComboBox,
                                   ComboBox<Team> teamComboBox, DatePicker startDatePicker, DatePicker endDatePicker) {
@@ -939,8 +936,8 @@ public class AdminTasksController {
     }
 
     /**
-     * Wyświetla okno dialogowe z informacją.
-     * @param message Treść wiadomości do wyświetlenia
+     * Shows an information dialog.
+     * @param message message text to display
      */
     private void showInfo(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -951,8 +948,8 @@ public class AdminTasksController {
     }
 
     /**
-     * Wyświetla okno dialogowe z ostrzeżeniem.
-     * @param message Treść ostrzeżenia do wyświetlenia
+     * Shows a warning dialog.
+     * @param message warning text to display
      */
     private void showWarning(String message) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -963,9 +960,9 @@ public class AdminTasksController {
     }
 
     /**
-     * Wyświetla okno dialogowe z błędem.
-     * @param title Tytuł okna dialogowego
-     * @param message Treść błędu do wyświetlenia
+     * Shows an error dialog.
+     * @param title dialog title
+     * @param message error text to display
      */
     private void showError(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);

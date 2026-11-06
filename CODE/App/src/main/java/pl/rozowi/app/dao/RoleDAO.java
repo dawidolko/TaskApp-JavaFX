@@ -11,16 +11,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Data Access Object dla zarządzania rolami użytkowników w systemie.
- * Zapewnia podstawowe operacje CRUD na tabeli ról w bazie danych.
+ * Data Access Object for managing user roles in the system.
+ * Provides basic CRUD operations on the roles table in the database.
  */
 public class RoleDAO {
 
     /**
-     * Pobiera wszystkie role z bazy danych.
+     * Gets all roles from the database.
      *
-     * @return Lista obiektów {@link Role} reprezentujących wszystkie role w systemie.
-     *         Pusta lista jeśli nie znaleziono żadnych ról.
+     * @return list of {@link Role} objects representing all roles in the system.
+     *         Empty list if no roles were found.
      */
     public List<Role> getAllRoles() {
         List<Role> roles = new ArrayList<>();
@@ -42,10 +42,10 @@ public class RoleDAO {
     }
 
     /**
-     * Wyszukuje rolę na podstawie nazwy.
+     * Finds a role by name.
      *
-     * @param roleName Nazwa roli do wyszukania
-     * @return Obiekt {@link Role} jeśli znaleziono, null w przeciwnym przypadku
+     * @param roleName name of the role to find
+     * @return the {@link Role} object if found, null otherwise
      */
     public Role getRoleByName(String roleName) {
         Role role = null;
@@ -66,10 +66,10 @@ public class RoleDAO {
     }
 
     /**
-     * Dodaje nową rolę do bazy danych.
+     * Adds a new role to the database.
      *
-     * @param role Obiekt {@link Role} zawierający nazwę nowej roli
-     * @return true jeśli rola została pomyślnie dodana, false w przypadku błędu
+     * @param role {@link Role} object containing the new role's name
+     * @return true if the role was added successfully, false on error
      */
     public boolean insertRole(Role role) {
         String sql = "INSERT INTO roles (role_name) VALUES (?)";

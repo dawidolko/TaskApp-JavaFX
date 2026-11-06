@@ -5,20 +5,20 @@ import pl.rozowi.app.models.Settings;
 import pl.rozowi.app.models.User;
 
 /**
- * Klasa zarządzająca domyślnym widokiem użytkownika.
- * Pozwala na zapisywanie preferencji dotyczących domyślnego widoku dla danego użytkownika.
+ * Manages the user's default view.
+ * Allows saving default view preferences for a given user.
  */
 public class DefaultViewManager {
 
     /**
-     * Zapisuje domyślny widok dla określonego użytkownika.
-     * Jeśli użytkownik istnieje w systemie, aktualizuje jego ustawienia.
-     * Jeśli użytkownik nie ma jeszcze ustawień, tworzy nowy rekord z preferencjami.
-     * Metoda również aktualizuje obiekt użytkownika przekazany jako parametr.
+     * Saves the default view for the given user.
+     * If the user exists in the system, updates their settings.
+     * If the user has no settings yet, creates a new record with the preferences.
+     * Also updates the user object passed as a parameter.
      *
-     * @param user obiekt użytkownika, dla którego zapisywane są preferencje
-     * @param defaultView nazwa domyślnego widoku do zapisania
-     * @throws IllegalArgumentException jeśli parametr defaultView jest null
+     * @param user user object for which the preferences are saved
+     * @param defaultView name of the default view to save
+     * @throws IllegalArgumentException if defaultView is null
      */
     public static void saveDefaultView(User user, String defaultView) {
         if (user == null) {

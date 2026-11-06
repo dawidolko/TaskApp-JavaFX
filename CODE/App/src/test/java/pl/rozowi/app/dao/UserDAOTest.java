@@ -20,9 +20,9 @@ import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
 /**
- * Testy jednostkowe dla klasy UserDAO z wykorzystaniem Mockito.
- * Klasa testuje operacje na użytkownikach w bazie danych,
- * stosując mocki do symulacji zachowania warstwy bazy danych.
+ * Unit tests for UserDAO using Mockito.
+ * Tests operations on users in the database, using mocks to simulate the
+ * behavior of the database layer.
  */
 public class UserDAOTest {
 
@@ -34,10 +34,9 @@ public class UserDAOTest {
     private UserDAO userDAO;
 
     /**
-     * Inicjalizacja środowiska testowego przed każdym testem.
-     * Tworzy i konfiguruje mocki dla połączenia z bazą danych,
-     * preparedStatements i resultSets. Inicjalizuje też
-     * statyczny mock klasy DatabaseManager.
+     * Initializes the test environment before each test.
+     * Creates and configures mocks for the database connection, preparedStatements
+     * and resultSets. Also initializes the static mock of DatabaseManager.
      */
     @Before
     public void setUp() throws SQLException {
@@ -54,8 +53,8 @@ public class UserDAOTest {
     }
 
     /**
-     * Czyszczenie zasobów po każdym teście.
-     * Zamyka statyczny mock DatabaseManager, aby uniknąć wycieków pamięci.
+     * Cleans up resources after each test.
+     * Closes the DatabaseManager static mock to avoid memory leaks.
      */
     @After
     public void tearDown() {
@@ -63,9 +62,9 @@ public class UserDAOTest {
     }
 
     /**
-     * Test sprawdzający metodę getUserById dla istniejącego użytkownika.
-     * Weryfikuje, czy metoda poprawnie pobiera dane z bazy
-     * i tworzy z nich obiekt User.
+     * Tests getUserById for an existing user.
+     * Verifies that the method correctly fetches data from the database and
+     * creates a User object from it.
      */
     @Test
     public void testGetUserById_userExists() throws SQLException {
@@ -96,9 +95,9 @@ public class UserDAOTest {
     }
 
     /**
-     * Test sprawdzający metodę getUserById dla nieistniejącego użytkownika.
-     * Weryfikuje, czy metoda poprawnie zwraca null w przypadku
-     * braku użytkownika o podanym ID.
+     * Tests getUserById for a non-existent user.
+     * Verifies that the method correctly returns null when there is no user with
+     * the given ID.
      */
     @Test
     public void testGetUserById_userDoesNotExist() throws SQLException {
@@ -112,9 +111,9 @@ public class UserDAOTest {
     }
 
     /**
-     * Test sprawdzający metodę getUserByEmail dla istniejącego użytkownika.
-     * Weryfikuje, czy metoda poprawnie pobiera dane z bazy
-     * i tworzy z nich obiekt User na podstawie adresu email.
+     * Tests getUserByEmail for an existing user.
+     * Verifies that the method correctly fetches data from the database and
+     * creates a User object from it based on the email address.
      */
     @Test
     public void testGetUserByEmail_userExists() throws SQLException {
@@ -139,9 +138,9 @@ public class UserDAOTest {
     }
 
     /**
-     * Test sprawdzający metodę getAllUsers.
-     * Weryfikuje, czy metoda poprawnie pobiera wszystkich użytkowników
-     * z bazy danych i tworzy z nich listę obiektów User.
+     * Tests getAllUsers.
+     * Verifies that the method correctly fetches all users from the database and
+     * creates a list of User objects from them.
      */
     @Test
     public void testGetAllUsers() throws SQLException {
@@ -166,9 +165,9 @@ public class UserDAOTest {
     }
 
     /**
-     * Test sprawdzający pomyślne dodanie nowego użytkownika.
-     * Weryfikuje, czy metoda insertUser poprawnie ustawia parametry
-     * zapytania i zwraca true w przypadku powodzenia operacji.
+     * Tests successfully adding a new user.
+     * Verifies that insertUser sets the query parameters correctly and returns
+     * true when the operation succeeds.
      */
     @Test
     public void testInsertUser_success() throws SQLException {
@@ -196,9 +195,9 @@ public class UserDAOTest {
     }
 
     /**
-     * Test sprawdzający niepowodzenie dodania nowego użytkownika.
-     * Symuluje sytuację, gdy operacja INSERT nie dodaje żadnych wierszy,
-     * i weryfikuje, czy metoda zwraca false w takim przypadku.
+     * Tests a failed attempt to add a new user.
+     * Simulates an INSERT that adds no rows and verifies that the method returns
+     * false in that case.
      */
     @Test
     public void testInsertUser_failure() throws SQLException {
@@ -212,10 +211,10 @@ public class UserDAOTest {
     }
 
     /**
-     * Test sprawdzający pomyślną aktualizację danych użytkownika,
-     * włącznie z automatycznym dodaniem rekordu ustawień.
-     * Weryfikuje poprawność transakcji bazodanowej i sprawdza,
-     * czy wszystkie parametry są poprawnie ustawione.
+     * Tests successfully updating user data, including automatically adding a
+     * settings record.
+     * Verifies the database transaction and checks that all parameters are set
+     * correctly.
      */
     @Test
     public void testUpdateUser_success() throws SQLException {
@@ -261,9 +260,9 @@ public class UserDAOTest {
     }
 
     /**
-     * Test sprawdzający obsługę błędów podczas aktualizacji danych użytkownika.
-     * Symuluje wyjątek SQLException podczas aktualizacji i weryfikuje,
-     * czy transakcja jest poprawnie wycofywana (rollback).
+     * Tests error handling when updating user data.
+     * Simulates an SQLException during the update and verifies that the
+     * transaction is correctly rolled back.
      */
     @Test
     public void testUpdateUser_failure() throws SQLException {
@@ -289,9 +288,9 @@ public class UserDAOTest {
     }
 
     /**
-     * Test sprawdzający pomyślne usunięcie użytkownika i jego ustawień.
-     * Weryfikuje poprawność transakcji bazodanowej i sprawdza,
-     * czy wszystkie parametry zapytań są poprawnie ustawione.
+     * Tests successfully deleting a user and their settings.
+     * Verifies the database transaction and checks that all query parameters are
+     * set correctly.
      */
     @Test
     public void testDeleteUser_success() throws SQLException {
@@ -319,9 +318,9 @@ public class UserDAOTest {
     }
 
     /**
-     * Test sprawdzający niepowodzenie usunięcia użytkownika.
-     * Symuluje sytuację, gdy operacja DELETE nie usuwa żadnych wierszy,
-     * i weryfikuje, czy metoda zwraca false w takim przypadku.
+     * Tests a failed user deletion.
+     * Simulates a DELETE that removes no rows and verifies that the method returns
+     * false in that case.
      */
     @Test
     public void testDeleteUser_failure() throws SQLException {
@@ -346,9 +345,9 @@ public class UserDAOTest {
     }
 
     /**
-     * Test sprawdzający obsługę wyjątków SQLException w metodzie getUserById.
-     * Symuluje wyjątek podczas wykonania zapytania i weryfikuje,
-     * czy metoda poprawnie zwraca null w takim przypadku.
+     * Tests SQLException handling in getUserById.
+     * Simulates an exception while executing the query and verifies that the
+     * method correctly returns null in that case.
      */
     @Test
     public void testSQLExceptionHandling_inGetUserById() throws SQLException {

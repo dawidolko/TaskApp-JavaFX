@@ -8,9 +8,9 @@ public class PasswordChangeServiceTest {
     private final PasswordChangeService service = new PasswordChangeService();
 
     /**
-     * Test sprawdza poprawne działanie metody validateAndHashPassword
-     * gdy hasło i jego potwierdzenie są poprawne i zgodne.
-     * Sprawdza, czy wynik nie jest nullem i czy hashowanie jest spójne.
+     * Tests validateAndHashPassword when the password and its confirmation are
+     * valid and match.
+     * Checks that the result is not null and that the hashing is consistent.
      */
     @Test
     public void testValidPasswordChange() {
@@ -22,8 +22,8 @@ public class PasswordChangeServiceTest {
     }
 
     /**
-     * Test sprawdza, czy metoda rzuca wyjątek, gdy hasło jest puste.
-     * Taki przypadek powinien zostać odrzucony z komunikatem walidacyjnym.
+     * Tests whether the method throws an exception when the password is empty.
+     * This case should be rejected with a validation message.
      */
     @Test
     public void testEmptyPasswordThrowsException() {
@@ -34,8 +34,8 @@ public class PasswordChangeServiceTest {
     }
 
     /**
-     * Test sprawdza, czy metoda odpowiednio reaguje na brak hasła (null).
-     * Null powinien być traktowany jako niepoprawne dane wejściowe.
+     * Tests whether the method reacts properly to a missing password (null).
+     * Null should be treated as invalid input.
      */
     @Test
     public void testNullPasswordThrowsException() {
@@ -46,8 +46,8 @@ public class PasswordChangeServiceTest {
     }
 
     /**
-     * Test waliduje sytuację, w której hasło i jego potwierdzenie nie są takie same.
-     * Oczekiwany rezultat to wyjątek z odpowiednim komunikatem.
+     * Tests the case where the password and its confirmation are not the same.
+     * The expected result is an exception with an appropriate message.
      */
     @Test
     public void testMismatchedPasswordsThrowsException() {
@@ -58,9 +58,9 @@ public class PasswordChangeServiceTest {
     }
 
     /**
-     * Test sprawdza, czy metoda hashPassword generuje taki sam hash
-     * dla dwóch wywołań z tym samym hasłem.
-     * Dzięki temu wiemy, że hash jest deterministyczny.
+     * Tests whether hashPassword generates the same hash for two calls with the
+     * same password.
+     * This shows that the hash is deterministic.
      */
     @Test
     public void testHashPasswordConsistency() {
@@ -71,8 +71,8 @@ public class PasswordChangeServiceTest {
     }
 
     /**
-     * Test sprawdza, czy hashowanie hasła zwraca niepusty, poprawny hash.
-     * To zabezpieczenie przed sytuacjami, gdzie funkcja zwraca null lub pusty string.
+     * Tests whether password hashing returns a non-empty, valid hash.
+     * This guards against the function returning null or an empty string.
      */
     @Test
     public void testHashPasswordNotNull() {

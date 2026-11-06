@@ -32,9 +32,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 /**
- * Kontroler zarządzający zespołami dla użytkowników z rolą Kierownika.
- * Umożliwia tworzenie, edycję i przypisywanie członków do zespołów,
- * a także przeglądanie zadań przypisanych do zespołów.
+ * Controller that manages teams for users with the Manager role.
+ * Allows creating and editing teams and assigning members to them, as well as
+ * browsing the tasks assigned to teams.
  */
 public class ManagerTeamsController {
 
@@ -80,73 +80,44 @@ public class ManagerTeamsController {
     private final ObservableList<Task> taskData = FXCollections.observableArrayList();
 
     /**
-     * Klasa pomocnicza reprezentująca zespół z numerem porządkowym.
+     * Helper class representing a team with an ordinal number.
      */
     public static class TeamWithOrdinal {
         private final Team team;
         private final SimpleIntegerProperty ordinalNumber = new SimpleIntegerProperty();
 
-        /**
-         * Tworzy nowy obiekt TeamWithOrdinal.
-         * @param team Obiekt zespołu
-         * @param ordinalNumber Numer porządkowy
-         */
         public TeamWithOrdinal(Team team, int ordinalNumber) {
             this.team = team;
             this.ordinalNumber.set(ordinalNumber);
         }
 
-        /**
-         * Zwraca obiekt zespołu.
-         * @return Obiekt Team
-         */
         public Team getTeam() {
             return team;
         }
 
-        /**
-         * Zwraca ID zespołu.
-         * @return ID zespołu
-         */
         public int getId() {
             return team.getId();
         }
 
-        /**
-         * Zwraca nazwę zespołu.
-         * @return Nazwa zespołu
-         */
         public String getTeamName() {
             return team.getTeamName();
         }
 
-        /**
-         * Zwraca ID projektu.
-         * @return ID projektu
-         */
         public int getProjectId() {
             return team.getProjectId();
         }
 
-        /**
-         * Zwraca właściwość z numerem porządkowym.
-         * @return Właściwość SimpleIntegerProperty
-         */
         public SimpleIntegerProperty ordinalProperty() {
             return ordinalNumber;
         }
 
-        /**
-         * Zwraca numer porządkowy.
-         * @return Numer porządkowy
-         */
         public int getOrdinalNumber() {
             return ordinalNumber.get();
         }
     }
 
     /**
-     * Klasa modelu wyboru użytkownika do przypisania do zespołu.
+     * Model class for selecting a user to assign to a team.
      */
     public static class UserSelectionModel {
         private final User user;
@@ -158,12 +129,12 @@ public class ManagerTeamsController {
         private boolean isEligibleForLeader;
 
         /**
-         * Tworzy nowy model wyboru użytkownika.
-         * @param user Obiekt użytkownika
-         * @param roleName Nazwa roli
-         * @param isSelected Czy użytkownik jest wybrany
-         * @param isLeader Czy użytkownik jest liderem
-         * @param isEligibleForLeader Czy użytkownik może być liderem
+         * Creates a new user selection model.
+         * @param user user object
+         * @param roleName role name
+         * @param isSelected whether the user is selected
+         * @param isLeader whether the user is a leader
+         * @param isEligibleForLeader whether the user can be a leader
          */
         public UserSelectionModel(User user, String roleName, boolean isSelected, boolean isLeader, boolean isEligibleForLeader) {
             this.user = user;
@@ -175,113 +146,69 @@ public class ManagerTeamsController {
             this.isEligibleForLeader = isEligibleForLeader;
         }
 
-        /**
-         * Zwraca obiekt użytkownika.
-         * @return Obiekt User
-         */
         public User getUser() {
             return user;
         }
 
-        /**
-         * Sprawdza czy użytkownik jest wybrany.
-         * @return true jeśli wybrany, false w przeciwnym przypadku
-         */
         public boolean isSelected() {
             return selected.get();
         }
 
-        /**
-         * Zwraca właściwość wyboru użytkownika.
-         * @return Właściwość SimpleBooleanProperty
-         */
         public SimpleBooleanProperty selectedProperty() {
             return selected;
         }
 
-        /**
-         * Ustawia wybór użytkownika.
-         * @param selected Czy użytkownik jest wybrany
-         */
         public void setSelected(boolean selected) {
             this.selected.set(selected);
         }
 
-        /**
-         * Sprawdza czy użytkownik jest liderem.
-         * @return true jeśli lider, false w przeciwnym przypadku
-         */
         public boolean isLeader() {
             return leader.get();
         }
 
-        /**
-         * Zwraca właściwość lidera.
-         * @return Właściwość SimpleBooleanProperty
-         */
         public SimpleBooleanProperty leaderProperty() {
             return leader;
         }
 
-        /**
-         * Ustawia lidera.
-         * @param leader Czy użytkownik jest liderem
-         */
         public void setLeader(boolean leader) {
             this.leader.set(leader);
         }
 
-        /**
-         * Zwraca nazwę roli.
-         * @return Nazwa roli
-         */
         public String getRole() {
             return roleProperty.get();
         }
 
-        /**
-         * Zwraca właściwość z nazwą roli.
-         * @return Właściwość SimpleStringProperty
-         */
         public SimpleStringProperty roleProperty() {
             return roleProperty;
         }
 
         /**
-         * Zwraca imię i nazwisko.
-         * @return Imię i nazwisko
+         * Returns the first and last name.
+         * @return first and last name
          */
         public String getName() {
             return nameProperty.get();
         }
 
         /**
-         * Zwraca właściwość z imieniem i nazwiskiem.
-         * @return Właściwość SimpleStringProperty
+         * Returns the property holding the first and last name.
+         * @return SimpleStringProperty
          */
         public SimpleStringProperty nameProperty() {
             return nameProperty;
         }
 
-        /**
-         * Zwraca email.
-         * @return Email
-         */
         public String getEmail() {
             return emailProperty.get();
         }
 
-        /**
-         * Zwraca właściwość z emailem.
-         * @return Właściwość SimpleStringProperty
-         */
         public SimpleStringProperty emailProperty() {
             return emailProperty;
         }
 
         /**
-         * Sprawdza czy użytkownik może być liderem.
-         * @return true jeśli może być liderem, false w przeciwnym przypadku
+         * Checks whether the user can be a leader.
+         * @return true if the user can be a leader, false otherwise
          */
         public boolean isEligibleForLeader() {
             return isEligibleForLeader;
@@ -289,8 +216,8 @@ public class ManagerTeamsController {
     }
 
     /**
-     * Inicjalizuje kontroler, ładując dane i konfigurując widoki tabel.
-     * @throws SQLException w przypadku błędu dostępu do bazy danych
+     * Initializes the controller, loading the data and configuring the table views.
+     * @throws SQLException on a database access error
      */
     @FXML
     public void initialize() throws SQLException {
@@ -337,7 +264,7 @@ public class ManagerTeamsController {
     }
 
     /**
-     * Ładuje nazwy ról z bazy danych.
+     * Loads role names from the database.
      */
     private void loadRoleNames() {
         try {
@@ -368,8 +295,8 @@ public class ManagerTeamsController {
     }
 
     /**
-     * Ładuje wszystkie zespoły przypisane do projektów kierownika.
-     * @throws SQLException w przypadku błędu dostępu do bazy danych
+     * Loads all teams assigned to the manager's projects.
+     * @throws SQLException on a database access error
      */
     private void loadAll() throws SQLException {
         teamData.clear();
@@ -390,9 +317,9 @@ public class ManagerTeamsController {
     }
 
     /**
-     * Obsługuje wybór zespołu z tabeli, ładując jego członków i zadania.
-     * @param team Wybrany zespół
-     * @throws SQLException w przypadku błędu dostępu do bazy danych
+     * Handles selecting a team in the table, loading its members and tasks.
+     * @param team the selected team
+     * @throws SQLException on a database access error
      */
     private void onTeamSelected(Team team) throws SQLException {
         if (team == null) {
@@ -407,8 +334,8 @@ public class ManagerTeamsController {
     }
 
     /**
-     * Obsługuje dodawanie nowego zespołu.
-     * @throws SQLException w przypadku błędu dostępu do bazy danych
+     * Handles adding a new team.
+     * @throws SQLException on a database access error
      */
     @FXML
     private void onAddTeam() throws SQLException {
@@ -483,8 +410,8 @@ public class ManagerTeamsController {
     }
 
     /**
-     * Obsługuje edycję istniejącego zespołu.
-     * @throws SQLException w przypadku błędu dostępu do bazy danych
+     * Handles editing an existing team.
+     * @throws SQLException on a database access error
      */
     @FXML
     private void onEditTeam() throws SQLException {
@@ -575,8 +502,8 @@ public class ManagerTeamsController {
     }
 
     /**
-     * Obsługuje przypisywanie członków do zespołu.
-     * @throws SQLException w przypadku błędu dostępu do bazy danych
+     * Handles assigning members to a team.
+     * @throws SQLException on a database access error
      */
     @FXML
     private void onAssignMembers() throws SQLException {
@@ -752,8 +679,8 @@ public class ManagerTeamsController {
     }
 
     /**
-     * Wyświetla okno dialogowe z informacją.
-     * @param message Treść wiadomości
+     * Shows an information dialog.
+     * @param message message text
      */
     private void showInfo(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -764,8 +691,8 @@ public class ManagerTeamsController {
     }
 
     /**
-     * Wyświetla okno dialogowe z ostrzeżeniem.
-     * @param message Treść ostrzeżenia
+     * Shows a warning dialog.
+     * @param message warning text
      */
     private void showWarning(String message) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -776,9 +703,9 @@ public class ManagerTeamsController {
     }
 
     /**
-     * Wyświetla okno dialogowe z błędem.
-     * @param title Tytuł błędu
-     * @param message Treść błędu
+     * Shows an error dialog.
+     * @param title error title
+     * @param message error text
      */
     private void showError(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);

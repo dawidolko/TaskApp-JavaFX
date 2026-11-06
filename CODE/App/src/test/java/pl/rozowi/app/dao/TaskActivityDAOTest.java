@@ -19,9 +19,9 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
 /**
- * Testy jednostkowe dla klasy TaskActivityDAO z wykorzystaniem Mockito.
- * Klasa testuje operacje na rejestrze aktywności zadań w bazie danych,
- * stosując mocki do symulacji zachowania warstwy bazy danych.
+ * Unit tests for TaskActivityDAO using Mockito.
+ * Tests operations on the task activity log in the database, using mocks to
+ * simulate the behavior of the database layer.
  */
 @RunWith(MockitoJUnitRunner.Silent.class) // Using Silent runner to ignore unnecessary stubbing
 public class TaskActivityDAOTest {
@@ -34,10 +34,10 @@ public class TaskActivityDAOTest {
     private TaskActivityDAO taskActivityDAO;
 
     /**
-     * Inicjalizacja środowiska testowego przed każdym testem.
-     * Tworzy mocki dla połączenia z bazą danych, statementów i wyników zapytań.
-     * Konfiguruje statyczne mockowanie klasy DatabaseManager, aby zwracała
-     * przygotowane mocki zamiast rzeczywistych połączeń z bazą danych.
+     * Initializes the test environment before each test.
+     * Creates mocks for the database connection, statements and query results.
+     * Configures static mocking of DatabaseManager so that it returns the prepared
+     * mocks instead of real database connections.
      */
     @Before
     public void setUp() throws SQLException {
@@ -60,8 +60,8 @@ public class TaskActivityDAOTest {
     }
 
     /**
-     * Czyszczenie zasobów po każdym teście.
-     * Zamyka statyczny mock DatabaseManager, aby uniknąć wycieków pamięci.
+     * Cleans up resources after each test.
+     * Closes the DatabaseManager static mock to avoid memory leaks.
      */
     @After
     public void tearDown() {
@@ -71,14 +71,13 @@ public class TaskActivityDAOTest {
     }
 
     /**
-     * Test metody getAllActivities, która powinna zwrócić wszystkie
-     * aktywności zadań z bazy danych.
-     * Symuluje zwrócenie dwóch wierszy z bazy danych i weryfikuje,
-     * czy zostały poprawnie przetworzone na obiekty TaskActivity.
+     * Tests getAllActivities, which should return all task activities from the
+     * database.
+     * Simulates two rows returned from the database and verifies that they were
+     * correctly converted to TaskActivity objects.
      */
     @Test
     public void testGetAllActivities() throws SQLException {
-        // Konfiguracja zachowania mocka ResultSet
         when(mockResultSet.next())
                 .thenReturn(true)
                 .thenReturn(true)
@@ -98,10 +97,8 @@ public class TaskActivityDAOTest {
         when(mockResultSet.getTimestamp("activity_date"))
                 .thenReturn(ts1).thenReturn(ts2);
 
-        // Wywołanie testowanej metody
         List<TaskActivity> results = taskActivityDAO.getAllActivities();
 
-        // Weryfikacja wyników
         assertNotNull("Lista aktywności nie powinna być null", results);
         assertEquals("Lista powinna zawierać dokładnie 2 aktywności", 2, results.size());
         assertEquals("Typ aktywności pierwszego elementu powinien być CREATE", "CREATE", results.get(0).getActivityType());
@@ -110,16 +107,15 @@ public class TaskActivityDAOTest {
     }
 
     /**
-     * Test metody getActivitiesByTaskId, która powinna zwrócić aktywności
-     * dla konkretnego zadania.
-     * Symuluje zwrócenie dwóch wierszy dla zadania o ID=10 i weryfikuje,
-     * czy zostały poprawnie odfiltrowane i przetworzone.
+     * Tests getActivitiesByTaskId, which should return the activities of a
+     * specific task.
+     * Simulates two rows returned for the task with ID=10 and verifies that they
+     * were correctly filtered and processed.
      */
     @Test
     public void testGetActivitiesByTaskId() throws SQLException {
         int taskId = 10;
 
-        // Konfiguracja zachowania mocka ResultSet
         when(mockResultSet.next())
                 .thenReturn(true).thenReturn(true).thenReturn(false);
         when(mockResultSet.getInt("id")).thenReturn(1).thenReturn(2);
@@ -135,10 +131,8 @@ public class TaskActivityDAOTest {
         when(mockResultSet.getTimestamp("activity_date"))
                 .thenReturn(ts1).thenReturn(ts2);
 
-        // Wywołanie testowanej metody
         List<TaskActivity> results = taskActivityDAO.getActivitiesByTaskId(taskId);
 
-        // Weryfikacja wyników
         assertNotNull("Lista aktywności nie powinna być null", results);
         assertEquals("Lista powinna zawierać dokładnie 2 aktywności", 2, results.size());
         assertEquals("ID zadania dla pierwszego elementu powinno być zgodne", taskId, results.get(0).getTaskId());
@@ -147,16 +141,15 @@ public class TaskActivityDAOTest {
     }
 
     /**
-     * Test metody getActivitiesByUserId, która powinna zwrócić aktywności
-     * wykonane przez konkretnego użytkownika.
-     * Symuluje zwrócenie dwóch wierszy dla użytkownika o ID=5 i sprawdza,
-     * czy zostały poprawnie odfiltrowane i przetworzone.
+     * Tests getActivitiesByUserId, which should return the activities performed
+     * by a specific user.
+     * Simulates two rows returned for the user with ID=5 and checks that they were
+     * correctly filtered and processed.
      */
     @Test
     public void testGetActivitiesByUserId() throws SQLException {
         int userId = 5;
 
-        // Konfiguracja zachowania mocka ResultSet
         when(mockResultSet.next())
                 .thenReturn(true).thenReturn(true).thenReturn(false);
         when(mockResultSet.getInt("id")).thenReturn(1).thenReturn(2);
@@ -172,10 +165,8 @@ public class TaskActivityDAOTest {
         when(mockResultSet.getTimestamp("activity_date"))
                 .thenReturn(ts1).thenReturn(ts2);
 
-        // Wywołanie testowanej metody
         List<TaskActivity> results = taskActivityDAO.getActivitiesByUserId(userId);
 
-        // Weryfikacja wyników
         assertNotNull("Lista aktywności nie powinna być null", results);
         assertEquals("Lista powinna zawierać dokładnie 2 aktywności", 2, results.size());
         assertEquals("ID użytkownika dla pierwszego elementu powinno być zgodne", userId, results.get(0).getUserId());
@@ -184,13 +175,12 @@ public class TaskActivityDAOTest {
     }
 
     /**
-     * Test sprawdzający niepowodzenie dodania nowej aktywności zadania.
-     * Symuluje sytuację, gdy zapytanie INSERT zwraca 0 zmodyfikowanych wierszy.
-     * Weryfikuje, czy metoda poprawnie obsługuje taki przypadek i zwraca false.
+     * Tests a failed attempt to add a new task activity.
+     * Simulates an INSERT query that returns 0 modified rows.
+     * Verifies that the method handles this case correctly and returns false.
      */
     @Test
     public void testInsertTaskActivity_failure() throws SQLException {
-        // Przygotowanie obiektu testowego
         TaskActivity activity = new TaskActivity();
         activity.setTaskId(10);
         activity.setUserId(5);
@@ -198,30 +188,25 @@ public class TaskActivityDAOTest {
         activity.setDescription("Created task");
         activity.setActivityDate(new Timestamp(System.currentTimeMillis()));
 
-        // Konfiguracja zachowania mocków
         when(mockPreparedStatement.executeUpdate()).thenReturn(0);
 
-        // Wywołanie testowanej metody
         boolean result = taskActivityDAO.insertTaskActivity(activity);
 
-        // Weryfikacja wyników
         assertFalse("Metoda insertTaskActivity powinna zwrócić false dla nieudanej operacji", result);
         verify(mockPreparedStatement).executeUpdate();
     }
 
     /**
-     * Test sprawdzający usunięcie aktywności dla konkretnego zadania.
-     * Symuluje pomyślne wykonanie operacji DELETE i weryfikuje,
-     * czy metoda poprawnie ustawia parametr ID zadania w zapytaniu.
+     * Tests deleting the activities of a specific task.
+     * Simulates a successful DELETE and verifies that the method correctly sets
+     * the task ID parameter in the query.
      */
     @Test
     public void testDeleteActivityByTaskId_success() throws SQLException {
         int taskId = 10;
 
-        // Konfiguracja zachowania mocków
         when(mockPreparedStatement.executeUpdate()).thenReturn(1);
 
-        // Wywołanie testowanej metody
 //        boolean result = taskActivityDAO.deleteActivityByTaskId(taskId);
 
 //        // Weryfikacja wyników
@@ -231,23 +216,20 @@ public class TaskActivityDAOTest {
     }
 
     /**
-     * Test sprawdzający obsługę wyjątków SQLException w DAO.
-     * Symuluje sytuację, gdy podczas wykonania zapytania rzucany jest
-     * wyjątek SQLException, i weryfikuje, czy metoda poprawnie go obsługuje,
-     * zwracając pustą listę zamiast propagowania wyjątku dalej.
+     * Tests SQLException handling in the DAO.
+     * Simulates an SQLException thrown while executing a query and verifies that
+     * the method handles it correctly, returning an empty list instead of
+     * propagating the exception.
      */
     @Test
     public void testHandleSQLException() throws SQLException {
         int taskId = 10;
 
-        // Konfiguracja zachowania mocków
         when(mockPreparedStatement.executeQuery())
                 .thenThrow(new SQLException("Database error"));
 
-        // Wywołanie testowanej metody
         List<TaskActivity> results = taskActivityDAO.getActivitiesByTaskId(taskId);
 
-        // Weryfikacja wyników
         assertNotNull("Metoda powinna zwrócić pustą listę, a nie null", results);
         assertTrue("Lista powinna być pusta w przypadku błędu SQL", results.isEmpty());
     }

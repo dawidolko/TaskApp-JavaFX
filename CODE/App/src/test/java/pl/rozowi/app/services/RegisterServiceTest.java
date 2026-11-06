@@ -18,7 +18,8 @@ class RegisterServiceTest {
     private RegisterService registerService;
 
     /**
-     * Inicjalizuje mocki i tworzy instancję serwisu rejestracji przed każdym testem.
+     * Initializes the mocks and creates the registration service instance before
+     * each test.
      */
     @BeforeEach
     void setUp() {
@@ -27,7 +28,7 @@ class RegisterServiceTest {
     }
 
     /**
-     * Test sprawdzający poprawną rejestrację użytkownika przy prawidłowych danych.
+     * Tests successful user registration with valid data.
      */
     @Test
     void testRegister_success() {
@@ -46,7 +47,7 @@ class RegisterServiceTest {
     }
 
     /**
-     * Test walidacji: imię powinno zaczynać się od wielkiej litery.
+     * Validation test: the first name should start with a capital letter.
      */
     @Test
     void testRegister_failWrongCaseForFirstName() {
@@ -64,7 +65,8 @@ class RegisterServiceTest {
     }
 
     /**
-     * Test walidacji adresu e-mail: musi zawierać znak @ oraz przynajmniej 2 znaki przed i po nim.
+     * Email address validation test: must contain an @ sign and at least 2
+     * characters before and after it.
      */
     @Test
     void testRegister_failEmailRegex() {
@@ -82,7 +84,7 @@ class RegisterServiceTest {
     }
 
     /**
-     * Test sprawdzający niezgodność haseł – użytkownik nie powinien zostać zarejestrowany.
+     * Tests mismatched passwords - the user should not be registered.
      */
     @Test
     void testRegister_failPasswordsDifferent() {

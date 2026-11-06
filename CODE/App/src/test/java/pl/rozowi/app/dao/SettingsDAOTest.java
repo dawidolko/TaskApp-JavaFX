@@ -14,8 +14,8 @@ import java.time.LocalDateTime;
 import static org.junit.Assert.*;
 
 /**
- * Testy jednostkowe dla klasy SettingsDAO, odpowiedzialnej za operacje
- * na ustawieniach użytkowników w bazie danych.
+ * Unit tests for SettingsDAO, which handles user settings operations in the
+ * database.
  */
 public class SettingsDAOTest {
 
@@ -23,9 +23,9 @@ public class SettingsDAOTest {
     private SettingsDAO settingsDAO;
 
     /**
-     * Konfiguracja środowiska testowego przed każdym testem.
-     * Tworzy tymczasową bazę danych H2 w pamięci oraz tabelę settings
-     * z jednym przykładowym rekordem dla użytkownika o ID 1.
+     * Sets up the test environment before each test.
+     * Creates a temporary in-memory H2 database and a settings table with one
+     * sample record for the user with ID 1.
      */
     @Before
     public void setUp() throws Exception {
@@ -49,8 +49,8 @@ public class SettingsDAOTest {
     }
 
     /**
-     * Czyszczenie zasobów po wykonaniu każdego testu.
-     * Usuwa wszystkie tabele z bazy danych i zamyka połączenie.
+     * Cleans up resources after each test.
+     * Drops all tables from the database and closes the connection.
      */
     @After
     public void tearDown() throws Exception {
@@ -62,8 +62,8 @@ public class SettingsDAOTest {
     }
 
     /**
-     * Test sprawdzający metodę getSettingsByUserId dla istniejących ustawień.
-     * Powinien zwrócić poprawny obiekt Settings dla użytkownika o ID 1.
+     * Tests getSettingsByUserId for existing settings.
+     * Should return the correct Settings object for the user with ID 1.
      */
     @Test
     public void testGetSettingsByUserId_found() {
@@ -78,8 +78,8 @@ public class SettingsDAOTest {
     }
 
     /**
-     * Test sprawdzający metodę getSettingsByUserId dla nieistniejących ustawień.
-     * Powinien zwrócić null dla użytkownika, który nie ma zapisanych ustawień.
+     * Tests getSettingsByUserId for non-existent settings.
+     * Should return null for a user who has no saved settings.
      */
     @Test
     public void testGetSettingsByUserId_notFound() {
@@ -89,9 +89,9 @@ public class SettingsDAOTest {
     }
 
     /**
-     * Test sprawdzający poprawne dodanie nowych ustawień do bazy danych.
-     * Tworzy ustawienia dla użytkownika o ID 5 i weryfikuje, czy zostały
-     * prawidłowo zapisane poprzez próbę ich odczytu.
+     * Tests adding new settings to the database.
+     * Creates settings for the user with ID 5 and verifies that they were saved
+     * correctly by reading them back.
      */
     @Test
     public void testInsertSettings_success() {
@@ -112,10 +112,9 @@ public class SettingsDAOTest {
     }
 
     /**
-     * Test sprawdzający reakcję na próbę dodania ustawień dla użytkownika,
-     * który już posiada ustawienia w bazie. Po dodaniu ograniczenia unique
-     * dla user_id, próba ponownego dodania ustawień powinna zakończyć się
-     * niepowodzeniem.
+     * Tests the reaction to adding settings for a user who already has settings
+     * in the database. After a unique constraint is added on user_id, adding
+     * settings again should fail.
      */
     @Test
     public void testInsertSettings_failure() throws Exception {
@@ -139,9 +138,9 @@ public class SettingsDAOTest {
     }
 
     /**
-     * Test sprawdzający aktualizację istniejących ustawień użytkownika.
-     * Najpierw dodaje ustawienia dla użytkownika o ID 3, a następnie
-     * aktualizuje je i weryfikuje, czy zmiany zostały poprawnie zapisane.
+     * Tests updating existing user settings.
+     * First adds settings for the user with ID 3, then updates them and verifies
+     * that the changes were saved correctly.
      */
     @Test
     public void testUpdateSettings_success() {
@@ -167,9 +166,9 @@ public class SettingsDAOTest {
     }
 
     /**
-     * Test sprawdzający usunięcie ustawień użytkownika z bazy danych.
-     * Dodaje ustawienia dla użytkownika o ID 8, usuwa je, a następnie
-     * weryfikuje, czy faktycznie zostały usunięte.
+     * Tests deleting user settings from the database.
+     * Adds settings for the user with ID 8, deletes them, then verifies that they
+     * were actually deleted.
      */
     @Test
     public void testDeleteSettings_success() {
@@ -187,9 +186,9 @@ public class SettingsDAOTest {
     }
 
     /**
-     * Test sprawdzający aktualizację domyślnego widoku użytkownika.
-     * Tworzy ustawienia z domyślnym widokiem "Tasks", aktualizuje go na
-     * "Dashboard" i weryfikuje, czy zmiana została poprawnie zapisana.
+     * Tests updating the user's default view.
+     * Creates settings with the default view "Tasks", updates it to "Dashboard"
+     * and verifies that the change was saved correctly.
      */
     @Test
     public void testUpdateDefaultView_success() {
@@ -209,9 +208,9 @@ public class SettingsDAOTest {
     }
 
     /**
-     * Test sprawdzający aktualizację daty ostatniej zmiany hasła dla
-     * użytkownika, który już posiada rekord ustawień. Weryfikuje, czy
-     * nowa data jest późniejsza lub równa dacie przed wywołaniem metody.
+     * Tests updating the last password change date for a user who already has
+     * a settings record. Verifies that the new date is later than or equal to the
+     * date before the method call.
      */
     @Test
     public void testUpdateLastPasswordChange_existing() {
@@ -234,9 +233,9 @@ public class SettingsDAOTest {
     }
 
     /**
-     * Test sprawdzający aktualizację daty ostatniej zmiany hasła dla
-     * użytkownika, który nie posiada jeszcze rekordu ustawień.
-     * Metoda powinna utworzyć nowy rekord z datą zmiany hasła.
+     * Tests updating the last password change date for a user who has no settings
+     * record yet.
+     * The method should create a new record with the password change date.
      */
     @Test
     public void testUpdateLastPasswordChange_newRecord() {

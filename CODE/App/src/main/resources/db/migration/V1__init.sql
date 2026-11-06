@@ -3,9 +3,9 @@ USE it_task_management;
 
 -- --------------------------------------------------------
 
---
--- Struktura tabeli dla tabeli `projects`
---
+/*
+ * Table structure for table `projects`
+ */
 
 CREATE TABLE `projects` (
   `id` int(11) NOT NULL,
@@ -18,9 +18,9 @@ CREATE TABLE `projects` (
 
 -- --------------------------------------------------------
 
---
--- Struktura tabeli dla tabeli `reports`
---
+/*
+ * Table structure for table `reports`
+ */
 
 CREATE TABLE `reports` (
   `id` int(11) NOT NULL,
@@ -34,9 +34,9 @@ CREATE TABLE `reports` (
 
 -- --------------------------------------------------------
 
---
--- Struktura tabeli dla tabeli `roles`
---
+/*
+ * Table structure for table `roles`
+ */
 
 CREATE TABLE `roles` (
   `id` int(11) NOT NULL,
@@ -46,9 +46,9 @@ CREATE TABLE `roles` (
 
 -- --------------------------------------------------------
 
---
--- Struktura tabeli dla tabeli `settings`
---
+/*
+ * Table structure for table `settings`
+ */
 
 CREATE TABLE `settings` (
   `id` int(11) NOT NULL,
@@ -60,9 +60,9 @@ CREATE TABLE `settings` (
 
 -- --------------------------------------------------------
 
---
--- Struktura tabeli dla tabeli `tasks`
---
+/*
+ * Table structure for table `tasks`
+ */
 
 CREATE TABLE `tasks` (
   `id` int(11) NOT NULL,
@@ -78,9 +78,9 @@ CREATE TABLE `tasks` (
 
 -- --------------------------------------------------------
 
---
--- Struktura tabeli dla tabeli `task_activities`
---
+/*
+ * Table structure for table `task_activities`
+ */
 
 CREATE TABLE `task_activities` (
   `id` int(11) NOT NULL,
@@ -93,9 +93,9 @@ CREATE TABLE `task_activities` (
 
 -- --------------------------------------------------------
 
---
--- Struktura tabeli dla tabeli `task_assignments`
---
+/*
+ * Table structure for table `task_assignments`
+ */
 
 CREATE TABLE `task_assignments` (
   `task_id` int(11) NOT NULL,
@@ -104,9 +104,9 @@ CREATE TABLE `task_assignments` (
 
 -- --------------------------------------------------------
 
---
--- Struktura tabeli dla tabeli `teams`
---
+/*
+ * Table structure for table `teams`
+ */
 
 CREATE TABLE `teams` (
   `id` int(11) NOT NULL,
@@ -116,9 +116,9 @@ CREATE TABLE `teams` (
 
 -- --------------------------------------------------------
 
---
--- Struktura tabeli dla tabeli `team_members`
---
+/*
+ * Table structure for table `team_members`
+ */
 
 CREATE TABLE `team_members` (
   `team_id` int(11) NOT NULL,
@@ -128,9 +128,9 @@ CREATE TABLE `team_members` (
 
 -- --------------------------------------------------------
 
---
--- Struktura tabeli dla tabeli `groups`
---
+/*
+ * Table structure for table `groups`
+ */
 
 CREATE TABLE `groups` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -140,9 +140,9 @@ CREATE TABLE `groups` (
 
 -- --------------------------------------------------------
 
---
--- Struktura tabeli dla tabeli `users`
---
+/*
+ * Table structure for table `users`
+ */
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
@@ -155,76 +155,76 @@ CREATE TABLE `users` (
   `group_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Indeksy dla zrzutów tabel
---
+/*
+ * Indexes for dumped tables
+ */
 
---
--- Indeksy dla tabeli `projects`
---
+/*
+ * Indexes for table `projects`
+ */
 ALTER TABLE `projects`
   ADD PRIMARY KEY (`id`),
   ADD KEY `manager_id` (`manager_id`);
 
---
--- Indeksy dla tabeli `reports`
---
+/*
+ * Indexes for table `reports`
+ */
 ALTER TABLE `reports`
   ADD PRIMARY KEY (`id`),
   ADD KEY `created_by` (`created_by`);
 
---
--- Indeksy dla tabeli `roles`
---
+/*
+ * Indexes for table `roles`
+ */
 ALTER TABLE `roles`
   ADD PRIMARY KEY (`id`);
 
---
--- Indeksy dla tabeli `settings`
---
+/*
+ * Indexes for table `settings`
+ */
 ALTER TABLE `settings`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`);
 
---
--- Indeksy dla tabeli `tasks`
---
+/*
+ * Indexes for table `tasks`
+ */
 ALTER TABLE `tasks`
   ADD PRIMARY KEY (`id`),
   ADD KEY `project_id` (`project_id`),
   ADD KEY `team_id` (`team_id`);
 
---
--- Indeksy dla tabeli `task_activities`
---
+/*
+ * Indexes for table `task_activities`
+ */
 ALTER TABLE `task_activities`
   ADD PRIMARY KEY (`id`),
   ADD KEY `task_id` (`task_id`),
   ADD KEY `user_id` (`user_id`);
 
---
--- Indeksy dla tabeli `task_assignments`
---
+/*
+ * Indexes for table `task_assignments`
+ */
 ALTER TABLE `task_assignments`
   ADD PRIMARY KEY (`task_id`,`user_id`),
   ADD KEY `user_id` (`user_id`);
 
---
--- Indeksy dla tabeli `teams`
---
+/*
+ * Indexes for table `teams`
+ */
 ALTER TABLE `teams`
   ADD PRIMARY KEY (`id`),
   ADD KEY `project_id` (`project_id`);
 
---
--- Indeksy dla tabeli `team_members`
---
+/*
+ * Indexes for table `team_members`
+ */
 ALTER TABLE `team_members`
   ADD KEY `user_id` (`user_id`);
 
---
--- Indeksy dla tabeli `users`
---
+/*
+ * Indexes for table `users`
+ */
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email`),

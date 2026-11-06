@@ -23,8 +23,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * Kontroler odpowiedzialny za zarządzanie widokiem listy pracowników.
- * Umożliwia przeglądanie pracowników z podziałem na zespoły z możliwością wyszukiwania.
+ * Controller that manages the employee list view.
+ * Allows browsing employees grouped by team, with search.
  */
 public class EmployeesController {
 
@@ -53,9 +53,9 @@ public class EmployeesController {
     private ObservableList<User> allEmployees;
 
     /**
-     * Inicjalizuje kontroler. Konfiguruje tabelę pracowników i mechanizm wyszukiwania.
-     * Wywoływana automatycznie po załadowaniu pliku FXML.
-     * @throws SQLException w przypadku problemów z dostępem do bazy danych
+     * Initializes the controller. Configures the employee table and the search
+     * mechanism. Called automatically after the FXML file is loaded.
+     * @throws SQLException on database access problems
      */
     @FXML
     private void initialize() throws SQLException {
@@ -88,11 +88,11 @@ public class EmployeesController {
     }
 
     /**
-     * Ładuje listę pracowników w zależności od roli obecnie zalogowanego użytkownika:
-     * - Administrator widzi wszystkich pracowników
-     * - Kierownik widzi pracowników ze swoich zespołów
-     * - Team Leader widzi członków swoich zespołów (z wyłączeniem siebie)
-     * @throws SQLException w przypadku problemów z dostępem do bazy danych
+     * Loads the employee list depending on the role of the currently logged-in user:
+     * - Administrator sees all employees
+     * - Manager sees employees from their own teams
+     * - Team Leader sees members of their own teams (excluding themselves)
+     * @throws SQLException on database access problems
      */
     private void loadEmployees() throws SQLException {
         User current = MainApplication.getCurrentUser();

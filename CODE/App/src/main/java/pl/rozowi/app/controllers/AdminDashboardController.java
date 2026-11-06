@@ -16,9 +16,8 @@ import pl.rozowi.app.util.ThemeManager;
 import java.io.IOException;
 
 /**
- * Kontroler panelu administratora systemu zarządzania zadaniami.
- * Rozszerza funkcjonalność klasy BaseDashboardController, dostarczając
- * specyficzne dla administratora widoki i akcje.
+ * Controller of the task management system's administrator panel.
+ * Extends BaseDashboardController with administrator-specific views and actions.
  */
 public class AdminDashboardController extends BaseDashboardController {
 
@@ -51,8 +50,8 @@ public class AdminDashboardController extends BaseDashboardController {
     private static final String ACTIVE_BUTTON_STYLE = "sidebar-button-active";
 
     /**
-     * Metoda inicjalizująca kontroler. Automatycznie ładuje widok użytkowników
-     * jako domyślny widok po uruchomieniu.
+     * Initializes the controller. Automatically loads the users view as the default
+     * view on startup.
      */
     @FXML
     private void initialize() {
@@ -65,10 +64,10 @@ public class AdminDashboardController extends BaseDashboardController {
     }
 
     /**
-     * Ustawia styl aktywnego przycisku w panelu bocznym i usuwa styl
-     * z pozostałych przycisków.
+     * Sets the active button style in the side panel and removes it from the other
+     * buttons.
      *
-     * @param activeButton przycisk, który ma zostać oznaczony jako aktywny
+     * @param activeButton button to mark as active
      */
     private void setActiveButton(Button activeButton) {
         usersButton.getStyleClass().remove(ACTIVE_BUTTON_STYLE);
@@ -86,10 +85,10 @@ public class AdminDashboardController extends BaseDashboardController {
     }
 
     /**
-     * Metoda wywoływana po ustawieniu użytkownika. Aktualizuje powitanie
-     * i ładuje domyślny widok użytkownika.
+     * Called after the user is set. Updates the greeting and loads the default user
+     * view.
      *
-     * @param user obiekt zalogowanego użytkownika
+     * @param user the logged-in user object
      */
     @Override
     protected void onUserSet(User user) {
@@ -136,9 +135,9 @@ public class AdminDashboardController extends BaseDashboardController {
     }
 
     /**
-     * Pobiera aktualną scenę z głównego panelu.
+     * Gets the current scene from the main panel.
      *
-     * @return obiekt Scene lub null jeśli nie został jeszcze zainicjalizowany
+     * @return the Scene object, or null if it has not been initialized yet
      */
     @Override
     protected Scene getScene() {
@@ -146,9 +145,9 @@ public class AdminDashboardController extends BaseDashboardController {
     }
 
     /**
-     * Przełącza na widok zarządzania użytkownikami.
+     * Switches to the user management view.
      *
-     * @throws IOException jeśli wystąpi błąd podczas ładowania pliku FXML
+     * @throws IOException if loading the FXML file fails
      */
     @FXML
     private void goToUsers() throws IOException {
@@ -157,9 +156,9 @@ public class AdminDashboardController extends BaseDashboardController {
     }
 
     /**
-     * Przełącza na widok zarządzania zespołami.
+     * Switches to the team management view.
      *
-     * @throws IOException jeśli wystąpi błąd podczas ładowania pliku FXML
+     * @throws IOException if loading the FXML file fails
      */
     @FXML
     private void goToTeams() throws IOException {
@@ -168,9 +167,9 @@ public class AdminDashboardController extends BaseDashboardController {
     }
 
     /**
-     * Przełącza na widok zarządzania projektami.
+     * Switches to the project management view.
      *
-     * @throws IOException jeśli wystąpi błąd podczas ładowania pliku FXML
+     * @throws IOException if loading the FXML file fails
      */
     @FXML
     private void goToProjects() throws IOException {
@@ -179,9 +178,9 @@ public class AdminDashboardController extends BaseDashboardController {
     }
 
     /**
-     * Przełącza na widok zarządzania zadaniami.
+     * Switches to the task management view.
      *
-     * @throws IOException jeśli wystąpi błąd podczas ładowania pliku FXML
+     * @throws IOException if loading the FXML file fails
      */
     @FXML
     private void goToTasks() throws IOException {
@@ -190,9 +189,9 @@ public class AdminDashboardController extends BaseDashboardController {
     }
 
     /**
-     * Przełącza na widok raportów.
+     * Switches to the reports view.
      *
-     * @throws IOException jeśli wystąpi błąd podczas ładowania pliku FXML
+     * @throws IOException if loading the FXML file fails
      */
     @FXML
     private void goToReports() throws IOException {
@@ -201,9 +200,9 @@ public class AdminDashboardController extends BaseDashboardController {
     }
 
     /**
-     * Przełącza na widok aktywności systemowych.
+     * Switches to the system activity view.
      *
-     * @throws IOException jeśli wystąpi błąd podczas ładowania pliku FXML
+     * @throws IOException if loading the FXML file fails
      */
     @FXML
     private void goToActivities() throws IOException {
@@ -212,9 +211,9 @@ public class AdminDashboardController extends BaseDashboardController {
     }
 
     /**
-     * Przełącza na widok ustawień użytkownika.
+     * Switches to the user settings view.
      *
-     * @throws IOException jeśli wystąpi błąd podczas ładowania pliku FXML
+     * @throws IOException if loading the FXML file fails
      */
     @FXML
     private void goToSettings() throws IOException {
@@ -223,9 +222,9 @@ public class AdminDashboardController extends BaseDashboardController {
     }
 
     /**
-     * Przełącza na widok ustawień systemowych.
+     * Switches to the system settings view.
      *
-     * @throws IOException jeśli wystąpi błąd podczas ładowania pliku FXML
+     * @throws IOException if loading the FXML file fails
      */
     @FXML
     private void goToSystem() throws IOException {
@@ -234,9 +233,9 @@ public class AdminDashboardController extends BaseDashboardController {
     }
 
     /**
-     * Wylogowuje użytkownika i przełącza na ekran logowania.
+     * Logs the user out and switches to the login screen.
      *
-     * @throws IOException jeśli wystąpi błąd podczas ładowania pliku FXML
+     * @throws IOException if loading the FXML file fails
      */
     @FXML
     private void logout() throws IOException {
@@ -245,10 +244,10 @@ public class AdminDashboardController extends BaseDashboardController {
     }
 
     /**
-     * Ładuje widok FXML do głównego panelu.
+     * Loads an FXML view into the main panel.
      *
-     * @param fxmlPath ścieżka do pliku FXML
-     * @throws IOException jeśli wystąpi błąd podczas ładowania pliku FXML
+     * @param fxmlPath path to the FXML file
+     * @throws IOException if loading the FXML file fails
      */
     private void loadView(String fxmlPath) throws IOException {
         FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource(fxmlPath));
@@ -276,9 +275,9 @@ public class AdminDashboardController extends BaseDashboardController {
     }
 
     /**
-     * Wyświetla okno dialogowe z komunikatem błędu.
+     * Shows a dialog with an error message.
      *
-     * @param message treść komunikatu błędu
+     * @param message error message text
      */
     private void showError(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);

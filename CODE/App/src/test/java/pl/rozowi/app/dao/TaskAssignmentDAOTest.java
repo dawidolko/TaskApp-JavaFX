@@ -19,9 +19,9 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
 /**
- * Testy jednostkowe dla klasy TaskAssignmentDAO z wykorzystaniem Mockito.
- * Klasa testuje operacje związane z przypisywaniem użytkowników do zadań,
- * stosując mocki do symulacji zachowania warstwy bazy danych.
+ * Unit tests for TaskAssignmentDAO using Mockito.
+ * Tests operations for assigning users to tasks, using mocks to simulate the
+ * behavior of the database layer.
  */
 @RunWith(MockitoJUnitRunner.class)
 public class TaskAssignmentDAOTest {
@@ -36,10 +36,10 @@ public class TaskAssignmentDAOTest {
     private MockedStatic<DatabaseManager> mockedDatabaseManager;
 
     /**
-     * Inicjalizacja środowiska testowego przed każdym testem.
-     * Tworzy mocki dla połączenia z bazą danych i statementów.
-     * Konfiguruje statyczne mockowanie klasy DatabaseManager, aby zwracała
-     * przygotowane mocki zamiast rzeczywistych połączeń z bazą danych.
+     * Initializes the test environment before each test.
+     * Creates mocks for the database connection and statements.
+     * Configures static mocking of DatabaseManager so that it returns the prepared
+     * mocks instead of real database connections.
      */
     @Before
     public void setUp() throws SQLException {
@@ -52,8 +52,8 @@ public class TaskAssignmentDAOTest {
     }
 
     /**
-     * Czyszczenie zasobów po każdym teście.
-     * Zamyka statyczny mock DatabaseManager, aby uniknąć wycieków pamięci.
+     * Cleans up resources after each test.
+     * Closes the DatabaseManager static mock to avoid memory leaks.
      */
     @After
     public void tearDown() {
@@ -63,9 +63,10 @@ public class TaskAssignmentDAOTest {
     }
 
     /**
-     * Test sprawdzający pomyślne przypisanie użytkownika do zadania.
-     * Symuluje udane wykonanie operacji INSERT z jednym zmodyfikowanym wierszem.
-     * Weryfikuje, czy metoda poprawnie ustawia parametry zapytania i zwraca true.
+     * Tests successfully assigning a user to a task.
+     * Simulates a successful INSERT with one modified row.
+     * Verifies that the method sets the query parameters correctly and returns
+     * true.
      */
     @Test
     public void testInsertTaskAssignment_success() throws SQLException {
@@ -85,9 +86,10 @@ public class TaskAssignmentDAOTest {
     }
 
     /**
-     * Test sprawdzający sytuację, gdy operacja INSERT nie modyfikuje żadnych wierszy.
-     * Symuluje wykonanie zapytania, które zwraca 0 jako liczbę zmodyfikowanych wierszy.
-     * Weryfikuje, czy metoda poprawnie ustawia parametry zapytania i zwraca false.
+     * Tests the case where an INSERT does not modify any rows.
+     * Simulates a query that returns 0 as the number of modified rows.
+     * Verifies that the method sets the query parameters correctly and returns
+     * false.
      */
     @Test
     public void testInsertTaskAssignment_noRowsAffected() throws SQLException {
@@ -107,10 +109,10 @@ public class TaskAssignmentDAOTest {
     }
 
     /**
-     * Test sprawdzający obsługę wyjątków SQLException w DAO.
-     * Symuluje sytuację, gdy podczas przygotowania zapytania rzucany jest
-     * wyjątek SQLException, i weryfikuje, czy metoda poprawnie go obsługuje,
-     * zwracając false zamiast propagowania wyjątku.
+     * Tests SQLException handling in the DAO.
+     * Simulates an SQLException thrown while preparing a query and verifies that
+     * the method handles it correctly, returning false instead of propagating the
+     * exception.
      */
     @Test
     public void testInsertTaskAssignment_sqlException() throws SQLException {

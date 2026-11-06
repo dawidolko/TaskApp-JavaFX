@@ -14,9 +14,9 @@ import java.util.StringTokenizer;
 import java.awt.Color;
 
 /**
- * Klasa odpowiedzialna za generowanie raportów PDF dla lidera zespołu.
- * Obsługuje raporty dotyczące członków zespołu oraz przypisanych zadań.
- * Wykorzystuje bibliotekę iText do tworzenia dokumentów PDF.
+ * Generates PDF reports for the team leader.
+ * Handles reports on team members and assigned tasks.
+ * Uses the iText library to create PDF documents.
  */
 public class TeamLeaderReportService {
 
@@ -32,8 +32,8 @@ public class TeamLeaderReportService {
     private Color primaryColor = new Color(0, 123, 255);
 
     /**
-     * Inicjalizuje czcionki wykorzystywane w dokumencie PDF.
-     * W przypadku błędu ładowania czcionki podstawowej, stosuje czcionkę domyślną.
+     * Initializes the fonts used in the PDF document.
+     * If loading the base font fails, the default font is used.
      */
     public TeamLeaderReportService() {
         try {
@@ -59,11 +59,12 @@ public class TeamLeaderReportService {
     }
 
     /**
-     * Generuje raport PDF zawierający listę członków zespołu.
+     * Generates a PDF report with the list of team members.
      *
-     * @param filename pełna ścieżka i nazwa pliku PDF do zapisania
-     * @param content dane wejściowe w postaci sformatowanego tekstu (np. z filtrami i listą członków)
-     * @throws IOException w przypadku błędu zapisu pliku PDF
+     * @param filename full path and name of the PDF file to save
+     * @param content input data as formatted text (e.g. with filters and the
+     *         member list)
+     * @throws IOException if writing the PDF file fails
      */
     public void generateTeamMembersReportPdf(String filename, String content) throws IOException {
         Document doc = new Document(PageSize.A4);
@@ -172,11 +173,12 @@ public class TeamLeaderReportService {
     }
 
     /**
-     * Generuje raport PDF dotyczący zadań zespołu.
+     * Generates a PDF report on team tasks.
      *
-     * @param filename pełna ścieżka i nazwa pliku PDF do zapisania
-     * @param content dane wejściowe w postaci sformatowanego tekstu (np. z listą zadań i podsumowaniem)
-     * @throws IOException w przypadku błędu zapisu pliku PDF
+     * @param filename full path and name of the PDF file to save
+     * @param content input data as formatted text (e.g. with the task list and
+     *         a summary)
+     * @throws IOException if writing the PDF file fails
      */
     public void generateTeamTasksReportPdf(String filename, String content) throws IOException {
         Document doc = new Document(PageSize.A4);
@@ -290,11 +292,11 @@ public class TeamLeaderReportService {
     }
 
     /**
-     * Dodaje nagłówek raportu do dokumentu PDF.
+     * Adds the report header to the PDF document.
      *
-     * @param doc obiekt dokumentu PDF
-     * @param title tytuł raportu wyświetlany na górze strony
-     * @throws DocumentException w przypadku błędu dodawania do dokumentu
+     * @param doc PDF document object
+     * @param title report title shown at the top of the page
+     * @throws DocumentException if adding to the document fails
      */
     private void addReportHeader(Document doc, String title) throws DocumentException {
         Paragraph p = new Paragraph(title, titleFont);
@@ -309,10 +311,10 @@ public class TeamLeaderReportService {
     }
 
     /**
-     * Dodaje poziomy separator (linię) do dokumentu PDF.
+     * Adds a horizontal separator (line) to the PDF document.
      *
-     * @param doc obiekt dokumentu PDF
-     * @throws DocumentException w przypadku błędu dodawania do dokumentu
+     * @param doc PDF document object
+     * @throws DocumentException if adding to the document fails
      */
     private void addSeparator(Document doc) throws DocumentException {
         Chunk line = new Chunk(new com.lowagie.text.pdf.draw.LineSeparator(0.5f, 100, primaryColor, Element.ALIGN_CENTER, -2));
@@ -322,7 +324,7 @@ public class TeamLeaderReportService {
     }
 
     /**
-     * Zdarzenie wywoływane na końcu każdej strony, które dodaje stopkę z numerem strony.
+     * Event called at the end of each page, adding a footer with the page number.
      */
     private class FooterEvent extends PdfPageEventHelper {
         @Override
@@ -340,10 +342,11 @@ public class TeamLeaderReportService {
     }
 
     /**
-     * Dodaje stopkę raportu do dokumentu PDF z informacją o źródle wygenerowania.
+     * Adds the report footer with information about the generation source to the
+     * PDF document.
      *
-     * @param doc obiekt dokumentu PDF
-     * @throws DocumentException w przypadku błędu dodawania do dokumentu
+     * @param doc PDF document object
+     * @throws DocumentException if adding to the document fails
      */
     private void addReportFooter(Document doc) throws DocumentException {
         addSeparator(doc);

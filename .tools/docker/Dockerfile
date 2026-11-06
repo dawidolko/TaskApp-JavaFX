@@ -1,12 +1,12 @@
-# TaskApp jest aplikacja okienkowa JavaFX, wiec kontener nie jest tu serwerem
-# aplikacji, tylko powtarzalnym srodowiskiem budowania i testow.
-# Uruchomienie GUI wymaga przekazania serwera X z hosta — patrz README.md.
+# TaskApp is a JavaFX desktop application, so the container is not an application
+# server here, just a reproducible build and test environment.
+# Running the GUI requires forwarding the host's X server - see README.md.
 FROM maven:3.9-eclipse-temurin-21 AS build
 
 WORKDIR /app
 
-# Najpierw sam pom.xml: pobrane zaleznosci zostaja w cache warstwy dopoki
-# plik sie nie zmieni, co skraca kolejne budowania.
+# pom.xml alone first: downloaded dependencies stay in the layer cache until the
+# file changes, which shortens subsequent builds.
 COPY CODE/App/pom.xml .
 RUN mvn -B dependency:go-offline
 
@@ -15,7 +15,7 @@ RUN mvn -B clean package -DskipTests
 
 FROM eclipse-temurin:21-jre AS runtime
 
-# Biblioteki GTK/X11 wymagane przez JavaFX do narysowania okna.
+# GTK/X11 libraries JavaFX needs to draw the window.
 RUN apt-get update && apt-get install -y --no-install-recommends \
         libgtk-3-0 \
         libxtst6 \

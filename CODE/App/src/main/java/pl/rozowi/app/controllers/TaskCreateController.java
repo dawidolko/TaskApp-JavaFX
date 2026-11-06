@@ -17,8 +17,8 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Kontroler odpowiedzialny za tworzenie nowych zadań w aplikacji.
- * Zawiera formularz do wprowadzania danych zadania oraz logikę związaną z jego zapisem.
+ * Controller that creates new tasks in the application.
+ * Contains the form for entering task data and the logic for saving it.
  */
 public class TaskCreateController {
     @FXML
@@ -44,7 +44,7 @@ public class TaskCreateController {
     private final TeamDAO teamDAO = new TeamDAO();
 
     /**
-     * Inicjalizacja kontrolera - ustawia początkowe wartości i konfiguruje listenery.
+     * Initializes the controller - sets initial values and configures listeners.
      */
     @FXML
     private void initialize() {
@@ -74,9 +74,9 @@ public class TaskCreateController {
     }
 
     /**
-     * Ładuje dostępne projekty w zależności od roli użytkownika.
-     * Dla administratora ładuje wszystkie projekty, dla managera - tylko przypisane projekty,
-     * dla team leadera - projekt przypisany do jego zespołu.
+     * Loads the available projects depending on the user's role.
+     * Loads all projects for an administrator, only assigned projects for a manager,
+     * and the project assigned to their team for a team leader.
      */
     private void loadAvailableProjects() {
         try {
@@ -153,8 +153,8 @@ public class TaskCreateController {
     }
 
     /**
-     * Ładuje zespoły przypisane do wybranego projektu.
-     * @param projectId ID projektu dla którego mają być załadowane zespoły
+     * Loads the teams assigned to the selected project.
+     * @param projectId ID of the project to load teams for
      */
     private void loadTeamsForProject(int projectId) {
         try {
@@ -177,8 +177,8 @@ public class TaskCreateController {
     }
 
     /**
-     * Ładuje członków wybranego zespołu.
-     * @param teamId ID zespołu dla którego mają być załadowani członkowie
+     * Loads the members of the selected team.
+     * @param teamId ID of the team to load members for
      */
     private void loadMembersForTeam(int teamId) {
         try {
@@ -190,8 +190,8 @@ public class TaskCreateController {
     }
 
     /**
-     * Konfiguruje konwertery tekstu dla ComboBoxów.
-     * Definiuje sposób wyświetlania obiektów Project, Team i User w kontrolkach ComboBox.
+     * Configures the text converters for the ComboBoxes.
+     * Defines how Project, Team and User objects are displayed in the ComboBox controls.
      */
     private void setupConverters() {
         comboProject.setConverter(new StringConverter<>() {
@@ -232,8 +232,8 @@ public class TaskCreateController {
     }
 
     /**
-     * Obsługuje zdarzenie tworzenia nowego zadania.
-     * Waliduje dane, tworzy nowe zadanie i przypisuje je wybranemu użytkownikowi.
+     * Handles the task creation event.
+     * Validates the data, creates a new task and assigns it to the selected user.
      */
     @FXML
     private void handleCreate() {
@@ -293,7 +293,7 @@ public class TaskCreateController {
     }
 
     /**
-     * Obsługuje zdarzenie zamknięcia okna.
+     * Handles the window close event.
      */
     @FXML
     private void handleClose() {
@@ -301,16 +301,16 @@ public class TaskCreateController {
     }
 
     /**
-     * Zamyka bieżące okno.
+     * Closes the current window.
      */
     private void closeWindow() {
         ((Stage) txtTitle.getScene().getWindow()).close();
     }
 
     /**
-     * Wyświetla okno dialogowe z informacją.
-     * @param title tytuł okna dialogowego
-     * @param message treść wiadomości
+     * Shows an information dialog.
+     * @param title dialog title
+     * @param message message text
      */
     private void showInfo(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -321,8 +321,8 @@ public class TaskCreateController {
     }
 
     /**
-     * Wyświetla okno dialogowe z ostrzeżeniem.
-     * @param message treść ostrzeżenia
+     * Shows a warning dialog.
+     * @param message warning text
      */
     private void showWarning(String message) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -333,9 +333,9 @@ public class TaskCreateController {
     }
 
     /**
-     * Wyświetla okno dialogowe z błędem.
-     * @param title tytuł okna dialogowego
-     * @param message treść błędu
+     * Shows an error dialog.
+     * @param title dialog title
+     * @param message error text
      */
     private void showError(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);

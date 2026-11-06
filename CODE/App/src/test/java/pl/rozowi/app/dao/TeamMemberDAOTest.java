@@ -21,9 +21,9 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
 /**
- * Testy jednostkowe dla klasy TeamMemberDAO z wykorzystaniem Mockito.
- * Klasa testuje operacje na członkach zespołów w bazie danych,
- * stosując mocki do symulacji zachowania warstwy bazy danych.
+ * Unit tests for TeamMemberDAO using Mockito.
+ * Tests operations on team members in the database, using mocks to simulate
+ * the behavior of the database layer.
  */
 public class TeamMemberDAOTest {
 
@@ -40,10 +40,9 @@ public class TeamMemberDAOTest {
     private TeamMemberDAO teamMemberDAO;
 
     /**
-     * Inicjalizacja środowiska testowego przed każdym testem.
-     * Tworzy i konfiguruje mocki dla połączenia z bazą danych,
-     * preparedStatements i resultSets. Inicjalizuje też
-     * statyczny mock klasy DatabaseManager.
+     * Initializes the test environment before each test.
+     * Creates and configures mocks for the database connection, preparedStatements
+     * and resultSets. Also initializes the static mock of DatabaseManager.
      */
     @Before
     public void setUp() throws SQLException {
@@ -62,9 +61,9 @@ public class TeamMemberDAOTest {
     }
 
     /**
-     * Czyszczenie zasobów po każdym teście.
-     * Zamyka statyczny mock DatabaseManager i inne mocki,
-     * aby uniknąć wycieków pamięci.
+     * Cleans up resources after each test.
+     * Closes the DatabaseManager static mock and other mocks to avoid memory
+     * leaks.
      */
     @After
     public void tearDown() throws Exception {
@@ -73,10 +72,9 @@ public class TeamMemberDAOTest {
     }
 
     /**
-     * Test sprawdzający metodę getTeamIdForUser dla użytkownika,
-     * który jest członkiem zespołu.
-     * Weryfikuje, czy metoda poprawnie zwraca ID zespołu,
-     * do którego należy użytkownik.
+     * Tests getTeamIdForUser for a user who is a team member.
+     * Verifies that the method correctly returns the ID of the team the user
+     * belongs to.
      */
     @Test
     public void testGetTeamIdForUser_userInTeam() throws SQLException {
@@ -97,9 +95,8 @@ public class TeamMemberDAOTest {
     }
 
     /**
-     * Test sprawdzający metodę getTeamIdForUser dla użytkownika,
-     * który nie jest członkiem żadnego zespołu.
-     * Weryfikuje, czy metoda poprawnie zwraca 0 w takim przypadku.
+     * Tests getTeamIdForUser for a user who is not a member of any team.
+     * Verifies that the method correctly returns 0 in that case.
      */
     @Test
     public void testGetTeamIdForUser_userNotInTeam() throws SQLException {
@@ -115,9 +112,8 @@ public class TeamMemberDAOTest {
     }
 
     /**
-     * Test sprawdzający metodę isTeamLeader dla użytkownika,
-     * który jest liderem zespołu.
-     * Weryfikuje, czy metoda poprawnie zwraca true w tym przypadku.
+     * Tests isTeamLeader for a user who is a team leader.
+     * Verifies that the method correctly returns true in this case.
      */
     @Test
     public void testIsTeamLeader_isLeader() throws SQLException {
@@ -139,9 +135,8 @@ public class TeamMemberDAOTest {
     }
 
     /**
-     * Test sprawdzający metodę isTeamLeader dla użytkownika,
-     * który jest członkiem zespołu, ale nie jest jego liderem.
-     * Weryfikuje, czy metoda poprawnie zwraca false w tym przypadku.
+     * Tests isTeamLeader for a user who is a team member but not its leader.
+     * Verifies that the method correctly returns false in this case.
      */
     @Test
     public void testIsTeamLeader_notLeader() throws SQLException {
@@ -163,9 +158,8 @@ public class TeamMemberDAOTest {
     }
 
     /**
-     * Test sprawdzający metodę isTeamLeader dla użytkownika,
-     * który nie jest członkiem danego zespołu.
-     * Weryfikuje, czy metoda poprawnie zwraca false w tym przypadku.
+     * Tests isTeamLeader for a user who is not a member of the given team.
+     * Verifies that the method correctly returns false in this case.
      */
     @Test
     public void testIsTeamLeader_notInTeam() throws SQLException {
@@ -184,9 +178,9 @@ public class TeamMemberDAOTest {
     }
 
     /**
-     * Test sprawdzający metodę getTeamMembers, która powinna zwrócić
-     * listę użytkowników będących członkami danego zespołu.
-     * Weryfikuje, czy dane z bazy są poprawnie przetwarzane na obiekty User.
+     * Tests getTeamMembers, which should return the list of users who are members
+     * of the given team.
+     * Verifies that data from the database is correctly converted to User objects.
      */
     @Test
     public void testGetTeamMembers() throws SQLException {
@@ -222,9 +216,9 @@ public class TeamMemberDAOTest {
     }
 
     /**
-     * Test sprawdzający metodę getTeamIdsForTeamLeader, która zwraca
-     * identyfikatory zespołów, dla których dany użytkownik jest liderem.
-     * Weryfikuje, czy ID zespołów są poprawnie pobierane z bazy danych.
+     * Tests getTeamIdsForTeamLeader, which returns the IDs of the teams led by the
+     * given user.
+     * Verifies that team IDs are correctly fetched from the database.
      */
     @Test
     public void testGetTeamIdsForTeamLeader() throws SQLException {
@@ -249,9 +243,9 @@ public class TeamMemberDAOTest {
     }
 
     /**
-     * Test sprawdzający pomyślne dodanie nowego członka do zespołu.
-     * Weryfikuje, czy metoda insertTeamMember poprawnie ustawia parametry
-     * zapytania i zwraca true w przypadku powodzenia operacji.
+     * Tests successfully adding a new member to a team.
+     * Verifies that insertTeamMember sets the query parameters correctly and
+     * returns true when the operation succeeds.
      */
     @Test
     public void testInsertTeamMember_success() throws SQLException {
@@ -272,9 +266,9 @@ public class TeamMemberDAOTest {
     }
 
     /**
-     * Test sprawdzający niepowodzenie dodania nowego członka do zespołu.
-     * Symuluje sytuację, gdy operacja INSERT nie dodaje żadnych wierszy,
-     * i weryfikuje, czy metoda zwraca false w takim przypadku.
+     * Tests a failed attempt to add a new member to a team.
+     * Simulates an INSERT that adds no rows and verifies that the method returns
+     * false in that case.
      */
     @Test
     public void testInsertTeamMember_failure() throws SQLException {
@@ -288,9 +282,9 @@ public class TeamMemberDAOTest {
     }
 
     /**
-     * Test sprawdzający pomyślną aktualizację zespołu użytkownika.
-     * Weryfikuje, czy metoda updateUserTeam poprawnie ustawia parametry
-     * zapytania i zwraca true w przypadku powodzenia operacji.
+     * Tests successfully updating a user's team.
+     * Verifies that updateUserTeam sets the query parameters correctly and returns
+     * true when the operation succeeds.
      */
     @Test
     public void testUpdateUserTeam_success() throws SQLException {
@@ -309,9 +303,9 @@ public class TeamMemberDAOTest {
     }
 
     /**
-     * Test sprawdzający pomyślne usunięcie członka z zespołu.
-     * Weryfikuje, czy metoda deleteTeamMember poprawnie ustawia parametry
-     * zapytania i zwraca true w przypadku powodzenia operacji.
+     * Tests successfully removing a member from a team.
+     * Verifies that deleteTeamMember sets the query parameters correctly and
+     * returns true when the operation succeeds.
      */
     @Test
     public void testDeleteTeamMember_success() throws SQLException {
@@ -327,9 +321,9 @@ public class TeamMemberDAOTest {
     }
 
     /**
-     * Test sprawdzający obsługę wyjątków SQL w metodzie getTeamIdForUser.
-     * Symuluje sytuację, gdy podczas wykonania zapytania jest rzucany
-     * wyjątek SQLException, i weryfikuje, czy metoda poprawnie zwraca 0.
+     * Tests SQL exception handling in getTeamIdForUser.
+     * Simulates an SQLException thrown while executing the query and verifies that
+     * the method correctly returns 0.
      */
     @Test
     public void testHandleSQLException() throws SQLException {

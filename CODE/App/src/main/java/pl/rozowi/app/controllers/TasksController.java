@@ -17,8 +17,8 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Kontroler odpowiedzialny za zarządzanie listą zadań.
- * Umożliwia wyświetlanie, filtrowanie, dodawanie i usuwanie zadań.
+ * Controller that manages the task list.
+ * Allows displaying, filtering, adding and deleting tasks.
  */
 public class TasksController {
 
@@ -49,8 +49,8 @@ public class TasksController {
     private ObservableList<Task> allTasks;
 
     /**
-     * Inicjalizacja kontrolera.
-     * Konfiguruje kolumny tabeli i ładuje listę zadań.
+     * Initializes the controller.
+     * Configures the table columns and loads the task list.
      */
     @FXML
     private void initialize() {
@@ -80,8 +80,8 @@ public class TasksController {
 
 
     /**
-     * Ładuje listę zadań z bazy danych.
-     * Pobiera zadania przypisane do aktualnego użytkownika i jego zespołu.
+     * Loads the task list from the database.
+     * Fetches the tasks assigned to the current user and their team.
      */
     private void loadTasks() {
         int teamId = 0;
@@ -97,8 +97,8 @@ public class TasksController {
     }
 
     /**
-     * Filtruje listę zadań na podstawie wprowadzonego tekstu.
-     * Wyszukuje w tytule, opisie, statusie i datach zadań.
+     * Filters the task list by the entered text.
+     * Searches task titles, descriptions, statuses and dates.
      */
     @FXML
     private void handleFilter() {
@@ -122,8 +122,8 @@ public class TasksController {
     }
 
     /**
-     * Obsługuje akcję dodawania nowego zadania.
-     * (Obecnie tylko loguje informację do konsoli)
+     * Handles adding a new task.
+     * (Currently only logs a message to the console)
      */
     @FXML
     private void handleAddTask() {
@@ -131,8 +131,8 @@ public class TasksController {
     }
 
     /**
-     * Obsługuje akcję usuwania wybranego zadania.
-     * Sprawdza uprawnienia użytkownika i wyświetla potwierdzenie przed usunięciem.
+     * Handles deleting the selected task.
+     * Checks the user's permissions and asks for confirmation before deletion.
      */
     @FXML
     private void handleDeleteTask() {
@@ -174,10 +174,10 @@ public class TasksController {
     }
 
     /**
-     * Wyświetla okno dialogowe z komunikatem.
-     * @param type Typ komunikatu (ERROR, WARNING, INFORMATION)
-     * @param title Tytuł okna dialogowego
-     * @param message Treść komunikatu
+     * Shows a message dialog.
+     * @param type message type (ERROR, WARNING, INFORMATION)
+     * @param title dialog title
+     * @param message message text
      */
     private void showAlert(Alert.AlertType type, String title, String message) {
         Alert alert = new Alert(type);

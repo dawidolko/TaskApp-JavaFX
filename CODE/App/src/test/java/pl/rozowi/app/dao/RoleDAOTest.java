@@ -13,8 +13,8 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 /**
- * Testy jednostkowe dla klasy RoleDAO, odpowiedzialnej za operacje
- * na rolach użytkowników w bazie danych.
+ * Unit tests for RoleDAO, which handles user role operations in the
+ * database.
  */
 public class RoleDAOTest {
 
@@ -22,9 +22,9 @@ public class RoleDAOTest {
     private RoleDAO roleDAO;
 
     /**
-     * Konfiguracja środowiska testowego przed każdym testem.
-     * Tworzy tymczasową bazę danych H2 w pamięci oraz tabelę roles
-     * z dwoma przykładowymi rolami: Admin i User.
+     * Sets up the test environment before each test.
+     * Creates a temporary in-memory H2 database and a roles table with two sample
+     * roles: Admin and User.
      */
     @Before
     public void setUp() throws Exception {
@@ -46,8 +46,8 @@ public class RoleDAOTest {
     }
 
     /**
-     * Czyszczenie zasobów po wykonaniu każdego testu.
-     * Usuwa wszystkie tabele z bazy danych i zamyka połączenie.
+     * Cleans up resources after each test.
+     * Drops all tables from the database and closes the connection.
      */
     @After
     public void tearDown() throws Exception {
@@ -59,9 +59,9 @@ public class RoleDAOTest {
     }
 
     /**
-     * Test sprawdzający metodę getAllRoles, która powinna zwrócić wszystkie
-     * role z bazy danych. Weryfikuje, czy wszystkie pola ról są prawidłowo
-     * odczytane, włącznie z identyfikatorami, nazwami i uprawnieniami.
+     * Tests getAllRoles, which should return all roles from the database.
+     * Verifies that all role fields are read correctly, including IDs, names and
+     * permissions.
      */
     @Test
     public void testGetAllRoles() {
@@ -82,8 +82,8 @@ public class RoleDAOTest {
     }
 
     /**
-     * Test sprawdzający metodę getRoleByName dla istniejącej roli.
-     * Powinien zwrócić poprawny obiekt Role dla nazwy "Admin".
+     * Tests getRoleByName for an existing role.
+     * Should return the correct Role object for the name "Admin".
      */
     @Test
     public void testGetRoleByName_found() {
@@ -95,8 +95,8 @@ public class RoleDAOTest {
     }
 
     /**
-     * Test sprawdzający metodę getRoleByName dla nieistniejącej roli.
-     * Powinien zwrócić null, gdy rola o podanej nazwie nie istnieje.
+     * Tests getRoleByName for a non-existent role.
+     * Should return null when no role with the given name exists.
      */
     @Test
     public void testGetRoleByName_notFound() {
@@ -106,9 +106,9 @@ public class RoleDAOTest {
     }
 
     /**
-     * Test sprawdzający poprawne dodanie nowej roli do bazy danych.
-     * Tworzy rolę "Guest", dodaje ją do bazy i weryfikuje, czy została
-     * poprawnie zapisana poprzez próbę odczytu jej po nazwie.
+     * Tests adding a new role to the database.
+     * Creates the role "Guest", adds it to the database and verifies that it was
+     * saved correctly by reading it back by name.
      */
     @Test
     public void testInsertRole_success() {
@@ -126,10 +126,11 @@ public class RoleDAOTest {
     }
 
     /**
-     * Test sprawdzający reakcję na próbę dodania roli o nazwie, która już istnieje.
-     * Najpierw dodaje rolę "Guest" bezpośrednio do bazy, dodając ograniczenie unique,
-     * a następnie próbuje dodać kolejną rolę o tej samej nazwie poprzez RoleDAO.
-     * Metoda insertRole powinna zwrócić false, sygnalizując niepowodzenie operacji.
+     * Tests the reaction to adding a role whose name already exists.
+     * First adds the role "Guest" directly to the database, adding a unique
+     * constraint, then tries to add another role with the same name through
+     * RoleDAO.
+     * insertRole should return false, signaling that the operation failed.
      */
     @Test
     public void testInsertRole_failure() throws Exception {

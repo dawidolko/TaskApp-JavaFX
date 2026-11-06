@@ -13,9 +13,9 @@ services:
       - "3307:3306"
     volumes:
       - taskapp-db-data:/var/lib/mysql
-      # Montujemy pojedyncze pliki .sql, a nie caly katalog SQL/ — leza w nim
-      # takze diagramy (.drawio, .png), ktore MySQL probowalby wykonac.
-      # Prefiks numeryczny wymusza kolejnosc: schemat przed danymi.
+      # We mount individual .sql files rather than the whole SQL/ directory - it also
+      # contains diagrams (.drawio, .png) that MySQL would try to execute.
+      # The numeric prefix enforces the order: schema before data.
       - ../../SQL/migration.sql:/docker-entrypoint-initdb.d/01-migration.sql:ro
       - ../../SQL/seeder.sql:/docker-entrypoint-initdb.d/02-seeder.sql:ro
     healthcheck:
@@ -33,7 +33,7 @@ services:
       db:
         condition: service_healthy
     environment:
-      # DISPLAY musi wskazywac na serwer X hosta, inaczej JavaFX nie wystartuje.
+      # DISPLAY must point at the host's X server, otherwise JavaFX will not start.
       - DISPLAY=${DISPLAY:-:0}
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw

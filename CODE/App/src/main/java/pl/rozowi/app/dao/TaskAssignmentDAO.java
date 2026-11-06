@@ -8,15 +8,15 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 /**
- * Data Access Object do operacji na przypisaniach zadań (TaskAssignment).
+ * Data Access Object for operations on task assignments (TaskAssignment).
  */
 public class TaskAssignmentDAO {
 
     /**
-     * Wstawia nowe przypisanie zadania do bazy danych.
+     * Inserts a new task assignment into the database.
      *
-     * @param assignment obiekt TaskAssignment zawierający identyfikatory zadania i użytkownika
-     * @return true, jeśli operacja zakończyła się powodzeniem; false w przeciwnym razie
+     * @param assignment TaskAssignment object containing the task and user identifiers
+     * @return true if the operation succeeded, false otherwise
      */
     public boolean insertTaskAssignment(TaskAssignment assignment) {
         String sql = "INSERT INTO task_assignments (task_id, user_id) VALUES (?, ?)";

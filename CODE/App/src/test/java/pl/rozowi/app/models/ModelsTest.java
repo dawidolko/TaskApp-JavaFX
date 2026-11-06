@@ -7,13 +7,13 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 
 /**
- * Klasa testowa sprawdzająca poprawność modeli danych aplikacji.
+ * Test class verifying the application's data models.
  */
 public class ModelsTest {
 
     /**
-     * Test sprawdza poprawne działanie getterów i setterów dla wszystkich właściwości klasy User.
-     * Weryfikuje, czy wszystkie pola są poprawnie ustawiane i odczytywane.
+     * Tests the getters and setters of all User properties.
+     * Verifies that all fields are set and read correctly.
      */
     @Test
     public void testUserProperties() {
@@ -46,14 +46,15 @@ public class ModelsTest {
 }
 
 /**
- * Zestaw testów dla klasy Team.
- * Weryfikuje poprawność podstawowych właściwości oraz mechanizmów JavaFX.
+ * Test suite for the Team class.
+ * Verifies basic properties and JavaFX mechanisms.
  */
 class TeamTest {
 
     /**
-     * Test sprawdza poprawne działanie podstawowych getterów i setterów dla klasy Team.
-     * Weryfikuje, czy pola id, teamName i projectId są poprawnie ustawiane i odczytywane.
+     * Tests the basic getters and setters of the Team class.
+     * Verifies that the id, teamName and projectId fields are set and read
+     * correctly.
      */
     @Test
     public void testTeamProperties() {
@@ -69,8 +70,8 @@ class TeamTest {
     }
 
     /**
-     * Test sprawdza poprawne działanie właściwości JavaFX w klasie Team.
-     * Weryfikuje, czy właściwości JavaFX odzwierciedlają prawidłowo wartości pól.
+     * Tests the JavaFX properties of the Team class.
+     * Verifies that the JavaFX properties correctly reflect the field values.
      */
     @Test
     public void testTeamJavaFXProperties() {
@@ -86,8 +87,9 @@ class TeamTest {
     }
 
     /**
-     * Test sprawdza poprawność implementacji metody toString() dla klasy Team.
-     * Metoda powinna zwracać tekstową reprezentację obiektu w formacie "id – teamName".
+     * Tests the toString() implementation of the Team class.
+     * The method should return a text representation of the object in the format
+     * "id - teamName", with an en dash as the separator.
      */
     @Test
     public void testToString() {
@@ -101,14 +103,14 @@ class TeamTest {
 }
 
 /**
- * Zestaw testów dla klasy Project.
- * Weryfikuje poprawność podstawowych właściwości, mechanizmów JavaFX oraz aliasów metod.
+ * Test suite for the Project class.
+ * Verifies basic properties, JavaFX mechanisms and method aliases.
  */
 class ProjectTest {
 
     /**
-     * Test sprawdza poprawne działanie podstawowych getterów i setterów dla klasy Project.
-     * Weryfikuje, czy wszystkie pola projektu są poprawnie ustawiane i odczytywane.
+     * Tests the basic getters and setters of the Project class.
+     * Verifies that all project fields are set and read correctly.
      */
     @Test
     public void testProjectProperties() {
@@ -132,8 +134,8 @@ class ProjectTest {
     }
 
     /**
-     * Test sprawdza poprawne działanie właściwości JavaFX w klasie Project.
-     * Weryfikuje, czy właściwości JavaFX odzwierciedlają prawidłowo wartości pól.
+     * Tests the JavaFX properties of the Project class.
+     * Verifies that the JavaFX properties correctly reflect the field values.
      */
     @Test
     public void testProjectJavaFXProperties() {
@@ -157,8 +159,9 @@ class ProjectTest {
     }
 
     /**
-     * Test sprawdza działanie aliasów metod getName() i setName() dla getProjectName() i setProjectName().
-     * Weryfikuje, czy alias poprawnie ustawia i odczytuje wartość pola projectName.
+     * Tests the getName() and setName() aliases for getProjectName() and
+     * setProjectName().
+     * Verifies that the alias correctly sets and reads the projectName field.
      */
     @Test
     public void testNameAlias() {
@@ -173,8 +176,9 @@ class ProjectTest {
     }
 
     /**
-     * Test sprawdza poprawność implementacji metody toString() dla klasy Project.
-     * Metoda powinna zwracać tekstową reprezentację obiektu w formacie "id - projectName".
+     * Tests the toString() implementation of the Project class.
+     * The method should return a text representation of the object in the format
+     * "id - projectName".
      */
     @Test
     public void testToString() {
@@ -188,14 +192,14 @@ class ProjectTest {
 }
 
 /**
- * Zestaw testów dla klasy Task.
- * Weryfikuje poprawność podstawowych właściwości oraz mechanizmów JavaFX.
+ * Test suite for the Task class.
+ * Verifies basic properties and JavaFX mechanisms.
  */
 class TaskTest {
 
     /**
-     * Test sprawdza poprawne działanie getterów i setterów dla wszystkich właściwości klasy Task.
-     * Weryfikuje, czy wszystkie pola zadania są poprawnie ustawiane i odczytywane.
+     * Tests the getters and setters of all Task properties.
+     * Verifies that all task fields are set and read correctly.
      */
     @Test
     public void testTaskProperties() {
@@ -229,8 +233,8 @@ class TaskTest {
     }
 
     /**
-     * Test sprawdza poprawne działanie właściwości JavaFX w klasie Task.
-     * Weryfikuje, czy właściwości JavaFX odzwierciedlają prawidłowo wartości pól.
+     * Tests the JavaFX properties of the Task class.
+     * Verifies that the JavaFX properties correctly reflect the field values.
      */
     @Test
     public void testTaskJavaFXProperties() {
@@ -246,8 +250,9 @@ class TaskTest {
     }
 
     /**
-     * Test sprawdza poprawność implementacji metody toString() dla klasy Task.
-     * Metoda powinna zwracać tekstową reprezentację obiektu w formacie "id – title".
+     * Tests the toString() implementation of the Task class.
+     * The method should return a text representation of the object in the format
+     * "id - title", with an en dash as the separator.
      */
     @Test
     public void testToString() {
@@ -261,14 +266,15 @@ class TaskTest {
 }
 
 /**
- * Zestaw testów dla klasy TeamMember.
- * Weryfikuje poprawność getterów i setterów dla właściwości klasy.
+ * Test suite for the TeamMember class.
+ * Verifies the getters and setters of the class properties.
  */
 class TeamMemberTest {
 
     /**
-     * Test sprawdza poprawne działanie getterów i setterów dla wszystkich właściwości klasy TeamMember.
-     * Weryfikuje, czy pola teamId, userId i leader są poprawnie ustawiane i odczytywane.
+     * Tests the getters and setters of all TeamMember properties.
+     * Verifies that the teamId, userId and leader fields are set and read
+     * correctly.
      */
     @Test
     public void testTeamMemberProperties() {
@@ -288,14 +294,14 @@ class TeamMemberTest {
 }
 
 /**
- * Zestaw testów dla klasy TaskActivity.
- * Weryfikuje poprawność getterów i setterów oraz metodę toString().
+ * Test suite for the TaskActivity class.
+ * Verifies the getters and setters and the toString() method.
  */
 class TaskActivityTest {
 
     /**
-     * Test sprawdza poprawne działanie getterów i setterów dla wszystkich właściwości klasy TaskActivity.
-     * Weryfikuje, czy wszystkie pola są poprawnie ustawiane i odczytywane.
+     * Tests the getters and setters of all TaskActivity properties.
+     * Verifies that all fields are set and read correctly.
      */
     @Test
     public void testTaskActivityProperties() {
@@ -318,8 +324,9 @@ class TaskActivityTest {
     }
 
     /**
-     * Test sprawdza poprawność implementacji metody toString() dla klasy TaskActivity.
-     * Metoda powinna zwracać tekstową reprezentację obiektu zawierającą wszystkie pola.
+     * Tests the toString() implementation of the TaskActivity class.
+     * The method should return a text representation of the object containing all
+     * fields.
      */
     @Test
     public void testToString() {
@@ -346,14 +353,16 @@ class TaskActivityTest {
 }
 
 /**
- * Zestaw testów dla klasy EnhancedTaskActivity.
- * Weryfikuje poprawność dziedziczenia z TaskActivity, dodatkowe pola oraz metody pomocnicze.
+ * Test suite for the EnhancedTaskActivity class.
+ * Verifies inheritance from TaskActivity, the additional fields and the helper
+ * methods.
  */
 class EnhancedTaskActivityTest {
 
     /**
-     * Test sprawdza poprawne działanie konstruktora i getterów/setterów dla klasy EnhancedTaskActivity.
-     * Weryfikuje zarówno pola dziedziczone z TaskActivity, jak i dodatkowe pola specyficzne dla EnhancedTaskActivity.
+     * Tests the constructor and getters/setters of EnhancedTaskActivity.
+     * Verifies both the fields inherited from TaskActivity and the additional
+     * fields specific to EnhancedTaskActivity.
      */
     @Test
     public void testEnhancedTaskActivityProperties() {
@@ -384,11 +393,11 @@ class EnhancedTaskActivityTest {
     }
 
     /**
-     * Test sprawdza działanie metody getFullUserName() w różnych scenariuszach:
-     * - gdy ustawione są zarówno imię jak i nazwisko
-     * - gdy ustawione jest tylko imię
-     * - gdy ustawione jest tylko nazwisko
-     * - gdy nie jest ustawione ani imię ani nazwisko
+     * Tests getFullUserName() in different scenarios:
+     * - when both first and last name are set
+     * - when only the first name is set
+     * - when only the last name is set
+     * - when neither first nor last name is set
      */
     @Test
     public void testGetFullUserName() {
@@ -412,9 +421,9 @@ class EnhancedTaskActivityTest {
     }
 
     /**
-     * Test sprawdza działanie metody getUserDisplayString() w różnych scenariuszach:
-     * - gdy ustawione są imię, nazwisko i email
-     * - gdy ustawione są tylko imię i nazwisko
+     * Tests getUserDisplayString() in different scenarios:
+     * - when first name, last name and email are set
+     * - when only first and last name are set
      */
     @Test
     public void testGetUserDisplayString() {
@@ -432,10 +441,10 @@ class EnhancedTaskActivityTest {
     }
 
     /**
-     * Test sprawdza działanie metody getTaskTitleOrDefault() w różnych scenariuszach:
-     * - gdy taskId jest równy 0
-     * - gdy tytuł zadania jest ustawiony
-     * - gdy tytuł zadania nie jest ustawiony
+     * Tests getTaskTitleOrDefault() in different scenarios:
+     * - when taskId equals 0
+     * - when the task title is set
+     * - when the task title is not set
      */
     @Test
     public void testGetTaskTitleOrDefault() {
@@ -455,9 +464,9 @@ class EnhancedTaskActivityTest {
     }
 
     /**
-     * Test sprawdza działanie metody getActivityTypeDisplayName(), która mapuje
-     * techniczne nazwy typów aktywności na ich przyjazne dla użytkownika odpowiedniki.
-     * Weryfikuje mapowanie dla wszystkich obsługiwanych typów oraz dla przypadków specjalnych.
+     * Tests getActivityTypeDisplayName(), which maps technical activity type names
+     * to their user-friendly equivalents.
+     * Verifies the mapping for all supported types and for special cases.
      */
     @Test
     public void testGetActivityTypeDisplayName() {
@@ -501,9 +510,9 @@ class EnhancedTaskActivityTest {
     }
 
     /**
-     * Test sprawdza działanie metody getActivityCssClasses(), która zwraca klasy CSS
-     * odpowiednie dla danego typu aktywności. Weryfikuje mapowanie dla różnych typów
-     * oraz dla przypadków niestandardowych i niezdefiniowanych.
+     * Tests getActivityCssClasses(), which returns the CSS classes appropriate for
+     * the given activity type. Verifies the mapping for different types and for
+     * custom and undefined cases.
      */
     @Test
     public void testGetActivityCssClasses() {
@@ -527,14 +536,15 @@ class EnhancedTaskActivityTest {
 }
 
 /**
- * Zestaw testów dla klasy Role.
- * Weryfikuje poprawność getterów i setterów dla właściwości klasy.
+ * Test suite for the Role class.
+ * Verifies the getters and setters of the class properties.
  */
 class RoleTest {
 
     /**
-     * Test sprawdza poprawne działanie getterów i setterów dla wszystkich właściwości klasy Role.
-     * Weryfikuje, czy pola id, roleName i permissions są poprawnie ustawiane i odczytywane.
+     * Tests the getters and setters of all Role properties.
+     * Verifies that the id, roleName and permissions fields are set and read
+     * correctly.
      */
     @Test
     public void testRoleProperties() {
@@ -551,14 +561,15 @@ class RoleTest {
 }
 
 /**
- * Zestaw testów dla klasy Settings.
- * Weryfikuje poprawność getterów i setterów dla właściwości klasy.
+ * Test suite for the Settings class.
+ * Verifies the getters and setters of the class properties.
  */
 class SettingsTest {
 
     /**
-     * Test sprawdza poprawne działanie getterów i setterów dla wszystkich właściwości klasy Settings.
-     * Weryfikuje, czy pola id, userId, theme, defaultView i lastPasswordChange są poprawnie ustawiane i odczytywane.
+     * Tests the getters and setters of all Settings properties.
+     * Verifies that the id, userId, theme, defaultView and lastPasswordChange
+     * fields are set and read correctly.
      */
     @Test
     public void testSettingsProperties() {
@@ -580,14 +591,14 @@ class SettingsTest {
 }
 
 /**
- * Zestaw testów dla klasy Report.
- * Weryfikuje poprawność getterów i setterów dla właściwości klasy.
+ * Test suite for the Report class.
+ * Verifies the getters and setters of the class properties.
  */
 class ReportTest {
 
     /**
-     * Test sprawdza poprawne działanie getterów i setterów dla wszystkich właściwości klasy Report.
-     * Weryfikuje, czy wszystkie pola raportu są poprawnie ustawiane i odczytywane.
+     * Tests the getters and setters of all Report properties.
+     * Verifies that all report fields are set and read correctly.
      */
     @Test
     public void testReportProperties() {
@@ -613,14 +624,14 @@ class ReportTest {
 }
 
 /**
- * Zestaw testów dla klasy TaskAssignment.
- * Weryfikuje poprawność getterów i setterów dla właściwości klasy.
+ * Test suite for the TaskAssignment class.
+ * Verifies the getters and setters of the class properties.
  */
 class TaskAssignmentTest {
 
     /**
-     * Test sprawdza poprawne działanie getterów i setterów dla wszystkich właściwości klasy TaskAssignment.
-     * Weryfikuje, czy pola taskId i userId są poprawnie ustawiane i odczytywane.
+     * Tests the getters and setters of all TaskAssignment properties.
+     * Verifies that the taskId and userId fields are set and read correctly.
      */
     @Test
     public void testTaskAssignmentProperties() {

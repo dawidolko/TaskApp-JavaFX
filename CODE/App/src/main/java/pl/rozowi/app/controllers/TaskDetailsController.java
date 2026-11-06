@@ -17,8 +17,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 /**
- * Kontroler odpowiedzialny za wyświetlanie i edycję szczegółów zadania.
- * Umożliwia przeglądanie informacji o zadaniu oraz modyfikację jego statusu i przypisania.
+ * Controller that displays and edits task details.
+ * Allows browsing task information and modifying its status and assignment.
  */
 public class TaskDetailsController {
 
@@ -55,8 +55,8 @@ public class TaskDetailsController {
 
 
     /**
-     * Ustawia zadanie do wyświetlenia i inicjalizuje widok szczegółów.
-     * @param task Obiekt zadania do wyświetlenia
+     * Sets the task to display and initializes the details view.
+     * @param task task object to display
      */
     public void setTask(Task task) {
         this.task = task;
@@ -64,9 +64,10 @@ public class TaskDetailsController {
     }
 
     /**
-     * Wyświetla szczegóły zadania w kontrolkach interfejsu użytkownika.
-     * Ładuje nazwę projektu i zespołu, ustawia dostępne opcje statusu i przypisania.
-     * Dostosowuje widoczność i dostępność kontrolek w zależności od roli użytkownika.
+     * Shows the task details in the UI controls.
+     * Loads the project and team names and sets the available status and assignment
+     * options. Adjusts the visibility and availability of controls depending on the
+     * user's role.
      */
     private void displayTaskDetails() {
         titleLabel.setText(task.getTitle());
@@ -146,8 +147,8 @@ public class TaskDetailsController {
     }
 
     /**
-     * Obsługuje zapisywanie zmian w zadaniu.
-     * Aktualizuje status zadania i przypisanie użytkownika w zależności od uprawnień.
+     * Handles saving changes to the task.
+     * Updates the task status and user assignment depending on permissions.
      */
 
     @FXML
@@ -191,8 +192,8 @@ public class TaskDetailsController {
     }
 
     /**
-     * Obsługuje edycję wszystkich właściwości zadania.
-     * Otwiera dialog edycji zadania dla użytkowników z odpowiednimi uprawnieniami.
+     * Handles editing all task properties.
+     * Opens the task edit dialog for users with the appropriate permissions.
      */
     @FXML
     private void handleEdit() {
@@ -236,7 +237,7 @@ public class TaskDetailsController {
     }
 
     /**
-     * Obsługuje anulowanie zmian i zamknięcie okna.
+     * Handles cancelling changes and closing the window.
      */
     @FXML
     private void handleCancel() {
@@ -244,7 +245,7 @@ public class TaskDetailsController {
     }
 
     /**
-     * Zamyka bieżące okno.
+     * Closes the current window.
      */
     private void closeWindow() {
         Stage stage = (Stage) cancelButton.getScene().getWindow();
@@ -252,8 +253,8 @@ public class TaskDetailsController {
     }
 
     /**
-     * Wyświetla okno dialogowe z informacją.
-     * @param message Treść wiadomości do wyświetlenia
+     * Shows an information dialog.
+     * @param message message text to display
      */
     private void showInfo(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -264,8 +265,8 @@ public class TaskDetailsController {
     }
 
     /**
-     * Wyświetla okno dialogowe z błędem.
-     * @param message Treść błędu do wyświetlenia
+     * Shows an error dialog.
+     * @param message error text to display
      */
     private void showError(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);

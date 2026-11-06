@@ -9,16 +9,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Klasa dostępu do danych dla zespołów.
- * Zawiera metody do zarządzania zespołami, ich członkami oraz relacjami w systemie.
+ * Data access class for teams.
+ * Contains methods for managing teams, their members and relations in the system.
  */
 public class TeamDAO {
 
     /**
-     * Pobiera listę wszystkich zespołów z bazy danych.
+     * Gets the list of all teams from the database.
      *
-     * @return Lista wszystkich zespołów
-     * @throws SQLException w przypadku błędu podczas komunikacji z bazą danych
+     * @return list of all teams
+     * @throws SQLException on an error communicating with the database
      */
     public List<Team> getAllTeams() throws SQLException {
         List<Team> list = new ArrayList<>();
@@ -38,10 +38,10 @@ public class TeamDAO {
     }
 
     /**
-     * Dodaje nowy zespół do bazy danych.
+     * Adds a new team to the database.
      *
-     * @param t Obiekt Team zawierający dane nowego zespołu
-     * @return true jeśli operacja się powiodła, false w przeciwnym wypadku
+     * @param t Team object containing the new team's data
+     * @return true if the operation succeeded, false otherwise
      */
     public boolean insertTeam(Team t) {
         String sql = "INSERT INTO teams (team_name, project_id) VALUES (?, ?)";
@@ -59,11 +59,11 @@ public class TeamDAO {
     }
 
     /**
-     * Aktualizuje dane zespołu w bazie danych.
+     * Updates a team's data in the database.
      *
-     * @param t Obiekt Team zawierający zaktualizowane dane
-     * @return true jeśli operacja się powiodła, false w przeciwnym wypadku
-     * @throws SQLException w przypadku błędu podczas komunikacji z bazą danych
+     * @param t Team object containing the updated data
+     * @return true if the operation succeeded, false otherwise
+     * @throws SQLException on an error communicating with the database
      */
     public boolean updateTeam(Team t) throws SQLException {
         String sql = "UPDATE teams SET team_name = ?, project_id = ? WHERE id = ?";
@@ -77,10 +77,10 @@ public class TeamDAO {
     }
 
     /**
-     * Pobiera listę członków określonego zespołu.
+     * Gets the list of members of the given team.
      *
-     * @param teamId ID zespołu
-     * @return Lista użytkowników będących członkami zespołu
+     * @param teamId team ID
+     * @return list of users who are members of the team
      */
     public List<User> getTeamMembers(int teamId) {
         List<User> members = new ArrayList<>();
@@ -110,13 +110,13 @@ public class TeamDAO {
     }
 
     /**
-     * Dodaje użytkownika do zespołu.
+     * Adds a user to a team.
      *
-     * @param teamId ID zespołu
-     * @param userId ID użytkownika
-     * @param isLeader flaga określająca czy użytkownik jest liderem zespołu
-     * @return true jeśli operacja się powiodła, false w przeciwnym wypadku
-     * @throws SQLException w przypadku błędu podczas komunikacji z bazą danych
+     * @param teamId team ID
+     * @param userId user ID
+     * @param isLeader flag indicating whether the user is the team leader
+     * @return true if the operation succeeded, false otherwise
+     * @throws SQLException on an error communicating with the database
      */
     public boolean insertTeamMember(int teamId, int userId, boolean isLeader) throws SQLException {
         String sql = "INSERT INTO team_members (team_id, user_id, is_leader) VALUES (?, ?, ?)";
@@ -130,11 +130,11 @@ public class TeamDAO {
     }
 
     /**
-     * Usuwa użytkownika z zespołu.
+     * Removes a user from a team.
      *
-     * @param teamId ID zespołu
-     * @param userId ID użytkownika
-     * @return true jeśli operacja się powiodła, false w przeciwnym wypadku
+     * @param teamId team ID
+     * @param userId user ID
+     * @return true if the operation succeeded, false otherwise
      */
     public boolean deleteTeamMember(int teamId, int userId) {
         String sql = "DELETE FROM team_members WHERE team_id = ? AND user_id = ?";
@@ -149,10 +149,10 @@ public class TeamDAO {
     }
 
     /**
-     * Pobiera listę zespołów, do których należy określony użytkownik.
+     * Gets the list of teams the given user belongs to.
      *
-     * @param userId ID użytkownika
-     * @return Lista zespołów użytkownika
+     * @param userId user ID
+     * @return list of the user's teams
      */
     public List<Team> getTeamsForUser(int userId) {
         List<Team> teams = new ArrayList<>();
@@ -181,10 +181,10 @@ public class TeamDAO {
     }
 
     /**
-     * Pobiera nazwę zespołu na podstawie jego ID.
+     * Gets a team's name by its ID.
      *
-     * @param teamId ID zespołu
-     * @return Nazwa zespołu lub "-" jeśli nie znaleziono
+     * @param teamId team ID
+     * @return team name, or "-" if not found
      */
     public String getTeamNameById(int teamId) {
         String sql = "SELECT team_name FROM teams WHERE id = ?";
@@ -200,11 +200,11 @@ public class TeamDAO {
     }
 
     /**
-     * Pobiera listę zespołów zarządzanych przez określonego menedżera.
+     * Gets the list of teams managed by the given manager.
      *
-     * @param managerId ID menedżera
-     * @return Lista zespołów zarządzanych przez menedżera
-     * @throws SQLException w przypadku błędu podczas komunikacji z bazą danych
+     * @param managerId manager ID
+     * @return list of teams managed by the manager
+     * @throws SQLException on an error communicating with the database
      */
     public List<Team> getTeamsForManager(int managerId) throws SQLException {
         List<Team> teams = new ArrayList<>();
@@ -229,11 +229,11 @@ public class TeamDAO {
     }
 
     /**
-     * Pobiera zespół na podstawie jego ID.
+     * Gets a team by its ID.
      *
-     * @param teamId ID zespołu
-     * @return Obiekt Team lub null jeśli nie znaleziono
-     * @throws SQLException w przypadku błędu podczas komunikacji z bazą danych
+     * @param teamId team ID
+     * @return Team object, or null if not found
+     * @throws SQLException on an error communicating with the database
      */
     public Team getTeamById(int teamId) throws SQLException {
         String sql = "SELECT id, team_name, project_id FROM teams WHERE id = ?";
@@ -253,11 +253,11 @@ public class TeamDAO {
     }
 
     /**
-     * Pobiera listę ID zespołów, w których określony użytkownik jest liderem.
+     * Gets the list of IDs of teams in which the given user is the leader.
      *
-     * @param leaderId ID użytkownika będącego liderem
-     * @return Lista ID zespołów
-     * @throws SQLException w przypadku błędu podczas komunikacji z bazą danych
+     * @param leaderId ID of the user who is the leader
+     * @return list of team IDs
+     * @throws SQLException on an error communicating with the database
      */
     public List<Integer> getTeamsByLeaderId(int leaderId) throws SQLException {
         List<Integer> teamIds = new ArrayList<>();
@@ -279,11 +279,11 @@ public class TeamDAO {
     }
 
     /**
-     * Pobiera listę zespołów, w których określony użytkownik jest liderem.
+     * Gets the list of teams in which the given user is the leader.
      *
-     * @param leaderId ID użytkownika będącego liderem
-     * @return Lista obiektów Team
-     * @throws SQLException w przypadku błędu podczas komunikacji z bazą danych
+     * @param leaderId ID of the user who is the leader
+     * @return list of Team objects
+     * @throws SQLException on an error communicating with the database
      */
     public List<Team> getTeamsByLeaderIdAsList(int leaderId) throws SQLException {
         List<Team> teams = new ArrayList<>();

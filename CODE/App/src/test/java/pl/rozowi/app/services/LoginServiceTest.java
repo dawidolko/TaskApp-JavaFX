@@ -25,7 +25,8 @@ class LoginServiceTest {
     AutoCloseable closeable;
 
     /**
-     * Inicjalizacja mocków przed każdym testem oraz utworzenie instancji testowanego LoginService.
+     * Initializes the mocks before each test and creates the LoginService instance
+     * under test.
      */
     @BeforeEach
     void setUp() {
@@ -34,7 +35,7 @@ class LoginServiceTest {
     }
 
     /**
-     * Zamyka kontekst mocków po każdym teście, aby uniknąć wycieków pamięci.
+     * Closes the mock context after each test to avoid memory leaks.
      */
     @AfterEach
     void tearDown() throws Exception {
@@ -42,8 +43,8 @@ class LoginServiceTest {
     }
 
     /**
-     * Test sprawdzający poprawne uwierzytelnienie użytkownika przy prawidłowych danych logowania.
-     * Wykorzystuje prawidłowy hash SHA-256 dla hasła "secret".
+     * Tests successful user authentication with valid login credentials.
+     * Uses a valid SHA-256 hash of the password "secret".
      */
     @Test
     void testAuthenticate_validCredentials() {
@@ -64,8 +65,8 @@ class LoginServiceTest {
     }
 
     /**
-     * Test sprawdzający przypadek, gdy podano nieprawidłowy email (użytkownik nie istnieje).
-     * Oczekujemy zwrócenia null i wywołania metody DAO.
+     * Tests the case where an invalid email is given (the user does not exist).
+     * Expects null to be returned and the DAO method to be called.
      */
     @Test
     void testAuthenticate_invalidCredentials() {
@@ -81,7 +82,7 @@ class LoginServiceTest {
     }
 
     /**
-     * Test sprawdzający, czy LoginService poprawnie pobiera identyfikator zespołu użytkownika.
+     * Tests whether LoginService correctly fetches the user's team ID.
      */
     @Test
     void testFindTeamIdForUser() {

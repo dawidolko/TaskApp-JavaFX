@@ -9,17 +9,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Data Access Object (DAO) dla zarządzania projektami w bazie danych.
- * Zapewnia podstawowe operacje CRUD oraz dodatkowe metody do zarządzania projektami.
+ * Data Access Object (DAO) for managing projects in the database.
+ * Provides basic CRUD operations and additional project management methods.
  */
 public class ProjectDAO {
 
     /**
-     * Dodaje nowy projekt do bazy danych.
+     * Adds a new project to the database.
      *
-     * @param p Obiekt projektu do dodania
-     * @return true jeśli projekt został pomyślnie dodany, false w przeciwnym przypadku
-     * @throws SQLException jeśli wystąpi błąd podczas operacji na bazie danych
+     * @param p project object to add
+     * @return true if the project was added successfully, false otherwise
+     * @throws SQLException if a database operation fails
      */
     public boolean insertProject(Project p) throws SQLException {
         String sql = "INSERT INTO projects (project_name, description, start_date, end_date, manager_id) VALUES (?, ?, ?, ?, ?)";
@@ -38,11 +38,11 @@ public class ProjectDAO {
     }
 
     /**
-     * Aktualizuje istniejący projekt w bazie danych.
+     * Updates an existing project in the database.
      *
-     * @param p Obiekt projektu z zaktualizowanymi danymi
-     * @return true jeśli projekt został pomyślnie zaktualizowany, false w przeciwnym przypadku
-     * @throws RuntimeException jeśli wystąpi błąd SQL
+     * @param p project object with the updated data
+     * @return true if the project was updated successfully, false otherwise
+     * @throws RuntimeException on a SQL error
      */
     public boolean updateProject(Project p) {
         String sql = "UPDATE projects SET project_name=?, description=?, start_date=?, end_date=?, manager_id=? WHERE id=?";
@@ -61,9 +61,9 @@ public class ProjectDAO {
     }
 
     /**
-     * Pobiera listę wszystkich projektów z bazy danych.
+     * Gets the list of all projects from the database.
      *
-     * @return Lista wszystkich projektów, pusta lista jeśli nie ma projektów
+     * @return list of all projects, empty if there are none
      */
     public List<Project> getAllProjects() {
         List<Project> list = new ArrayList<>();
@@ -88,10 +88,10 @@ public class ProjectDAO {
     }
 
     /**
-     * Pobiera listę projektów przypisanych do określonego menedżera.
+     * Gets the list of projects assigned to the given manager.
      *
-     * @param managerId ID menedżera
-     * @return Lista projektów menedżera, pusta lista jeśli nie ma projektów
+     * @param managerId manager ID
+     * @return list of the manager's projects, empty if there are none
      */
     public List<Project> getProjectsForManager(int managerId) {
         List<Project> list = new ArrayList<>();
@@ -122,11 +122,11 @@ public class ProjectDAO {
     }
 
     /**
-     * Pobiera nazwę projektu na podstawie ID.
+     * Gets a project's name by ID.
      *
-     * @param projectId ID projektu
-     * @return Nazwa projektu lub null jeśli projekt nie istnieje
-     * @throws RuntimeException jeśli wystąpi błąd podczas pobierania danych
+     * @param projectId project ID
+     * @return project name, or null if the project does not exist
+     * @throws RuntimeException if fetching the data fails
      */
     public String getProjectNameById(int projectId) {
         String sql = "SELECT project_name FROM projects WHERE id = ?";
@@ -146,11 +146,11 @@ public class ProjectDAO {
     }
 
     /**
-     * Usuwa projekt wraz z wszystkimi powiązanymi encjami (zadania, zespoły itp.).
-     * Operacja wykonuje się w transakcji - w przypadku błędu następuje rollback.
+     * Deletes a project along with all related entities (tasks, teams, etc.).
+     * Runs in a transaction - on error it is rolled back.
      *
-     * @param projectId ID projektu do usunięcia
-     * @return true jeśli projekt został pomyślnie usunięty, false w przeciwnym przypadku
+     * @param projectId ID of the project to delete
+     * @return true if the project was deleted successfully, false otherwise
      */
     public boolean deleteProject(int projectId) {
         try (Connection conn = DatabaseManager.getConnection()) {
@@ -302,10 +302,10 @@ public class ProjectDAO {
     }
 
     /**
-     * Pobiera projekt na podstawie ID.
+     * Gets a project by ID.
      *
-     * @param projectId ID projektu
-     * @return Obiekt projektu lub null jeśli projekt nie istnieje
+     * @param projectId project ID
+     * @return the project object, or null if the project does not exist
      */
     public Project getProjectById(int projectId) {
         String sql = "SELECT id, project_name, description, start_date, end_date, manager_id FROM projects WHERE id = ?";

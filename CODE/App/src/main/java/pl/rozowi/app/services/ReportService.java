@@ -22,9 +22,9 @@ import java.util.StringTokenizer;
 import java.awt.Color;
 
 /**
- * Klasa służąca do generowania raportów w formacie PDF.
- * Udostępnia metody do tworzenia raportów dotyczących struktury zespołów,
- * użytkowników systemu oraz przeglądu projektów.
+ * Generates reports in PDF format.
+ * Provides methods for creating reports on team structure, system users
+ * and a project overview.
  */
 public class ReportService {
 
@@ -42,8 +42,8 @@ public class ReportService {
     private Color LIGHT_COLOR = new Color(240, 240, 245);
 
     /**
-     * Konstruktor inicjalizujący czcionki używane w raportach.
-     * W przypadku błędu ładowania czcionek, używane są domyślne czcionki Helvetica.
+     * Constructor initializing the fonts used in reports.
+     * If loading the fonts fails, the default Helvetica fonts are used.
      */
     public ReportService() {
         try {
@@ -69,12 +69,12 @@ public class ReportService {
     }
 
     /**
-     * Generuje raport PDF ze strukturą zespołów.
+     * Generates a PDF report with the team structure.
      *
-     * @param filename ścieżka do pliku wynikowego PDF
-     * @param content zawartość raportu w formie tekstu
-     * @param filterOptions mapa opcji filtrów zastosowanych w raporcie
-     * @throws IOException w przypadku problemów z zapisem pliku
+     * @param filename path to the output PDF file
+     * @param content report content as text
+     * @param filterOptions map of filter options applied in the report
+     * @throws IOException if writing the file fails
      */
     public void generateTeamsStructurePdf(String filename, String content, Map<String, Object> filterOptions) throws IOException {
         Document doc = new Document(PageSize.A4);
@@ -96,12 +96,12 @@ public class ReportService {
     }
 
     /**
-     * Generuje raport PDF z listą użytkowników systemu.
+     * Generates a PDF report with the list of system users.
      *
-     * @param filename ścieżka do pliku wynikowego PDF
-     * @param content zawartość raportu w formie tekstu
-     * @param filterOptions mapa opcji filtrów zastosowanych w raporcie
-     * @throws IOException w przypadku problemów z zapisem pliku
+     * @param filename path to the output PDF file
+     * @param content report content as text
+     * @param filterOptions map of filter options applied in the report
+     * @throws IOException if writing the file fails
      */
     public void generateUsersReportPdf(String filename, String content, Map<String, Object> filterOptions) throws IOException {
         Document doc = new Document(PageSize.A4);
@@ -123,12 +123,12 @@ public class ReportService {
     }
 
     /**
-     * Generuje raport PDF z przeglądem projektów.
+     * Generates a PDF report with a project overview.
      *
-     * @param filename ścieżka do pliku wynikowego PDF
-     * @param content zawartość raportu w formie tekstu
-     * @param filterOptions mapa opcji filtrów zastosowanych w raporcie
-     * @throws IOException w przypadku problemów z zapisem pliku
+     * @param filename path to the output PDF file
+     * @param content report content as text
+     * @param filterOptions map of filter options applied in the report
+     * @throws IOException if writing the file fails
      */
     public void generateProjectsOverviewPdf(String filename, String content, Map<String, Object> filterOptions) throws IOException {
         Document doc = new Document(PageSize.A4);
@@ -150,11 +150,11 @@ public class ReportService {
     }
 
     /**
-     * Dodaje sekcję z filtrami do dokumentu PDF.
+     * Adds a filter section to the PDF document.
      *
-     * @param doc dokument PDF
-     * @param filterOptions mapa opcji filtrów do wyświetlenia
-     * @throws DocumentException w przypadku problemów z dodaniem zawartości do dokumentu
+     * @param doc PDF document
+     * @param filterOptions map of filter options to display
+     * @throws DocumentException if adding content to the document fails
      */
     private void addFilterSection(Document doc, Map<String, Object> filterOptions) throws DocumentException {
         if (filterOptions == null || filterOptions.isEmpty()) {
@@ -253,11 +253,11 @@ public class ReportService {
     }
 
     /**
-     * Dodaje nagłówek raportu do dokumentu PDF.
+     * Adds the report header to the PDF document.
      *
-     * @param doc dokument PDF
-     * @param title tytuł raportu
-     * @throws DocumentException w przypadku problemów z dodaniem zawartości do dokumentu
+     * @param doc PDF document
+     * @param title report title
+     * @throws DocumentException if adding content to the document fails
      */
     private void addReportHeader(Document doc, String title) throws DocumentException {
         Paragraph p = new Paragraph(title, TITLE_FONT);
@@ -272,10 +272,10 @@ public class ReportService {
     }
 
     /**
-     * Dodaje separator wizualny do dokumentu PDF.
+     * Adds a visual separator to the PDF document.
      *
-     * @param doc dokument PDF
-     * @throws DocumentException w przypadku problemów z dodaniem zawartości do dokumentu
+     * @param doc PDF document
+     * @throws DocumentException if adding content to the document fails
      */
     private void addSeparator(Document doc) throws DocumentException {
         Chunk line = new Chunk(new com.lowagie.text.pdf.draw.LineSeparator(0.5f, 100, PRIMARY_COLOR, Element.ALIGN_CENTER, -2));
@@ -285,15 +285,15 @@ public class ReportService {
     }
 
     /**
-     * Klasa wewnętrzna obsługująca stopkę w dokumencie PDF.
+     * Inner class handling the footer in the PDF document.
      */
     private class FooterEvent extends PdfPageEventHelper {
 
         /**
-         * Metoda wywoływana na końcu każdej strony dokumentu.
+         * Called at the end of each page of the document.
          *
-         * @param writer obiekt PdfWriter
-         * @param doc dokument PDF
+         * @param writer PdfWriter object
+         * @param doc PDF document
          */
         @Override
         public void onEndPage(PdfWriter writer, Document doc) {
@@ -310,12 +310,12 @@ public class ReportService {
     }
 
     /**
-     * Parsuje i dodaje do dokumentu informacje o zespołach.
+     * Parses team information and adds it to the document.
      *
-     * @param doc dokument PDF
-     * @param content zawartość raportu w formie tekstu
-     * @param filterOptions mapa opcji filtrów
-     * @throws DocumentException w przypadku problemów z dodaniem zawartości do dokumentu
+     * @param doc PDF document
+     * @param content report content as text
+     * @param filterOptions map of filter options
+     * @throws DocumentException if adding content to the document fails
      */
     private void parseTeams(Document doc, String content, Map<String, Object> filterOptions) throws DocumentException {
         StringTokenizer st = new StringTokenizer(content, "\n");
@@ -381,7 +381,9 @@ public class ReportService {
             } else if (line.startsWith("- ") && inTaskSection) {
                 String taskLine = line.substring(2).trim();
 
-                // Parsowanie informacji o zadaniu
+                /*
+                 * Parse task information
+                 */
                 String taskName = taskLine;
                 String taskStatus = "";
                 String taskPriority = "";
@@ -438,12 +440,12 @@ public class ReportService {
     }
 
     /**
-     * Parsuje i dodaje do dokumentu informacje o użytkownikach.
+     * Parses user information and adds it to the document.
      *
-     * @param doc dokument PDF
-     * @param content zawartość raportu w formie tekstu
-     * @param filterOptions mapa opcji filtrów
-     * @throws DocumentException w przypadku problemów z dodaniem zawartości do dokumentu
+     * @param doc PDF document
+     * @param content report content as text
+     * @param filterOptions map of filter options
+     * @throws DocumentException if adding content to the document fails
      */
     private void parseUsers(Document doc, String content, Map<String, Object> filterOptions) throws DocumentException {
         StringTokenizer st = new StringTokenizer(content, "\n");
@@ -567,12 +569,12 @@ public class ReportService {
     }
 
     /**
-     * Przetwarza linie z danymi użytkownika i dodaje je do tabeli.
+     * Processes lines with user data and adds them to the table.
      *
-     * @param table tabela PDF
-     * @param userLines lista linii z danymi użytkownika
-     * @param isTeamLeader czy użytkownik jest team liderem
-     * @param selectedGroup wybrana grupa użytkowników
+     * @param table PDF table
+     * @param userLines list of lines with user data
+     * @param isTeamLeader whether the user is a team leader
+     * @param selectedGroup selected user group
      */
     private void processUserLines(PdfPTable table, List<String> userLines, boolean isTeamLeader, String selectedGroup) {
         if (userLines.isEmpty()) return;
@@ -632,12 +634,12 @@ public class ReportService {
     }
 
     /**
-     * Parsuje i dodaje do dokumentu informacje o projektach.
+     * Parses project information and adds it to the document.
      *
-     * @param doc dokument PDF
-     * @param content zawartość raportu w formie tekstu
-     * @param filterOptions mapa opcji filtrów
-     * @throws DocumentException w przypadku problemów z dodaniem zawartości do dokumentu
+     * @param doc PDF document
+     * @param content report content as text
+     * @param filterOptions map of filter options
+     * @throws DocumentException if adding content to the document fails
      */
     private void parseProjects(Document doc, String content, Map<String, Object> filterOptions) throws DocumentException {
         StringTokenizer st = new StringTokenizer(content, "\n");
@@ -683,7 +685,9 @@ public class ReportService {
                     } else if (line.startsWith("- ") && inTaskList) {
                         String taskLine = line.substring(2).trim();
 
-                        // Parsowanie informacji o zadaniu w jednolitym formacie
+                        /*
+                         * Parse task information in a uniform format
+                         */
                         String taskName = taskLine;
                         String taskStatus = "";
                         String taskPriority = "";
@@ -776,10 +780,10 @@ public class ReportService {
     }
 
     /**
-     * Dodaje stopkę raportu do dokumentu PDF.
+     * Adds the report footer to the PDF document.
      *
-     * @param doc dokument PDF
-     * @throws DocumentException w przypadku problemów z dodaniem zawartości do dokumentu
+     * @param doc PDF document
+     * @throws DocumentException if adding content to the document fails
      */
     private void addReportFooter(Document doc) throws DocumentException {
         addSeparator(doc);

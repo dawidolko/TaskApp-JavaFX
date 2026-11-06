@@ -1,8 +1,8 @@
 package pl.rozowi.app.services;
 
 /**
- * Klasa reprezentująca wynik operacji rejestracji użytkownika.
- * Przechowuje informację o powodzeniu operacji oraz ewentualny komunikat.
+ * Class representing the result of a user registration operation.
+ * Holds whether the operation succeeded and an optional message.
  */
 public class RegistrationResult {
 
@@ -10,10 +10,10 @@ public class RegistrationResult {
     private final String message;
 
     /**
-     * Prywatny konstruktor tworzący obiekt wyniku rejestracji.
+     * Private constructor creating a registration result object.
      *
-     * @param success true jeśli rejestracja zakończyła się sukcesem, false w przeciwnym wypadku
-     * @param message komunikat związany z wynikiem operacji
+     * @param success true if registration succeeded, false otherwise
+     * @param message message related to the operation result
      */
     private RegistrationResult(boolean success, String message) {
         this.success = success;
@@ -21,38 +21,33 @@ public class RegistrationResult {
     }
 
     /**
-     * Tworzy obiekt RegistrationResult dla udanej rejestracji.
+     * Creates a RegistrationResult for a successful registration.
      *
-     * @param msg komunikat sukcesu
-     * @return obiekt RegistrationResult z ustawionym flagą sukcesu
+     * @param msg success message
+     * @return RegistrationResult with the success flag set
      */
     public static RegistrationResult success(String msg) {
         return new RegistrationResult(true, msg);
     }
 
     /**
-     * Tworzy obiekt RegistrationResult dla nieudanej rejestracji.
+     * Creates a RegistrationResult for a failed registration.
      *
-     * @param msg komunikat błędu
-     * @return obiekt RegistrationResult z ustawioną flagą niepowodzenia
+     * @param msg error message
+     * @return RegistrationResult with the failure flag set
      */
     public static RegistrationResult fail(String msg) {
         return new RegistrationResult(false, msg);
     }
 
-    /**
-     * Sprawdza czy rejestracja zakończyła się sukcesem.
-     *
-     * @return true jeśli rejestracja była udana, false w przeciwnym wypadku
-     */
     public boolean isSuccess() {
         return success;
     }
 
     /**
-     * Zwraca komunikat związany z wynikiem rejestracji.
+     * Returns the message related to the registration result.
      *
-     * @return komunikat sukcesu lub błędu
+     * @return success or error message
      */
     public String getMessage() {
         return message;

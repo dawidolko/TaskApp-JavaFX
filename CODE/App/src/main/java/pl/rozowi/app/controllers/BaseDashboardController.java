@@ -5,16 +5,16 @@ import pl.rozowi.app.models.User;
 import pl.rozowi.app.util.ThemeManager;
 
 /**
- * Bazowy kontroler dla wszystkich dashboardów.
- * Zawiera wspólne funkcje jak zarządzanie użytkownikiem i motywem.
+ * Base controller for all dashboards.
+ * Contains shared functions such as user and theme management.
  */
 public abstract class BaseDashboardController {
 
     protected User currentUser;
 
     /**
-     * Ustawia użytkownika dla kontrolera i stosuje jego motyw
-     * @param user Obiekt użytkownika
+     * Sets the controller's user and applies their theme.
+     * @param user user object
      */
     public void setUser(User user) {
         this.currentUser = user;
@@ -25,13 +25,13 @@ public abstract class BaseDashboardController {
     }
 
     /**
-     * Metoda wywoływana po ustawieniu użytkownika
-     * @param user Obiekt użytkownika
+     * Called after the user is set.
+     * @param user user object
      */
     protected abstract void onUserSet(User user);
 
     /**
-     * Stosuje motyw użytkownika do aktualnej sceny
+     * Applies the user's theme to the current scene.
      */
     protected void applyUserTheme() {
         if (currentUser != null && getScene() != null) {
@@ -40,8 +40,8 @@ public abstract class BaseDashboardController {
     }
 
     /**
-     * Zwraca aktualną scenę dla kontrolera
-     * @return Obiekt sceny lub null, jeśli scena nie jest jeszcze dostępna
+     * Returns the controller's current scene.
+     * @return the scene object, or null if the scene is not available yet
      */
     protected abstract Scene getScene();
 }

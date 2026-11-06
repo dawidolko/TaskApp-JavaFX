@@ -13,8 +13,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
- * Kontroler odpowiedzialny za edycję szczegółów zadania.
- * Umożliwia administratorom i uprzywilejowanym użytkownikom modyfikację wszystkich właściwości zadania.
+ * Controller that handles editing task details.
+ * Lets administrators and privileged users modify all task properties.
  */
 public class TaskEditController {
 
@@ -48,8 +48,8 @@ public class TaskEditController {
     private DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     /**
-     * Inicjalizacja kontrolera.
-     * Ustawia dostępne wartości dla pól wyboru statusu i priorytetu.
+     * Initializes the controller.
+     * Sets the available values for the status and priority selection fields.
      */
     @FXML
     private void initialize() {
@@ -61,8 +61,8 @@ public class TaskEditController {
     }
 
     /**
-     * Ustawia zadanie do edycji i wypełnia formularz jego danymi.
-     * @param task Zadanie do edycji
+     * Sets the task to edit and fills the form with its data.
+     * @param task task to edit
      */
     public void setTask(Task task) {
         this.currentTask = task;
@@ -97,9 +97,9 @@ public class TaskEditController {
     }
 
     /**
-     * Ładuje listę zespołów dla danego projektu i zaznacza aktualny zespół zadania.
-     * @param projectId ID projektu
-     * @param currentTeamId ID aktualnego zespołu zadania
+     * Loads the team list for the given project and selects the task's current team.
+     * @param projectId project ID
+     * @param currentTeamId ID of the task's current team
      */
     private void loadTeams(int projectId, int currentTeamId) {
         try {
@@ -125,9 +125,9 @@ public class TaskEditController {
     }
 
     /**
-     * Ładuje członków wybranego zespołu i zaznacza aktualnego przypisanego użytkownika.
-     * @param teamId ID zespołu
-     * @param currentAssigneeId ID aktualnie przypisanego użytkownika
+     * Loads the members of the selected team and selects the current assignee.
+     * @param teamId team ID
+     * @param currentAssigneeId ID of the currently assigned user
      */
     private void loadTeamMembers(int teamId, int currentAssigneeId) {
         try {
@@ -149,7 +149,7 @@ public class TaskEditController {
     }
 
     /**
-     * Konfiguruje konwertery tekstu dla pól wyboru.
+     * Configures the text converters for the selection fields.
      */
     private void setupConverters() {
         teamComboBox.setConverter(new StringConverter<Team>() {
@@ -178,8 +178,8 @@ public class TaskEditController {
     }
 
     /**
-     * Obsługuje akcję zapisywania zmian.
-     * Aktualizuje zadanie na podstawie danych z formularza i zamyka okno.
+     * Handles saving changes.
+     * Updates the task from the form data and closes the window.
      */
     @FXML
     private void handleSave() {
@@ -228,8 +228,8 @@ public class TaskEditController {
     }
 
     /**
-     * Obsługuje akcję anulowania edycji.
-     * Zamyka okno bez zapisywania zmian.
+     * Handles cancelling the edit.
+     * Closes the window without saving changes.
      */
     @FXML
     private void handleCancel() {
@@ -237,8 +237,8 @@ public class TaskEditController {
     }
 
     /**
-     * Sprawdza poprawność danych w formularzu przed zapisem.
-     * @return true jeśli wszystkie pola są poprawne, false w przeciwnym przypadku
+     * Validates the form data before saving.
+     * @return true if all fields are valid, false otherwise
      */
     private boolean validateForm() {
         if (titleField.getText().trim().isEmpty()) {
@@ -280,7 +280,7 @@ public class TaskEditController {
     }
 
     /**
-     * Zamyka okno dialogowe.
+     * Closes the dialog.
      */
     private void closeDialog() {
         Stage stage = (Stage) cancelButton.getScene().getWindow();
@@ -288,9 +288,9 @@ public class TaskEditController {
     }
 
     /**
-     * Wyświetla okno dialogowe z informacją.
-     * @param title Tytuł okna dialogowego
-     * @param message Treść wiadomości
+     * Shows an information dialog.
+     * @param title dialog title
+     * @param message message text
      */
     private void showInfo(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -301,8 +301,8 @@ public class TaskEditController {
     }
 
     /**
-     * Wyświetla okno dialogowe z ostrzeżeniem.
-     * @param message Treść ostrzeżenia
+     * Shows a warning dialog.
+     * @param message warning text
      */
     private void showWarning(String message) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -313,9 +313,9 @@ public class TaskEditController {
     }
 
     /**
-     * Wyświetla okno dialogowe z błędem.
-     * @param title Tytuł okna dialogowego
-     * @param message Treść błędu
+     * Shows an error dialog.
+     * @param title dialog title
+     * @param message error text
      */
     private void showError(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);

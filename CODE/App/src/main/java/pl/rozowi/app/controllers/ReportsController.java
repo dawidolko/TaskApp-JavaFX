@@ -27,8 +27,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * Kontroler odpowiedzialny za generowanie i zarządzanie raportami w systemie.
- * Umożliwia tworzenie raportów w formie tekstowej oraz eksport do plików PDF.
+ * Controller that generates and manages reports in the system.
+ * Allows creating reports in text form and exporting them to PDF files.
  */
 public class ReportsController {
 
@@ -122,7 +122,7 @@ public class ReportsController {
     private boolean showUsers = true;
 
     /**
-     * Inicjalizuje kontroler, konfigurując interfejs i ładując dane.
+     * Initializes the controller, configuring the interface and loading the data.
      */
     @FXML
     private void initialize() {
@@ -199,7 +199,7 @@ public class ReportsController {
     }
 
     /**
-     * Obsługuje zaznaczenie wszystkich zespołów w liście.
+     * Handles selecting all teams in the list.
      */
     @FXML
     private void handleSelectAllTeams() {
@@ -209,7 +209,7 @@ public class ReportsController {
     }
 
     /**
-     * Obsługuje odznaczenie wszystkich zespołów w liście.
+     * Handles deselecting all teams in the list.
      */
     @FXML
     private void handleDeselectAllTeams() {
@@ -219,7 +219,7 @@ public class ReportsController {
     }
 
     /**
-     * Obsługuje zaznaczenie wszystkich projektów w liście.
+     * Handles selecting all projects in the list.
      */
     @FXML
     private void handleSelectAllProjects() {
@@ -229,7 +229,7 @@ public class ReportsController {
     }
 
     /**
-     * Obsługuje odznaczenie wszystkich projektów w liście.
+     * Handles deselecting all projects in the list.
      */
     @FXML
     private void handleDeselectAllProjects() {
@@ -238,22 +238,16 @@ public class ReportsController {
         updateGenerateButtonState();
     }
 
-    /**
-     * Odświeża widok listy zespołów.
-     */
     private void refreshTeamsListView() {
         teamsListView.refresh();
     }
 
-    /**
-     * Odświeża widok listy projektów.
-     */
     private void refreshProjectsListView() {
         projectsListView.refresh();
     }
 
     /**
-     * Aktualizuje stan przycisku generowania raportu na podstawie wybranych opcji.
+     * Updates the state of the report generation button based on the selected options.
      */
     private void updateGenerateButtonState() {
         boolean disableGenerateButton = false;
@@ -296,7 +290,7 @@ public class ReportsController {
     }
 
     /**
-     * Inicjalizuje opcje filtrowania i konfiguruje widoki list.
+     * Initializes the filter options and configures the list views.
      */
     private void initFilterOptions() {
         try {
@@ -410,7 +404,7 @@ public class ReportsController {
     }
 
     /**
-     * Obsługuje pokazywanie/ukrywanie panelu opcji filtrowania.
+     * Handles showing/hiding the filter options panel.
      */
     @FXML
     private void handleShowFilterOptions() {
@@ -430,8 +424,8 @@ public class ReportsController {
     }
 
     /**
-     * Aktualizuje widoczność sekcji filtrów w zależności od typu raportu.
-     * @param reportType Typ wybranego raportu
+     * Updates the visibility of the filter sections depending on the report type.
+     * @param reportType type of the selected report
      */
     private void updateFilterVisibility(String reportType) {
         boolean isProjectsReport = "Przegląd Projektów".equals(reportType);
@@ -470,10 +464,6 @@ public class ReportsController {
         updateGenerateButtonState();
     }
 
-    /**
-     * Ustawia widoczność sekcji zespołów.
-     * @param visible Czy sekcja ma być widoczna
-     */
     private void setTeamSectionVisibility(boolean visible) {
         setVisibility(teamsContainer, visible);
         setVisibility(teamsButtonsContainer, visible);
@@ -486,10 +476,6 @@ public class ReportsController {
         }
     }
 
-    /**
-     * Ustawia widoczność sekcji projektów.
-     * @param visible Czy sekcja ma być widoczna
-     */
     private void setProjectSectionVisibility(boolean visible) {
         setVisibility(projectsListView, visible);
         setVisibility(projectsLabel, visible);
@@ -498,8 +484,8 @@ public class ReportsController {
     }
 
     /**
-     * Ustawia widoczność sekcji dat i statystyk.
-     * @param visible Czy sekcja ma być widoczna
+     * Sets the visibility of the date and statistics sections.
+     * @param visible whether the section should be visible
      */
     private void setDateAndStatsVisibility(boolean visible) {
         setVisibility(dateRangeLabel, visible);
@@ -518,10 +504,6 @@ public class ReportsController {
         }
     }
 
-    /**
-     * Ustawia widoczność opcji zadań.
-     * @param visible Czy opcje mają być widoczne
-     */
     private void setTasksOptionsVisibility(boolean visible) {
         setVisibility(showTasksCheckbox, visible);
         if (showTasksCheckbox != null) {
@@ -530,7 +512,7 @@ public class ReportsController {
     }
 
     /**
-     * Ogranicza opcje dostępne dla użytkowników z rolą kierownika.
+     * Restricts the options available to users with the manager role.
      */
     private void restrictOptionsForManager() {
         User currentUser = MainApplication.getCurrentUser();
@@ -541,9 +523,9 @@ public class ReportsController {
     }
 
     /**
-     * Obsługuje automatyczne zaznaczanie elementów w zależności od typu raportu.
-     * @param isTeamStructureReport Czy raport dotyczy struktury zespołów
-     * @param isProjectsReport Czy raport dotyczy projektów
+     * Handles automatic selection of items depending on the report type.
+     * @param isTeamStructureReport whether the report concerns the team structure
+     * @param isProjectsReport whether the report concerns projects
      */
     private void handleAutoSelection(boolean isTeamStructureReport, boolean isProjectsReport) {
         if (isTeamStructureReport && teamsListView != null) {
@@ -556,7 +538,7 @@ public class ReportsController {
     }
 
     /**
-     * Resetuje wartości w kontrolkach wyboru dat.
+     * Resets the values in the date picker controls.
      */
     private void resetDatePickers() {
         if (startDatePicker != null) {
@@ -568,9 +550,9 @@ public class ReportsController {
     }
 
     /**
-     * Ustawia widoczność elementu interfejsu.
-     * @param node Element interfejsu
-     * @param visible Czy element ma być widoczny
+     * Sets the visibility of a UI element.
+     * @param node UI element
+     * @param visible whether the element should be visible
      */
     private void setVisibility(Node node, boolean visible) {
         if (node != null) {
@@ -580,7 +562,7 @@ public class ReportsController {
     }
 
     /**
-     * Ładuje dostępne typy raportów do comboboxa.
+     * Loads the available report types into the combo box.
      */
     private void loadReportTypes() {
         User currentUser = MainApplication.getCurrentUser();
@@ -595,7 +577,7 @@ public class ReportsController {
     }
 
     /**
-     * Generuje raport na podstawie wybranych opcji.
+     * Generates a report based on the selected options.
      */
     @FXML
     private void handleGenerateReport() {
@@ -650,9 +632,9 @@ public class ReportsController {
     }
 
     /**
-     * Generuje raport struktury zespołów.
-     * @param filterOptions Mapa opcji filtrowania
-     * @throws SQLException w przypadku błędu dostępu do bazy danych
+     * Generates the team structure report.
+     * @param filterOptions map of filter options
+     * @throws SQLException on a database access error
      */
     private void generateTeamsStructureReport(Map<String, Object> filterOptions) throws SQLException {
         List<Team> teamsToShow;
@@ -768,9 +750,9 @@ public class ReportsController {
     }
 
     /**
-     * Generuje raport użytkowników systemu.
-     * @param filterOptions Mapa opcji filtrowania
-     * @throws SQLException w przypadku błędu dostępu do bazy danych
+     * Generates the system users report.
+     * @param filterOptions map of filter options
+     * @throws SQLException on a database access error
      */
     private void generateUsersReport(Map<String, Object> filterOptions) throws SQLException {
         List<User> allUsers = userDAO.getAllUsers();
@@ -913,11 +895,11 @@ public class ReportsController {
     }
 
     /**
-     * Generuje raport przeglądu projektów.
-     * @param isAdmin Czy użytkownik jest administratorem
-     * @param managerId ID kierownika (jeśli użytkownik jest kierownikiem)
-     * @param filterOptions Mapa opcji filtrowania
-     * @throws SQLException w przypadku błędu dostępu do bazy danych
+     * Generates the projects overview report.
+     * @param isAdmin whether the user is an administrator
+     * @param managerId manager ID (if the user is a manager)
+     * @param filterOptions map of filter options
+     * @throws SQLException on a database access error
      */
     private void generateProjectsOverviewReport(boolean isAdmin, int managerId, Map<String, Object> filterOptions) throws SQLException {
         List<Project> allProjects;
@@ -1046,7 +1028,7 @@ public class ReportsController {
     }
 
     /**
-     * Zapisuje wygenerowany raport do pliku PDF.
+     * Saves the generated report to a PDF file.
      */
     @FXML
     private void handleSaveAsPdf() {
@@ -1111,9 +1093,9 @@ public class ReportsController {
     }
 
     /**
-     * Wyświetla okno dialogowe z informacją.
-     * @param title Tytuł okna
-     * @param message Treść komunikatu
+     * Shows an information dialog.
+     * @param title window title
+     * @param message message text
      */
     private void showInfo(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -1124,8 +1106,8 @@ public class ReportsController {
     }
 
     /**
-     * Wyświetla okno dialogowe z ostrzeżeniem.
-     * @param message Treść ostrzeżenia
+     * Shows a warning dialog.
+     * @param message warning text
      */
     private void showWarning(String message) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -1136,9 +1118,9 @@ public class ReportsController {
     }
 
     /**
-     * Wyświetla okno dialogowe z błędem.
-     * @param title Tytuł błędu
-     * @param message Treść błędu
+     * Shows an error dialog.
+     * @param title error title
+     * @param message error text
      */
     private void showError(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);

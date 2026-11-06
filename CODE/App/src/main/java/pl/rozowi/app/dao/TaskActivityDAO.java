@@ -9,22 +9,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Data Access Object dla tabeli aktywności zadań.
- * Odpowiada za operacje związane z logowaniem działań użytkowników na zadaniach, takie jak:
+ * Data Access Object for the task activity table.
+ * Handles operations related to logging user actions on tasks, such as:
  * <ul>
- *   <li>Rejestrowanie nowych aktywności</li>
- *   <li>Pobieranie aktywności wg zadania, użytkownika, typu lub daty</li>
- *   <li>Pobieranie rozszerzonych informacji o aktywnościach z dodatkowymi danymi</li>
- *   <li>Filtrowanie aktywności według wielu kryteriów</li>
+ *   <li>Recording new activities</li>
+ *   <li>Fetching activities by task, user, type or date</li>
+ *   <li>Fetching extended activity information with additional data</li>
+ *   <li>Filtering activities by multiple criteria</li>
  * </ul>
  */
 public class TaskActivityDAO {
 
     /**
-     * Wstawia nową aktywność związaną z zadaniem do bazy danych.
+     * Inserts a new task-related activity into the database.
      *
-     * @param activity Obiekt TaskActivity zawierający szczegóły aktywności
-     * @return true jeśli wstawienie się powiodło, false w przypadku błędu
+     * @param activity TaskActivity object containing the activity details
+     * @return true if the insert succeeded, false on error
      */
     public boolean insertTaskActivity(TaskActivity activity) {
         String sql = "INSERT INTO task_activities (task_id, user_id, activity_type, description) VALUES (?, ?, ?, ?)";
@@ -43,10 +43,10 @@ public class TaskActivityDAO {
     }
 
     /**
-     * Pobiera wszystkie aktywności dla danego zadania posortowane malejąco według daty.
+     * Gets all activities for the given task, sorted by date in descending order.
      *
-     * @param taskId ID zadania, dla którego mają być pobrane aktywności
-     * @return Lista obiektów TaskActivity powiązanych z zadaniem
+     * @param taskId ID of the task to fetch activities for
+     * @return list of TaskActivity objects related to the task
      */
     public List<TaskActivity> getActivitiesByTaskId(int taskId) {
         List<TaskActivity> activities = new ArrayList<>();
@@ -66,9 +66,9 @@ public class TaskActivityDAO {
     }
 
     /**
-     * Pobiera wszystkie aktywności zarejestrowane w systemie, uporządkowane od najnowszych.
+     * Gets all activities recorded in the system, newest first.
      *
-     * @return Lista wszystkich aktywności TaskActivity
+     * @return list of all TaskActivity activities
      */
     public List<TaskActivity> getAllActivities() {
         List<TaskActivity> activities = new ArrayList<>();
@@ -87,10 +87,10 @@ public class TaskActivityDAO {
     }
 
     /**
-     * Pobiera aktywności wykonane przez określonego użytkownika.
+     * Gets the activities performed by the given user.
      *
-     * @param userId ID użytkownika, którego aktywności mają zostać pobrane
-     * @return Lista aktywności wykonanych przez użytkownika
+     * @param userId ID of the user whose activities are to be fetched
+     * @return list of activities performed by the user
      */
     public List<TaskActivity> getActivitiesByUserId(int userId) {
         List<TaskActivity> activities = new ArrayList<>();
@@ -110,10 +110,10 @@ public class TaskActivityDAO {
     }
 
     /**
-     * Pobiera aktywności według typu (np. "utworzono", "edytowano", "usunięto").
+     * Gets activities by type (e.g. "created", "edited", "deleted").
      *
-     * @param activityType Typ aktywności
-     * @return Lista aktywności danego typu
+     * @param activityType activity type
+     * @return list of activities of the given type
      */
     public List<TaskActivity> getActivitiesByType(String activityType) {
         List<TaskActivity> activities = new ArrayList<>();
@@ -133,11 +133,11 @@ public class TaskActivityDAO {
     }
 
     /**
-     * Pobiera aktywności, które miały miejsce w określonym przedziale czasowym.
+     * Gets the activities that took place in the given time range.
      *
-     * @param startDate Data początkowa przedziału
-     * @param endDate Data końcowa przedziału
-     * @return Lista aktywności z określonego zakresu dat
+     * @param startDate start date of the range
+     * @param endDate end date of the range
+     * @return list of activities from the given date range
      */
     public List<TaskActivity> getActivitiesByDateRange(java.sql.Date startDate, java.sql.Date endDate) {
         List<TaskActivity> activities = new ArrayList<>();
@@ -158,9 +158,10 @@ public class TaskActivityDAO {
     }
 
     /**
-     * Pobiera wszystkie aktywności wraz z dodatkowymi informacjami o użytkownikach i zadaniach.
+     * Gets all activities along with additional information about users and tasks.
      *
-     * @return Lista aktywności z rozszerzonymi danymi (nazwa zadania, imię i nazwisko użytkownika)
+     * @return list of activities with extended data (task name, user's first and last
+     *         name)
      */
     public List<TaskActivity> getAllActivitiesWithDetails() {
         List<TaskActivity> activities = new ArrayList<>();
@@ -193,15 +194,15 @@ public class TaskActivityDAO {
     }
 
     /**
-     * Pobiera aktywności według podanych filtrów:
-     * typ aktywności, zakres dat, użytkownik oraz zadanie.
+     * Gets activities by the given filters:
+     * activity type, date range, user and task.
      *
-     * @param activityType Typ aktywności (może być null)
-     * @param startDate Data początkowa (może być null)
-     * @param endDate Data końcowa (może być null)
-     * @param userId ID użytkownika (0 oznacza wszystkich)
-     * @param taskId ID zadania (0 oznacza wszystkie)
-     * @return Lista aktywności spełniających warunki filtrów
+     * @param activityType activity type (may be null)
+     * @param startDate start date (may be null)
+     * @param endDate end date (may be null)
+     * @param userId user ID (0 means all)
+     * @param taskId task ID (0 means all)
+     * @return list of activities matching the filter conditions
      */
     public List<TaskActivity> getFilteredActivities(String activityType, java.sql.Date startDate,
                                                  java.sql.Date endDate, int userId, int taskId) {
@@ -271,10 +272,10 @@ public class TaskActivityDAO {
     }
 
     /**
-     * Pobiera rozszerzoną wersję aktywności z dodatkowymi danymi użytkownika i zadania.
-     * Używane głównie do wyświetlania informacji w interfejsie użytkownika.
+     * Gets the extended version of activities with additional user and task data.
+     * Used mainly for displaying information in the user interface.
      *
-     * @return Lista rozszerzonych aktywności EnhancedTaskActivity
+     * @return list of extended EnhancedTaskActivity activities
      */
     public List<EnhancedTaskActivity> getEnhancedActivities() {
         List<EnhancedTaskActivity> enhancedActivities = new ArrayList<>();
@@ -314,16 +315,16 @@ public class TaskActivityDAO {
     }
 
     /**
-     * Pobiera przefiltrowane rozszerzone aktywności na podstawie:
-     * typu, zakresu dat, użytkownika, zadania i wyszukiwanej frazy.
+     * Gets filtered extended activities based on:
+     * type, date range, user, task and search phrase.
      *
-     * @param activityType Typ aktywności (może być null)
-     * @param startDate Data początkowa (może być null)
-     * @param endDate Data końcowa (może być null)
-     * @param userId ID użytkownika (0 oznacza wszystkich)
-     * @param taskId ID zadania (0 oznacza wszystkie)
-     * @param searchText Fraza do przeszukania (np. opis, nazwa zadania, email)
-     * @return Lista rozszerzonych aktywności spełniających warunki filtrów
+     * @param activityType activity type (may be null)
+     * @param startDate start date (may be null)
+     * @param endDate end date (may be null)
+     * @param userId user ID (0 means all)
+     * @param taskId task ID (0 means all)
+     * @param searchText phrase to search for (e.g. description, task name, email)
+     * @return list of extended activities matching the filter conditions
      */
     public List<EnhancedTaskActivity> getFilteredEnhancedActivities(
             String activityType,
@@ -416,11 +417,11 @@ public class TaskActivityDAO {
     }
 
     /**
-     * Metoda pomocnicza mapująca dane z ResultSet na obiekt TaskActivity.
+     * Helper method mapping data from a ResultSet to a TaskActivity object.
      *
-     * @param rs obiekt ResultSet zawierający dane z bazy danych
-     * @return obiekt TaskActivity wypełniony danymi z ResultSet
-     * @throws SQLException jeśli wystąpi błąd podczas odczytu danych z ResultSet
+     * @param rs ResultSet object containing data from the database
+     * @return TaskActivity object filled with data from the ResultSet
+     * @throws SQLException if reading data from the ResultSet fails
      */
     private TaskActivity mapActivityFromResultSet(ResultSet rs) throws SQLException {
         TaskActivity activity = new TaskActivity();

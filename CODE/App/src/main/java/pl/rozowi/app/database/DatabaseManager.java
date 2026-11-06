@@ -9,13 +9,13 @@ import java.sql.*;
 import java.util.stream.Collectors;
 
 /**
- * Klasa zarządzająca połączeniami do bazy danych i inicjalizacją schematu.
- * Obsługuje dwa tryby pracy:
+ * Class that manages database connections and schema initialization.
+ * Supports two modes of operation:
  * <ul>
- *   <li>Tryb produkcyjny z MariaDB</li>
- *   <li>Tryb embedded z H2 (używany gdy MariaDB nie jest dostępna)</li>
+ *   <li>Production mode with MariaDB</li>
+ *   <li>Embedded mode with H2 (used when MariaDB is not available)</li>
  * </ul>
- * Automatycznie wykrywa dostępność MariaDB i przełącza się między trybami.
+ * Automatically detects MariaDB availability and switches between the modes.
  */
 public class DatabaseManager {
 
@@ -49,10 +49,10 @@ public class DatabaseManager {
     }
 
     /**
-     * Ustawia testowy URL bazy danych (używane w testach jednostkowych).
-     * Wymusza użycie bazy H2 niezależnie od dostępności MariaDB.
+     * Sets the test database URL (used in unit tests).
+     * Forces the use of the H2 database regardless of MariaDB availability.
      *
-     * @param url URL testowej bazy danych
+     * @param url test database URL
      */
     public static void setTestUrl(String url) {
         testUrl = url;
@@ -65,16 +65,16 @@ public class DatabaseManager {
     }
 
     /**
-     * Zwraca połączenie do bazy danych.
-     * Wybiera odpowiedni typ połączenia w zależności od konfiguracji:
+     * Returns a database connection.
+     * Chooses the connection type depending on the configuration:
      * <ol>
-     *   <li>Jeśli ustawiono testUrl - używa go (dla testów)</li>
-     *   <li>Jeśli MariaDB jest niedostępna - używa bazy H2 w trybie embedded</li>
-     *   <li>W przeciwnym razie używa produkcyjnej bazy MariaDB</li>
+     *   <li>If testUrl is set - uses it (for tests)</li>
+     *   <li>If MariaDB is unavailable - uses the H2 database in embedded mode</li>
+     *   <li>Otherwise uses the production MariaDB database</li>
      * </ol>
      *
-     * @return aktywne połączenie do bazy danych
-     * @throws SQLException jeśli wystąpi błąd podczas nawiązywania połączenia
+     * @return an active database connection
+     * @throws SQLException if establishing the connection fails
      */
     public static Connection getConnection() throws SQLException {
         if (testUrl != null) {
@@ -90,11 +90,12 @@ public class DatabaseManager {
     }
 
     /**
-     * Sprawdza czy określony schemat bazy danych istnieje.
-     * Działa inaczej dla H2 i MariaDB ze względu na różnice w systemach zarządzania bazami.
+     * Checks whether the given database schema exists.
+     * Works differently for H2 and MariaDB due to differences between the database
+     * management systems.
      *
-     * @param schemaName nazwa schematu do sprawdzenia
-     * @return true jeśli schemat istnieje, false w przeciwnym przypadku
+     * @param schemaName name of the schema to check
+     * @return true if the schema exists, false otherwise
      */
     public static boolean schemaExists(String schemaName) {
         if (useEmbedded) {
@@ -122,9 +123,9 @@ public class DatabaseManager {
     }
 
     /**
-     * Sprawdza dostępność serwera MariaDB.
+     * Checks whether the MariaDB server is available.
      *
-     * @return true jeśli MariaDB jest dostępna, false w przeciwnym przypadku
+     * @return true if MariaDB is available, false otherwise
      */
     private static boolean isMariaDBAvailable() {
         String urlWithoutSchema = "jdbc:mariadb://localhost:3306/";
@@ -136,11 +137,11 @@ public class DatabaseManager {
     }
 
     /**
-     * Inicjalizuje bazę danych w trybie embedded (H2).
-     * Wykonuje skrypty migracji i seedera jeśli tabela USERS nie istnieje.
+     * Initializes the database in embedded mode (H2).
+     * Runs the migration and seeder scripts if the USERS table does not exist.
      *
-     * @return true jeśli inicjalizacja się powiodła lub nie była potrzebna,
-     *         false jeśli wystąpił błąd podczas inicjalizacji
+     * @return true if initialization succeeded or was not needed,
+     *         false if an error occurred during initialization
      */
     public static boolean initializeDatabase() {
         if (!useEmbedded) {
@@ -161,12 +162,12 @@ public class DatabaseManager {
     }
 
     /**
-     * Sprawdza czy tabela istnieje w bieżącej bazie danych.
+     * Checks whether a table exists in the current database.
      *
-     * @param conn aktywne połączenie do bazy danych
-     * @param tableName nazwa tabeli do sprawdzenia
-     * @return true jeśli tabela istnieje, false w przeciwnym przypadku
-     * @throws SQLException jeśli wystąpi błąd podczas sprawdzania
+     * @param conn active database connection
+     * @param tableName name of the table to check
+     * @return true if the table exists, false otherwise
+     * @throws SQLException if the check fails
      */
     private static boolean tableExists(Connection conn, String tableName) throws SQLException {
         DatabaseMetaData meta = conn.getMetaData();
@@ -175,11 +176,11 @@ public class DatabaseManager {
     }
 
     /**
-     * Wykonuje skrypt SQL z zasobów aplikacji.
+     * Runs a SQL script from the application resources.
      *
-     * @param conn aktywne połączenie do bazy danych
-     * @param resourcePath ścieżka do zasobu ze skryptem SQL
-     * @throws SQLException jeśli wystąpi błąd podczas wykonywania skryptu
+     * @param conn active database connection
+     * @param resourcePath path to the resource containing the SQL script
+     * @throws SQLException if running the script fails
      */
     private static void executeScriptFromResource(Connection conn, String resourcePath) throws SQLException {
         try {
@@ -200,12 +201,12 @@ public class DatabaseManager {
     }
 
     /**
-     * Wykonuje zestaw poleceń SQL jako batch.
-     * Dzieli skrypt na pojedyncze polecenia używając średnika jako separatora.
+     * Runs a set of SQL statements as a batch.
+     * Splits the script into individual statements using the semicolon as a separator.
      *
-     * @param conn aktywne połączenie do bazy danych
-     * @param script pełny skrypt SQL do wykonania
-     * @throws SQLException jeśli wystąpi błąd podczas wykonywania poleceń
+     * @param conn active database connection
+     * @param script full SQL script to run
+     * @throws SQLException if running the statements fails
      */
     private static void executeBatchScript(Connection conn, String script) throws SQLException {
         String[] statements = script.split(";");

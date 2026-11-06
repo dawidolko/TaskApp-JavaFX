@@ -11,10 +11,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Kontroler odpowiedzialny za zarządzanie ustawieniami systemowymi aplikacji.
- * Udostępnia funkcjonalności testowania połączenia z bazą danych, konfiguracji
- * parametrów systemowych, zarządzania logami oraz operacji na bazie danych.
- * Implementuje interfejs UserAwareController do obsługi aktualnie zalogowanego użytkownika.
+ * Controller that manages the application's system settings.
+ * Provides testing the database connection, configuring system parameters,
+ * managing logs and performing database operations.
+ * Implements UserAwareController to handle the currently logged-in user.
  */
 public class AdminSystemController implements UserAwareController {
 
@@ -38,8 +38,8 @@ public class AdminSystemController implements UserAwareController {
     private User currentUser;
 
     /**
-     * Metoda inicjalizująca kontroler. Ustawia podstawowe informacje o systemie,
-     * sprawdza status połączenia z bazą danych i dodaje początkowe wpisy do logów.
+     * Initializes the controller. Sets basic system information, checks the database
+     * connection status and adds initial log entries.
      */
     @FXML
     private void initialize() {
@@ -53,9 +53,9 @@ public class AdminSystemController implements UserAwareController {
     }
 
     /**
-     * Ustawia aktualnie zalogowanego użytkownika.
+     * Sets the currently logged-in user.
      *
-     * @param user obiekt reprezentujący zalogowanego użytkownika
+     * @param user object representing the logged-in user
      */
     @Override
     public void setUser(User user) {
@@ -63,8 +63,8 @@ public class AdminSystemController implements UserAwareController {
     }
 
     /**
-     * Obsługuje akcję testowania połączenia z bazą danych.
-     * Wyświetla wynik testu w oknie dialogowym i dodaje wpis do logów.
+     * Handles testing the database connection.
+     * Shows the test result in a dialog and adds a log entry.
      */
     @FXML
     private void handleTestConnection() {
@@ -87,8 +87,8 @@ public class AdminSystemController implements UserAwareController {
     }
 
     /**
-     * Obsługuje akcję zapisywania ustawień systemowych.
-     * Waliduje wprowadzone wartości i wyświetla odpowiedni komunikat.
+     * Handles saving the system settings.
+     * Validates the entered values and shows an appropriate message.
      */
     @FXML
     private void handleSaveSettings() {
@@ -107,7 +107,7 @@ public class AdminSystemController implements UserAwareController {
     }
 
     /**
-     * Obsługuje akcję resetowania ustawień do wartości domyślnych.
+     * Handles resetting the settings to default values.
      */
     @FXML
     private void handleResetSettings() {
@@ -120,8 +120,8 @@ public class AdminSystemController implements UserAwareController {
     }
 
     /**
-     * Obsługuje akcję zmiany poziomu logowania.
-     * Dodaje wpis do logów o zmianie poziomu.
+     * Handles changing the logging level.
+     * Adds a log entry about the level change.
      */
     @FXML
     private void handleApplyLogLevel() {
@@ -133,7 +133,7 @@ public class AdminSystemController implements UserAwareController {
     }
 
     /**
-     * Obsługuje akcję czyszczenia logów systemowych.
+     * Handles clearing the system logs.
      */
     @FXML
     private void handleClearLogs() {
@@ -142,8 +142,8 @@ public class AdminSystemController implements UserAwareController {
     }
 
     /**
-     * Obsługuje akcję tworzenia kopii zapasowej bazy danych.
-     * Wyświetla okno dialogowe z postępem operacji.
+     * Handles creating a database backup.
+     * Shows a dialog with the operation's progress.
      */
     @FXML
     private void handleBackupDatabase() {
@@ -160,8 +160,8 @@ public class AdminSystemController implements UserAwareController {
     }
 
     /**
-     * Obsługuje akcję przywracania bazy danych z kopii zapasowej.
-     * Wyświetla okno potwierdzenia przed wykonaniem operacji.
+     * Handles restoring the database from a backup.
+     * Shows a confirmation dialog before running the operation.
      */
     @FXML
     private void handleRestoreDatabase() {
@@ -187,8 +187,8 @@ public class AdminSystemController implements UserAwareController {
     }
 
     /**
-     * Obsługuje akcję optymalizacji bazy danych.
-     * Wyświetla okno dialogowe z postępem operacji.
+     * Handles database optimization.
+     * Shows a dialog with the operation's progress.
      */
     @FXML
     private void handleOptimizeDatabase() {
@@ -206,8 +206,8 @@ public class AdminSystemController implements UserAwareController {
 
 
     /**
-     * Aktualizuje status połączenia z bazą danych.
-     * Zmienia wygląd etykiety w zależności od stanu połączenia.
+     * Updates the database connection status.
+     * Changes the label's appearance depending on the connection state.
      */
     private void updateConnectionStatus() {
         try (Connection conn = DatabaseManager.getConnection()) {
@@ -220,10 +220,10 @@ public class AdminSystemController implements UserAwareController {
     }
 
     /**
-     * Dodaje nowy wpis do logów systemowych.
+     * Adds a new entry to the system logs.
      *
-     * @param level poziom logowania (np. INFO, ERROR)
-     * @param message treść wiadomości do zalogowania
+     * @param level logging level (e.g. INFO, ERROR)
+     * @param message message text to log
      */
     private void addLogEntry(String level, String message) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -233,9 +233,9 @@ public class AdminSystemController implements UserAwareController {
     }
 
     /**
-     * Wyświetla okno dialogowe z komunikatem o sukcesie.
+     * Shows a dialog with a success message.
      *
-     * @param message treść komunikatu
+     * @param message message text
      */
     private void showSuccessAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -246,9 +246,9 @@ public class AdminSystemController implements UserAwareController {
     }
 
     /**
-     * Wyświetla okno dialogowe z komunikatem o błędzie.
+     * Shows a dialog with an error message.
      *
-     * @param message treść komunikatu
+     * @param message message text
      */
     private void showErrorAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -259,10 +259,10 @@ public class AdminSystemController implements UserAwareController {
     }
 
     /**
-     * Wyświetla okno dialogowe z paskiem postępu dla długotrwałych operacji.
+     * Shows a progress bar dialog for long-running operations.
      *
-     * @param title tytuł okna dialogowego
-     * @param task zadanie do wykonania w tle
+     * @param title dialog title
+     * @param task task to run in the background
      */
     private void showProgressDialog(String title, java.util.function.Supplier<String> task) {
         Dialog<String> dialog = new Dialog<>();

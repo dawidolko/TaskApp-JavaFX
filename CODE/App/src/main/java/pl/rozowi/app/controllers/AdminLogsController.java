@@ -20,8 +20,8 @@ import java.util.Optional;
 import java.util.Random;
 
 /**
- * Kontroler odpowiedzialny za zarządzanie logami systemowymi w panelu administratora.
- * Udostępnia funkcjonalności przeglądania, filtrowania i eksportowania logów.
+ * Controller that manages system logs in the administrator panel.
+ * Provides browsing, filtering and exporting of logs.
  */
 public class AdminLogsController {
 
@@ -68,8 +68,8 @@ public class AdminLogsController {
     private ObservableList<LogEntry> filteredLogs = FXCollections.observableArrayList();
 
     /**
-     * Metoda inicjalizująca kontroler. Konfiguruje tabelę logów,
-     * ustawia wartości domyślne i ładuje przykładowe dane.
+     * Initializes the controller. Configures the log table, sets default values and
+     * loads sample data.
      */
     @FXML
     private void initialize() {
@@ -115,8 +115,8 @@ public class AdminLogsController {
     }
 
     /**
-     * Ładuje przykładowe logi do tabeli (w wersji produkcyjnej należy zastąpić
-     * prawdziwym źródłem danych).
+     * Loads sample logs into the table (in production, replace with a real data
+     * source).
      */
     private void loadSampleLogs() {
         List<LogEntry> logs = generateSampleLogs(100);
@@ -126,10 +126,10 @@ public class AdminLogsController {
     }
 
     /**
-     * Generuje przykładowe wpisy logów dla celów demonstracyjnych.
+     * Generates sample log entries for demonstration purposes.
      *
-     * @param count liczba logów do wygenerowania
-     * @return lista wygenerowanych wpisów logów
+     * @param count number of logs to generate
+     * @return list of generated log entries
      */
     private List<LogEntry> generateSampleLogs(int count) {
         List<LogEntry> logs = new ArrayList<>();
@@ -178,9 +178,9 @@ public class AdminLogsController {
     }
 
     /**
-     * Generuje przykładowy stack trace dla błędów.
+     * Generates a sample stack trace for errors.
      *
-     * @return wygenerowany stack trace
+     * @return the generated stack trace
      */
     private String generateStackTrace() {
         Random random = new Random();
@@ -215,9 +215,9 @@ public class AdminLogsController {
     }
 
     /**
-     * Wyświetla szczegóły wybranego logu w panelu detali.
+     * Shows the details of the selected log in the details panel.
      *
-     * @param logEntry wybrany wpis logu
+     * @param logEntry the selected log entry
      */
     private void displayLogDetails(LogEntry logEntry) {
         detailTimestamp.setText(logEntry.getTimestamp());
@@ -238,9 +238,6 @@ public class AdminLogsController {
         }
     }
 
-    /**
-     * Czyści panel szczegółów logu.
-     */
     private void clearLogDetails() {
         detailTimestamp.setText("-");
         detailLevel.setText("-");
@@ -254,7 +251,7 @@ public class AdminLogsController {
     }
 
     /**
-     * Wyszukuje logi na podstawie wprowadzonych kryteriów.
+     * Searches logs by the entered criteria.
      */
     @FXML
     private void handleSearch() {
@@ -291,12 +288,12 @@ public class AdminLogsController {
     }
 
     /**
-     * Sprawdza czy data logu mieści się w wybranym zakresie.
+     * Checks whether the log date falls within the selected range.
      *
-     * @param timestamp znacznik czasu logu
-     * @param startDate data początkowa zakresu
-     * @param endDate data końcowa zakresu
-     * @return true jeśli log mieści się w zakresie dat
+     * @param timestamp log timestamp
+     * @param startDate start date of the range
+     * @param endDate end date of the range
+     * @return true if the log falls within the date range
      */
     private boolean isInDateRange(String timestamp, LocalDate startDate, LocalDate endDate) {
         if (startDate == null && endDate == null) {
@@ -316,7 +313,7 @@ public class AdminLogsController {
     }
 
     /**
-     * Filtruje logi na podstawie wybranego poziomu (ERROR, WARNING itp.).
+     * Filters logs by the selected level (ERROR, WARNING, etc.).
      */
     @FXML
     private void handleFilterByLevel() {
@@ -324,7 +321,7 @@ public class AdminLogsController {
     }
 
     /**
-     * Filtruje logi na podstawie wybranego zakresu dat.
+     * Filters logs by the selected date range.
      */
     @FXML
     private void handleDateFilter() {
@@ -332,7 +329,7 @@ public class AdminLogsController {
     }
 
     /**
-     * Czyści wszystkie ustawione filtry.
+     * Clears all set filters.
      */
     @FXML
     private void handleClearFilters() {
@@ -345,9 +342,6 @@ public class AdminLogsController {
         logsTable.setItems(filteredLogs);
     }
 
-    /**
-     * Odświeża listę logów.
-     */
     @FXML
     private void handleRefresh() {
         loadSampleLogs();
@@ -355,7 +349,7 @@ public class AdminLogsController {
     }
 
     /**
-     * Eksportuje widoczne logi do pliku tekstowego lub CSV.
+     * Exports the visible logs to a text or CSV file.
      */
     @FXML
     private void handleExportLogs() {
@@ -398,9 +392,9 @@ public class AdminLogsController {
     }
 
     /**
-     * Wyświetla okno dialogowe z informacją.
+     * Shows an information dialog.
      *
-     * @param message treść wiadomości
+     * @param message message text
      */
     private void showInfo(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -411,10 +405,10 @@ public class AdminLogsController {
     }
 
     /**
-     * Wyświetla okno dialogowe z błędem.
+     * Shows an error dialog.
      *
-     * @param title tytuł okna
-     * @param message treść błędu
+     * @param title window title
+     * @param message error text
      */
     private void showError(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -425,7 +419,7 @@ public class AdminLogsController {
     }
 
     /**
-     * Klasa wewnętrzna reprezentująca pojedynczy wpis logu.
+     * Inner class representing a single log entry.
      */
     public static class LogEntry {
         private final String timestamp;
@@ -438,16 +432,16 @@ public class AdminLogsController {
         private final String stackTrace;
 
         /**
-         * Tworzy nowy wpis logu.
+         * Creates a new log entry.
          *
-         * @param timestamp znacznik czasu
-         * @param level poziom logu (ERROR, WARNING itp.)
-         * @param source źródło logu
-         * @param user użytkownik związany z logiem
-         * @param message treść wiadomości
-         * @param ip adres IP związany z logiem
-         * @param session identyfikator sesji
-         * @param stackTrace stack trace dla błędów
+         * @param timestamp timestamp
+         * @param level log level (ERROR, WARNING, etc.)
+         * @param source log source
+         * @param user user associated with the log
+         * @param message message text
+         * @param ip IP address associated with the log
+         * @param session session identifier
+         * @param stackTrace stack trace for errors
          */
         public LogEntry(String timestamp, String level, String source, String user,
                         String message, String ip, String session, String stackTrace) {

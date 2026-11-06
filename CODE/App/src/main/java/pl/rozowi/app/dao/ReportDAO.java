@@ -11,16 +11,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Data Access Object (DAO) dla zarządzania raportami w bazie danych.
- * Zapewnia podstawowe operacje CRUD dla encji raportów.
+ * Data Access Object (DAO) for managing reports in the database.
+ * Provides basic CRUD operations for report entities.
  */
 public class ReportDAO {
 
     /**
-     * Dodaje nowy raport do bazy danych.
-            *
-            * @param report Obiekt raportu do zapisania, zawierający wszystkie wymagane dane
-     * @return true jeśli raport został pomyślnie dodany, false w przypadku błędu
+     * Adds a new report to the database.
+     *
+     * @param report report object to save, containing all required data
+     * @return true if the report was added successfully, false on error
      */
     public boolean insertReport(Report report) {
         String sql = "INSERT INTO reports (report_name, report_type, report_scope, created_by, created_at, exported_file) VALUES (?, ?, ?, ?, ?, ?)";
@@ -41,9 +41,9 @@ public class ReportDAO {
     }
 
     /**
-     * Pobiera listę wszystkich raportów z bazy danych.
+     * Gets the list of all reports from the database.
      *
-     * @return Lista wszystkich raportów w systemie, pusta lista jeśli nie ma raportów
+     * @return list of all reports in the system, empty if there are none
      */
     public List<Report> getAllReports() {
         List<Report> reports = new ArrayList<>();

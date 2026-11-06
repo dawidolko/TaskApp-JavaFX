@@ -8,32 +8,32 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
- * Klasa odpowiedzialna za proces rejestracji nowych użytkowników w systemie.
- * Zapewnia walidację danych wejściowych, tworzenie nowych kont użytkowników
- * i zwracanie wyników operacji rejestracji.
+ * Class that handles registering new users in the system.
+ * Provides input validation, creation of new user accounts and returning the results
+ * of the registration operation.
  */
 public class RegisterService {
 
     private final UserDAO userDAO;
 
     /**
-     * Konstruktor inicjalizujący serwis rejestracji.
+     * Constructor initializing the registration service.
      *
-     * @param userDAO obiekt DAO do komunikacji z warstwą danych użytkowników
+     * @param userDAO DAO object for communicating with the user data layer
      */
     public RegisterService(UserDAO userDAO) {
         this.userDAO = userDAO;
     }
 
     /**
-     * Rejestruje nowego użytkownika w systemie po przeprowadzeniu walidacji danych.
+     * Registers a new user in the system after validating the data.
      *
-     * @param firstName imię użytkownika
-     * @param lastName nazwisko użytkownika
-     * @param email adres email użytkownika
-     * @param password hasło użytkownika
-     * @param confirmPassword potwierdzenie hasła
-     * @return obiekt RegistrationResult zawierający status i komunikat wyniku operacji
+     * @param firstName user's first name
+     * @param lastName user's last name
+     * @param email user's email address
+     * @param password user's password
+     * @param confirmPassword password confirmation
+     * @return RegistrationResult object containing the operation's status and message
      */
     public RegistrationResult register(String firstName, String lastName, String email,
                                        String password, String confirmPassword) {
@@ -71,10 +71,10 @@ public class RegisterService {
     }
 
     /**
-     * Sprawdza czy tekst zaczyna się od wielkiej litery.
+     * Checks whether the text starts with an uppercase letter.
      *
-     * @param text tekst do sprawdzenia
-     * @return true jeśli tekst zaczyna się od wielkiej litery, false w przeciwnym wypadku
+     * @param text text to check
+     * @return true if the text starts with an uppercase letter, false otherwise
      */
     private boolean isCapitalized(String text) {
         if (text == null || text.isEmpty()) return false;
@@ -82,10 +82,10 @@ public class RegisterService {
     }
 
     /**
-     * Weryfikuje poprawność formatu adresu email.
+     * Validates the email address format.
      *
-     * @param email adres email do walidacji
-     * @return true jeśli email jest w poprawnym formacie, false w przeciwnym wypadku
+     * @param email email address to validate
+     * @return true if the email is in a valid format, false otherwise
      */
     private boolean isValidEmail(String email) {
         if (email == null) return false;
@@ -94,10 +94,10 @@ public class RegisterService {
     }
 
     /**
-     * Sprawdza czy hasło zawiera przynajmniej jeden znak specjalny.
+     * Checks whether the password contains at least one special character.
      *
-     * @param password hasło do sprawdzenia
-     * @return true jeśli hasło zawiera znak specjalny, false w przeciwnym wypadku
+     * @param password password to check
+     * @return true if the password contains a special character, false otherwise
      */
     private boolean hasSpecialChar(String password) {
         if (password == null) return false;
@@ -105,10 +105,10 @@ public class RegisterService {
     }
 
     /**
-     * Haszuje podane hasło algorytmem SHA-256.
+     * Hashes the given password with SHA-256.
      *
-     * @param password hasło do zaszyfrowania
-     * @return zahashowane hasło jako ciąg znaków hex lub null w przypadku błędu
+     * @param password password to hash
+     * @return the hashed password as a hex string, or null on error
      */
     private String hashPassword(String password) {
         try {

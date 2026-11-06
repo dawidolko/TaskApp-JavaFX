@@ -24,15 +24,15 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
- * Kontroler panelu głównego dla zwykłego użytkownika systemu.
- * Rozszerza funkcjonalność BaseDashboardController, dostosowując ją do potrzeb standardowego użytkownika.
+ * Main panel controller for a regular system user.
+ * Extends BaseDashboardController, tailoring it to a standard user's needs.
  *
- * <p>Zapewnia następujące funkcjonalności:</p>
+ * <p>Provides the following functionality:</p>
  * <ul>
- *   <li>Przełączanie między widokami zadań (własnych i wszystkich)</li>
- *   <li>Dostęp do ustawień użytkownika</li>
- *   <li>Możliwość wylogowania się z systemu</li>
- *   <li>Podstawowe wyszukiwanie zadań</li>
+ *   <li>Switching between task views (own and all)</li>
+ *   <li>Access to user settings</li>
+ *   <li>Logging out of the system</li>
+ *   <li>Basic task search</li>
  * </ul>
  */
 public class UserDashboardController extends BaseDashboardController {
@@ -60,17 +60,17 @@ public class UserDashboardController extends BaseDashboardController {
     private static final String ACTIVE_BUTTON_STYLE = "sidebar-button-active";
 
     /**
-     * Inicjalizacja kontrolera.
-     * Metoda wywoływana automatycznie po załadowaniu pliku FXML.
+     * Initializes the controller.
+     * Called automatically after the FXML file is loaded.
      */
     @FXML
     private void initialize() {
     }
 
     /**
-     * Ustawia styl aktywnego przycisku w pasku bocznym.
+     * Sets the active button style in the sidebar.
      *
-     * @param activeButton Przycisk, który ma zostać oznaczony jako aktywny
+     * @param activeButton button to mark as active
      */
     private void setActiveButton(Button activeButton) {
         myTasksButton.getStyleClass().remove(ACTIVE_BUTTON_STYLE);
@@ -83,10 +83,10 @@ public class UserDashboardController extends BaseDashboardController {
     }
 
     /**
-     * Metoda wywoływana po ustawieniu użytkownika.
-     * Inicjalizuje panel na podstawie domyślnego widoku użytkownika.
+     * Called after the user is set.
+     * Initializes the panel based on the user's default view.
      *
-     * @param user Obiekt użytkownika zalogowanego do systemu
+     * @param user object of the user logged in to the system
      */
     @Override
     protected void onUserSet(User user) {
@@ -118,9 +118,9 @@ public class UserDashboardController extends BaseDashboardController {
     }
 
     /**
-     * Pobiera scenę główną panelu.
+     * Gets the panel's main scene.
      *
-     * @return Obiekt sceny lub null jeśli główny panel nie został załadowany
+     * @return the scene object, or null if the main panel has not been loaded
      */
     @Override
     protected Scene getScene() {
@@ -128,9 +128,9 @@ public class UserDashboardController extends BaseDashboardController {
     }
 
     /**
-     * Przechodzi do widoku własnych zadań użytkownika.
+     * Goes to the view of the user's own tasks.
      *
-     * @throws IOException gdy wystąpi błąd ładowania widoku
+     * @throws IOException if loading the view fails
      */
     @FXML
     private void goToMyTasks() throws IOException {
@@ -139,9 +139,9 @@ public class UserDashboardController extends BaseDashboardController {
     }
 
     /**
-     * Przechodzi do widoku wszystkich zadań dostępnych dla użytkownika.
+     * Goes to the view of all tasks available to the user.
      *
-     * @throws IOException gdy wystąpi błąd ładowania widoku
+     * @throws IOException if loading the view fails
      */
     @FXML
     private void goToAllTasks() throws IOException {
@@ -150,9 +150,9 @@ public class UserDashboardController extends BaseDashboardController {
     }
 
     /**
-     * Przechodzi do widoku ustawień użytkownika.
+     * Goes to the user settings view.
      *
-     * @throws IOException gdy wystąpi błąd ładowania widoku
+     * @throws IOException if loading the view fails
      */
     @FXML
     private void goToSettings() throws IOException {
@@ -161,9 +161,9 @@ public class UserDashboardController extends BaseDashboardController {
     }
 
     /**
-     * Wylogowuje użytkownika i przekierowuje do ekranu logowania.
+     * Logs the user out and redirects to the login screen.
      *
-     * @throws IOException gdy wystąpi błąd ładowania widoku logowania
+     * @throws IOException if loading the login view fails
      */
     @FXML
     private void logout() throws IOException {
@@ -172,10 +172,10 @@ public class UserDashboardController extends BaseDashboardController {
     }
 
     /**
-     * Ładuje widok w głównym panelu.
+     * Loads a view into the main panel.
      *
-     * @param fxmlPath Ścieżka do pliku FXML z definicją widoku
-     * @throws IOException gdy wystąpi błąd ładowania widoku
+     * @param fxmlPath path to the FXML file defining the view
+     * @throws IOException if loading the view fails
      */
     private void loadView(String fxmlPath) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));

@@ -18,9 +18,9 @@ import pl.rozowi.app.util.ThemeManager;
 import java.io.IOException;
 
 /**
- * Kontroler panelu głównego dla lidera zespołu.
- * Rozszerza funkcjonalność BaseDashboardController, dostosowując ją do potrzeb lidera zespołu.
- * Zawiera nawigację po modułach dostępnych dla lidera zespołu.
+ * Main panel controller for a team leader.
+ * Extends BaseDashboardController, tailoring it to a team leader's needs.
+ * Contains navigation across the modules available to a team leader.
  */
 public class TeamLeaderDashboardController extends BaseDashboardController {
 
@@ -47,16 +47,16 @@ public class TeamLeaderDashboardController extends BaseDashboardController {
     private static final String ACTIVE_BUTTON_STYLE = "sidebar-button-active";
 
     /**
-     * Inicjalizacja kontrolera.
-     * Metoda wywoływana automatycznie po załadowaniu pliku FXML.
+     * Initializes the controller.
+     * Called automatically after the FXML file is loaded.
      */
     @FXML
     private void initialize() {
     }
 
     /**
-     * Ustawia styl aktywnego przycisku w pasku bocznym.
-     * @param activeButton Przycisk, który ma zostać oznaczony jako aktywny
+     * Sets the active button style in the sidebar.
+     * @param activeButton button to mark as active
      */
     private void setActiveButton(Button activeButton) {
         myTasksButton.getStyleClass().remove(ACTIVE_BUTTON_STYLE);
@@ -71,9 +71,9 @@ public class TeamLeaderDashboardController extends BaseDashboardController {
     }
 
     /**
-     * Metoda wywoływana po ustawieniu użytkownika.
-     * Inicjalizuje panel na podstawie domyślnego widoku użytkownika.
-     * @param user Obiekt użytkownika zalogowanego do systemu
+     * Called after the user is set.
+     * Initializes the panel based on the user's default view.
+     * @param user object of the user logged in to the system
      */
     @Override
     protected void onUserSet(User user) {
@@ -111,8 +111,8 @@ public class TeamLeaderDashboardController extends BaseDashboardController {
     }
 
     /**
-     * Pobiera scenę główną panelu.
-     * @return Obiekt sceny
+     * Gets the panel's main scene.
+     * @return the scene object
      */
     @Override
     protected Scene getScene() {
@@ -120,8 +120,8 @@ public class TeamLeaderDashboardController extends BaseDashboardController {
     }
 
     /**
-     * Przechodzi do widoku moich zadań.
-     * @throws IOException gdy wystąpi błąd ładowania widoku
+     * Goes to the my tasks view.
+     * @throws IOException if loading the view fails
      */
     @FXML
     private void goToMyTasks() throws IOException {
@@ -130,8 +130,8 @@ public class TeamLeaderDashboardController extends BaseDashboardController {
     }
 
     /**
-     * Przechodzi do widoku zadań zespołu.
-     * @throws IOException gdy wystąpi błąd ładowania widoku
+     * Goes to the team tasks view.
+     * @throws IOException if loading the view fails
      */
     @FXML
     private void goToTasks() throws IOException {
@@ -140,8 +140,8 @@ public class TeamLeaderDashboardController extends BaseDashboardController {
     }
 
     /**
-     * Przechodzi do widoku raportów.
-     * @throws IOException gdy wystąpi błąd ładowania widoku
+     * Goes to the reports view.
+     * @throws IOException if loading the view fails
      */
     @FXML
     private void goToReports() throws IOException {
@@ -159,8 +159,8 @@ public class TeamLeaderDashboardController extends BaseDashboardController {
     }
 
     /**
-     * Przechodzi do widoku pracowników.
-     * @throws IOException gdy wystąpi błąd ładowania widoku
+     * Goes to the employees view.
+     * @throws IOException if loading the view fails
      */
     @FXML
     private void goToEmployees() throws IOException {
@@ -169,8 +169,8 @@ public class TeamLeaderDashboardController extends BaseDashboardController {
     }
 
     /**
-     * Przechodzi do widoku ustawień.
-     * @throws IOException gdy wystąpi błąd ładowania widoku
+     * Goes to the settings view.
+     * @throws IOException if loading the view fails
      */
     @FXML
     private void goToSettings() throws IOException {
@@ -179,8 +179,8 @@ public class TeamLeaderDashboardController extends BaseDashboardController {
     }
 
     /**
-     * Wylogowuje użytkownika i przekierowuje do ekranu logowania.
-     * @throws IOException gdy wystąpi błąd ładowania widoku logowania
+     * Logs the user out and redirects to the login screen.
+     * @throws IOException if loading the login view fails
      */
     @FXML
     private void logout() throws IOException {
@@ -189,9 +189,9 @@ public class TeamLeaderDashboardController extends BaseDashboardController {
     }
 
     /**
-     * Ładuje widok w głównym panelu.
-     * @param fxmlPath Ścieżka do pliku FXML z definicją widoku
-     * @throws IOException gdy wystąpi błąd ładowania widoku
+     * Loads a view into the main panel.
+     * @param fxmlPath path to the FXML file defining the view
+     * @throws IOException if loading the view fails
      */
     private void loadView(String fxmlPath) throws IOException {
         FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource(fxmlPath));

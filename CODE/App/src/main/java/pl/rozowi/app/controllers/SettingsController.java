@@ -20,8 +20,9 @@ import pl.rozowi.app.util.DefaultViewManager;
 import java.io.IOException;
 
 /**
- * Kontroler odpowiedzialny za obsługę panelu ustawień użytkownika.
- * Pozwala na zmianę hasła, podpowiedzi do hasła, adresu email, motywu oraz domyślnego widoku.
+ * Controller that handles the user settings panel.
+ * Allows changing the password, password hint, email address, theme and default
+ * view.
  */
 public class SettingsController {
 
@@ -46,9 +47,9 @@ public class SettingsController {
     private User currentUser;
 
     /**
-     * Ustawia aktualnego użytkownika i inicjalizuje formularz jego danymi.
+     * Sets the current user and fills the form with their data.
      *
-     * @param user obiekt użytkownika, którego ustawienia będą edytowane
+     * @param user user object whose settings will be edited
      */
     public void setUser(User user) {
         this.currentUser = user;
@@ -120,7 +121,7 @@ public class SettingsController {
     }
 
     /**
-     * Inicjalizacja kontrolera - ustawia obsługę zdarzenia dla przycisku zapisywania.
+     * Initializes the controller - sets the event handler for the save button.
      */
     @FXML
     private void initialize() {
@@ -128,8 +129,9 @@ public class SettingsController {
     }
 
     /**
-     * Obsługuje zdarzenie zapisywania ustawień.
-     * Waliduje dane, aktualizuje użytkownika i przełącza na odpowiedni widok w zależności od roli.
+     * Handles the save settings event.
+     * Validates the data, updates the user and switches to the appropriate view
+     * depending on the role.
      */
     @FXML
     private void handleSaveSettings() {
@@ -227,21 +229,21 @@ public class SettingsController {
     }
 
     /**
-     * Sprawdza poprawność formatu adresu email.
+     * Validates the email address format.
      *
-     * @param email adres email do walidacji
-     * @return true jeśli email jest poprawny, false w przeciwnym wypadku
+     * @param email email address to validate
+     * @return true if the email is valid, false otherwise
      */
     private boolean isValidEmail(String email) {
         return email != null && email.matches("^[A-Za-z0-9+_.-]+@(.+)$");
     }
 
     /**
-     * Wyświetla okno dialogowe z komunikatem.
+     * Shows a message dialog.
      *
-     * @param type typ komunikatu (ERROR, INFORMATION itp.)
-     * @param title tytuł okna dialogowego
-     * @param content treść komunikatu
+     * @param type message type (ERROR, INFORMATION, etc.)
+     * @param title dialog title
+     * @param content message text
      */
     private void showAlert(Alert.AlertType type, String title, String content) {
         Alert a = new Alert(type);

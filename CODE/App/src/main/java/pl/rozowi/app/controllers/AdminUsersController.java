@@ -30,8 +30,8 @@ import java.util.HashMap;
 import java.util.Optional;
 
 /**
- * Kontroler odpowiedzialny za zarządzanie użytkownikami w panelu administracyjnym.
- * Umożliwia dodawanie, edycję, usuwanie użytkowników oraz zarządzanie ich uprawnieniami.
+ * Controller that manages users in the administration panel.
+ * Allows adding, editing and deleting users and managing their permissions.
  */
 public class AdminUsersController {
 
@@ -83,8 +83,8 @@ public class AdminUsersController {
     private ObservableList<User> allUsers = FXCollections.observableArrayList();
 
     /**
-     * Inicjalizuje kontroler. Ładuje dane użytkowników, konfiguruje tabele
-     * oraz ustawia podstawowe parametry. Wywoływana automatycznie po załadowaniu FXML.
+     * Initializes the controller. Loads user data, configures the tables and sets basic
+     * parameters. Called automatically after the FXML is loaded.
      */
     @FXML
     private void initialize() {
@@ -128,8 +128,8 @@ public class AdminUsersController {
     }
 
     /**
-     * Ładuje nazwy ról i grup użytkowników z bazy danych.
-     * W przypadku błędu używa domyślnych wartości.
+     * Loads user role and group names from the database.
+     * Falls back to default values on error.
      */
     private void loadRolesAndGroups() {
         try {
@@ -161,7 +161,7 @@ public class AdminUsersController {
     }
 
     /**
-     * Ładuje listę wszystkich użytkowników z bazy danych.
+     * Loads the list of all users from the database.
      */
     private void loadUsers() {
         try {
@@ -175,8 +175,8 @@ public class AdminUsersController {
     }
 
     /**
-     * Wyświetla szczegółowe informacje o wybranym użytkowniku.
-     * @param user Obiekt użytkownika do wyświetlenia
+     * Shows detailed information about the selected user.
+     * @param user user object to display
      */
     private void showUserDetails(User user) {
         detailId.setText(String.valueOf(user.getId()));
@@ -213,7 +213,7 @@ public class AdminUsersController {
     }
 
     /**
-     * Filtruje listę użytkowników na podstawie wprowadzonego tekstu.
+     * Filters the user list by the entered text.
      */
     @FXML
     private void handleSearch() {
@@ -236,8 +236,8 @@ public class AdminUsersController {
     }
 
     /**
-     * Obsługuje akcję dodawania nowego użytkownika.
-     * Wyświetla okno dialogowe do wprowadzenia danych.
+     * Handles adding a new user.
+     * Shows a dialog for entering the data.
      */
     @FXML
     private void handleAddUser() {
@@ -270,8 +270,8 @@ public class AdminUsersController {
     }
 
     /**
-     * Obsługuje akcję edycji istniejącego użytkownika.
-     * Wyświetla okno dialogowe z danymi użytkownika.
+     * Handles editing an existing user.
+     * Shows a dialog with the user's data.
      */
     @FXML
     private void handleEditUser() {
@@ -312,7 +312,7 @@ public class AdminUsersController {
     }
 
     /**
-     * Klasa pomocnicza przechowująca parę użytkownik-zespół.
+     * Helper class holding a user-team pair.
      */
     private static class UserTeamPair {
         User user;
@@ -325,8 +325,8 @@ public class AdminUsersController {
     }
 
     /**
-     * Obsługuje akcję usuwania użytkownika.
-     * Wyświetla okno potwierdzenia przed usunięciem.
+     * Handles deleting a user.
+     * Shows a confirmation dialog before deletion.
      */
     @FXML
     private void handleDeleteUser() {
@@ -369,8 +369,8 @@ public class AdminUsersController {
     }
 
     /**
-     * Obsługuje akcję resetowania hasła użytkownika.
-     * Ustawia domyślne hasło i aktualizuje datę ostatniej zmiany.
+     * Handles resetting a user's password.
+     * Sets the default password and updates the last change date.
      */
     @FXML
     private void handleResetPassword() {
@@ -418,8 +418,8 @@ public class AdminUsersController {
     }
 
     /**
-     * Obsługuje akcję zmiany roli użytkownika.
-     * Wyświetla okno dialogowe z listą dostępnych ról.
+     * Handles changing a user's role.
+     * Shows a dialog with the list of available roles.
      */
     @FXML
     private void handleChangeRole() {
@@ -485,8 +485,8 @@ public class AdminUsersController {
     }
 
     /**
-     * Obsługuje akcję zmiany grupy użytkownika.
-     * Wyświetla okno dialogowe z listą dostępnych grup.
+     * Handles changing a user's group.
+     * Shows a dialog with the list of available groups.
      */
     @FXML
     private void handleChangeGroup() {
@@ -552,7 +552,7 @@ public class AdminUsersController {
     }
 
     /**
-     * Odświeża dane, ponownie ładując listę użytkowników.
+     * Refreshes the data by reloading the user list.
      */
     @FXML
     private void handleRefresh() {
@@ -561,9 +561,9 @@ public class AdminUsersController {
     }
 
     /**
-     * Tworzy i konfiguruje okno dialogowe do edycji/dodawania użytkownika.
-     * @param user Obiekt użytkownika do edycji lub null dla nowego użytkownika
-     * @return Skonfigurowane okno dialogowe
+     * Creates and configures the dialog for editing/adding a user.
+     * @param user user object to edit, or null for a new user
+     * @return the configured dialog
      */
     private Dialog<UserTeamPair> createUserDialog(User user) {
         Dialog<UserTeamPair> dialog = new Dialog<>();
@@ -711,11 +711,11 @@ public class AdminUsersController {
     }
 
     /**
-     * Sprawdza poprawność danych w formularzu użytkownika.
-     * @param saveButton Przycisk zapisu do aktywacji/dezaktywacji
-     * @param nameField Pole z imieniem użytkownika
-     * @param lastNameField Pole z nazwiskiem użytkownika
-     * @param emailField Pole z emailem użytkownika
+     * Validates the data in the user form.
+     * @param saveButton save button to enable/disable
+     * @param nameField user's first name field
+     * @param lastNameField user's last name field
+     * @param emailField user's email field
      */
     private void validateForm(Node saveButton, TextField nameField, TextField lastNameField, TextField emailField) {
         boolean isValid = !nameField.getText().trim().isEmpty() &&
@@ -726,17 +726,17 @@ public class AdminUsersController {
     }
 
     /**
-     * Sprawdza poprawność formatu adresu email.
-     * @param email Adres email do walidacji
-     * @return true jeśli email jest poprawny, false w przeciwnym przypadku
+     * Validates the email address format.
+     * @param email email address to validate
+     * @return true if the email is valid, false otherwise
      */
     private boolean isValidEmail(String email) {
         return email != null && email.matches("^[\\w.-]+@([\\w-]+\\.)+[\\w-]{2,4}$");
     }
 
     /**
-     * Wyświetla okno dialogowe z informacją.
-     * @param message Treść wiadomości do wyświetlenia
+     * Shows an information dialog.
+     * @param message message text to display
      */
     private void showInfo(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -747,8 +747,8 @@ public class AdminUsersController {
     }
 
     /**
-     * Wyświetla okno dialogowe z ostrzeżeniem.
-     * @param message Treść ostrzeżenia do wyświetlenia
+     * Shows a warning dialog.
+     * @param message warning text to display
      */
     private void showWarning(String message) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -760,8 +760,8 @@ public class AdminUsersController {
     }
 
     /**
-     * Wyświetla okno dialogowe z błędem.
-     * @param message Treść błędu do wyświetlenia
+     * Shows an error dialog.
+     * @param message error text to display
      */
     private void showError(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);

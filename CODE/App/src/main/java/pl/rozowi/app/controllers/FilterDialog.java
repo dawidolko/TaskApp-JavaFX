@@ -18,8 +18,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Klasa odpowiedzialna za wyświetlanie i obsługę okna dialogowego do filtrowania raportów.
- * Umożliwia użytkownikowi wybór różnych kryteriów filtrowania w zależności od typu raportu.
+ * Class that displays and handles the report filtering dialog.
+ * Lets the user choose various filter criteria depending on the report type.
  */
 public class FilterDialog {
 
@@ -32,9 +32,9 @@ public class FilterDialog {
     private boolean showStatistics = true;
 
     /**
-     * Wyświetla okno dialogowe z opcjami filtrowania odpowiednimi dla danego typu raportu.
-     * @param reportType Typ raportu dla którego mają być wyświetlone opcje filtrowania
-     * @return Mapa zawierająca wybrane opcje filtrowania lub null jeśli anulowano
+     * Shows a dialog with the filter options appropriate for the given report type.
+     * @param reportType report type to show filter options for
+     * @return map with the selected filter options, or null if cancelled
      */
     public Map<String, Object> showFilterDialog(String reportType) {
         Dialog<Map<String, Object>> dialog = new Dialog<>();
@@ -89,8 +89,8 @@ public class FilterDialog {
     }
 
     /**
-     * Konfiguruje kontrolki do wyboru zespołów w oknie dialogowym.
-     * @param grid Panel GridPane do którego dodawane są kontrolki
+     * Configures the team selection controls in the dialog.
+     * @param grid GridPane the controls are added to
      */
     private void setupTeamsFilterControls(GridPane grid) {
         try {
@@ -126,8 +126,8 @@ public class FilterDialog {
     }
 
     /**
-     * Konfiguruje kontrolki do wyboru zakresu dat w oknie dialogowym.
-     * @param grid Panel GridPane do którego dodawane są kontrolki
+     * Configures the date range selection controls in the dialog.
+     * @param grid GridPane the controls are added to
      */
     private void setupDateFilterControls(GridPane grid) {
         Label startDateLabel = new Label("Data początkowa:");
@@ -149,8 +149,8 @@ public class FilterDialog {
     }
 
     /**
-     * Konfiguruje kontrolki do wyboru opcji wyświetlania zadań i członków zespołów.
-     * @param grid Panel GridPane do którego dodawane są kontrolki
+     * Configures the controls for the task and team member display options.
+     * @param grid GridPane the controls are added to
      */
     private void setupTaskMemberControls(GridPane grid) {
         CheckBox showTasksCheckBox = new CheckBox("Pokaż zadania zespołów");
@@ -165,8 +165,8 @@ public class FilterDialog {
     }
 
     /**
-     * Konfiguruje kontrolki do wyboru opcji wyświetlania przynależności do zespołów.
-     * @param grid Panel GridPane do którego dodawane są kontrolki
+     * Configures the controls for the team membership display options.
+     * @param grid GridPane the controls are added to
      */
     private void setupMemberFilterControls(GridPane grid) {
         CheckBox showMemberCheckBox = new CheckBox("Pokaż przynależność do zespołów");
@@ -176,8 +176,8 @@ public class FilterDialog {
     }
 
     /**
-     * Konfiguruje kontrolki do wyboru opcji wyświetlania zadań i statystyk projektów.
-     * @param grid Panel GridPane do którego dodawane są kontrolki
+     * Configures the controls for the task and project statistics display options.
+     * @param grid GridPane the controls are added to
      */
     private void setupTaskStatsControls(GridPane grid) {
         CheckBox showTasksCheckBox = new CheckBox("Pokaż zadania projektów");

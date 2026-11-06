@@ -20,8 +20,9 @@ import pl.rozowi.app.util.ThemeManager;
 import java.io.IOException;
 
 /**
- * Kontroler odpowiedzialny za obsługę logowania użytkowników do systemu.
- * Zarządza procesem uwierzytelniania oraz przekierowaniem do odpowiedniego panelu w zależności od roli użytkownika.
+ * Controller that handles user login to the system.
+ * Manages authentication and redirects to the appropriate panel based on the user's
+ * role.
  */
 public class LoginController {
 
@@ -33,15 +34,15 @@ public class LoginController {
     private LoginService loginService;
 
     /**
-     * Konstruktor inicjalizujący serwis logowania.
+     * Constructor initializing the login service.
      */
     public LoginController() {
         this.loginService = new LoginService(new UserDAO(), new TeamMemberDAO());
     }
 
     /**
-     * Inicjalizuje kontroler, ustawiając obsługę zdarzeń klawiatury.
-     * Enter w polu loginu lub hasła wywołuje próbę logowania.
+     * Initializes the controller by setting up keyboard event handling.
+     * Enter in the login or password field triggers a login attempt.
      */
     public void initialize() {
         usernameField.setOnKeyPressed(event -> {
@@ -57,9 +58,9 @@ public class LoginController {
     }
 
     /**
-     * Obsługuje proces logowania użytkownika.
-     * Weryfikuje dane logowania i w przypadku sukcesu przekierowuje do odpowiedniego panelu.
-     * W przypadku niepowodzenia wyświetla komunikat o błędzie.
+     * Handles the user login process.
+     * Verifies the credentials and on success redirects to the appropriate panel.
+     * On failure shows an error message.
      */
     @FXML
     public void handleLogin() {
@@ -138,8 +139,8 @@ public class LoginController {
     }
 
     /**
-     * Przekierowuje użytkownika do formularza rejestracji.
-     * @throws IOException w przypadku problemów z załadowaniem widoku rejestracji
+     * Redirects the user to the registration form.
+     * @throws IOException if loading the registration view fails
      */
     @FXML
     private void goToRegister() throws IOException {
@@ -147,8 +148,8 @@ public class LoginController {
     }
 
     /**
-     * Wyświetla podpowiedź do hasła dla użytkownika o podanym emailu.
-     * Wymaga wprowadzenia emaila w polu nazwy użytkownika.
+     * Shows the password hint for the user with the given email.
+     * Requires the email to be entered in the username field.
      */
     @FXML
     private void forgotPassword() {

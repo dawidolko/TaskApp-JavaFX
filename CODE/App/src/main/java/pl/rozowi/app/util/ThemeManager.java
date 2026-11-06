@@ -6,9 +6,9 @@ import pl.rozowi.app.models.Settings;
 import pl.rozowi.app.models.User;
 
 /**
- * Klasa zarządzająca motywami (skórkami) aplikacji.
- * Umożliwia aplikowanie, zmianę oraz zapis motywów dla użytkowników.
- * Obsługuje dwa podstawowe motywy: Light (domyślny) i Dark.
+ * Manages application themes (skins).
+ * Allows applying, changing and saving themes for users.
+ * Supports two basic themes: Light (default) and Dark.
  */
 public class ThemeManager {
 
@@ -18,12 +18,12 @@ public class ThemeManager {
     private static final String DEFAULT_THEME = "Light";
 
     /**
-     * Stosuje odpowiedni motyw dla podanej sceny na podstawie preferencji użytkownika.
-     * Jeśli użytkownik jest null lub nie ma ustawionego motywu, stosuje motyw domyślny.
-     * Czyści wszystkie istniejące style przed zastosowaniem nowego motywu.
+     * Applies the appropriate theme to the given scene based on user preferences.
+     * If the user is null or has no theme set, applies the default theme.
+     * Clears all existing styles before applying the new theme.
      *
-     * @param scene Scena, do której ma zostać zastosowany motyw
-     * @param user Użytkownik, którego preferencje motywu mają zostać użyte (może być null)
+     * @param scene scene to apply the theme to
+     * @param user user whose theme preferences should be used (may be null)
      */
     public static void applyTheme(Scene scene, User user) {
         if (scene == null) {
@@ -42,11 +42,12 @@ public class ThemeManager {
     }
 
     /**
-     * Zmienia motyw dla podanej sceny na określony.
-     * Czyści wszystkie istniejące style przed zastosowaniem nowego motywu.
+     * Changes the theme of the given scene to the specified one.
+     * Clears all existing styles before applying the new theme.
      *
-     * @param scene Scena, do której ma zostać zastosowany motyw
-     * @param themeName Nazwa motywu do zastosowania ("Dark" lub cokolwiek innego dla motywu jasnego)
+     * @param scene scene to apply the theme to
+     * @param themeName name of the theme to apply ("Dark", or anything else for
+     *         the light theme)
      */
     public static void changeTheme(Scene scene, String themeName) {
         if (scene == null) {
@@ -62,13 +63,13 @@ public class ThemeManager {
     }
 
     /**
-     * Zapisuje preferencje motywu użytkownika w bazie danych.
-     * Jeśli użytkownik ma już ustawienia, aktualizuje je.
-     * Jeśli nie, tworzy nowy rekord z preferencjami.
-     * Aktualizuje również obiekt użytkownika przekazany jako parametr.
+     * Saves the user's theme preference in the database.
+     * If the user already has settings, updates them.
+     * If not, creates a new record with the preferences.
+     * Also updates the user object passed as a parameter.
      *
-     * @param user Użytkownik, którego preferencje mają zostać zapisane
-     * @param themeName Nazwa motywu do zapisania
+     * @param user user whose preferences should be saved
+     * @param themeName name of the theme to save
      */
     public static void saveThemeToDatabase(User user, String themeName) {
         if (user == null) {

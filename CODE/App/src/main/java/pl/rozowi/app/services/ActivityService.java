@@ -8,21 +8,21 @@ import java.sql.Timestamp;
 import java.time.Instant;
 
 /**
- * Klasa odpowiedzialna za logowanie aktywności w systemie.
- * Zapewnia metody do rejestrowania różnych typów zdarzeń związanych z zadaniami,
- * użytkownikami, zespołami oraz innymi działaniami systemowymi.
+ * Class that logs activity in the system.
+ * Provides methods for recording various types of events related to tasks, users,
+ * teams and other system actions.
  */
 public class ActivityService {
 
     private static final TaskActivityDAO activityDAO = new TaskActivityDAO();
 
     /**
-     * Loguje utworzenie nowego zadania.
+     * Logs the creation of a new task.
      *
-     * @param taskId ID tworzonego zadania
-     * @param taskTitle tytuł zadania
-     * @param assignedUserId ID użytkownika, do którego zadanie jest przypisane
-     * @return true jeśli operacja logowania zakończyła się sukcesem, false w przeciwnym wypadku
+     * @param taskId ID of the created task
+     * @param taskTitle task title
+     * @param assignedUserId ID of the user the task is assigned to
+     * @return true if the logging operation succeeded, false otherwise
      */
     public static boolean logTaskCreation(int taskId, String taskTitle, int assignedUserId) {
         TaskActivity activity = createActivity(taskId, "CREATE");
@@ -31,13 +31,13 @@ public class ActivityService {
     }
 
     /**
-     * Loguje zmianę statusu zadania.
+     * Logs a task status change.
      *
-     * @param taskId ID zadania
-     * @param taskTitle tytuł zadania
-     * @param oldStatus poprzedni status
-     * @param newStatus nowy status
-     * @return true jeśli operacja logowania zakończyła się sukcesem, false w przeciwnym wypadku
+     * @param taskId task ID
+     * @param taskTitle task title
+     * @param oldStatus previous status
+     * @param newStatus new status
+     * @return true if the logging operation succeeded, false otherwise
      */
     public static boolean logStatusChange(int taskId, String taskTitle, String oldStatus, String newStatus) {
         TaskActivity activity = createActivity(taskId, "STATUS");
@@ -46,13 +46,13 @@ public class ActivityService {
     }
 
     /**
-     * Loguje zmianę przypisania zadania do użytkownika.
+     * Logs a change of a task's user assignment.
      *
-     * @param taskId ID zadania
-     * @param taskTitle tytuł zadania
-     * @param oldUserId ID poprzedniego użytkownika (0 jeśli brak)
-     * @param newUserId ID nowego użytkownika
-     * @return true jeśli operacja logowania zakończyła się sukcesem, false w przeciwnym wypadku
+     * @param taskId task ID
+     * @param taskTitle task title
+     * @param oldUserId ID of the previous user (0 if none)
+     * @param newUserId ID of the new user
+     * @return true if the logging operation succeeded, false otherwise
      */
     public static boolean logAssignment(int taskId, String taskTitle, int oldUserId, int newUserId) {
         TaskActivity activity = createActivity(taskId, "ASSIGN");
@@ -64,14 +64,14 @@ public class ActivityService {
     }
 
     /**
-     * Loguje aktualizację pola w zadaniu.
+     * Logs an update of a task field.
      *
-     * @param taskId ID zadania
-     * @param taskTitle tytuł zadania
-     * @param fieldName nazwa aktualizowanego pola
-     * @param oldValue poprzednia wartość
-     * @param newValue nowa wartość
-     * @return true jeśli operacja logowania zakończyła się sukcesem, false w przeciwnym wypadku
+     * @param taskId task ID
+     * @param taskTitle task title
+     * @param fieldName name of the updated field
+     * @param oldValue previous value
+     * @param newValue new value
+     * @return true if the logging operation succeeded, false otherwise
      */
     public static boolean logTaskUpdate(int taskId, String taskTitle, String fieldName, String oldValue, String newValue) {
         TaskActivity activity = createActivity(taskId, "UPDATE");
@@ -80,12 +80,12 @@ public class ActivityService {
     }
 
     /**
-     * Loguje dodanie komentarza do zadania.
+     * Logs the addition of a comment to a task.
      *
-     * @param taskId ID zadania
-     * @param taskTitle tytuł zadania
-     * @param comment treść komentarza
-     * @return true jeśli operacja logowania zakończyła się sukcesem, false w przeciwnym wypadku
+     * @param taskId task ID
+     * @param taskTitle task title
+     * @param comment comment text
+     * @return true if the logging operation succeeded, false otherwise
      */
     public static boolean logTaskComment(int taskId, String taskTitle, String comment) {
         TaskActivity activity = createActivity(taskId, "COMMENT");
@@ -94,12 +94,12 @@ public class ActivityService {
     }
 
     /**
-     * Loguje niestandardową aktywność związaną z zadaniem.
+     * Logs a custom task-related activity.
      *
-     * @param taskId ID zadania
-     * @param activityType typ aktywności
-     * @param description opis aktywności
-     * @return true jeśli operacja logowania zakończyła się sukcesem, false w przeciwnym wypadku
+     * @param taskId task ID
+     * @param activityType activity type
+     * @param description activity description
+     * @return true if the logging operation succeeded, false otherwise
      */
     public static boolean logCustomActivity(int taskId, String activityType, String description) {
         TaskActivity activity = createActivity(taskId, activityType);
@@ -108,11 +108,11 @@ public class ActivityService {
     }
 
     /**
-     * Tworzy obiekt aktywności z podstawowymi danymi.
+     * Creates an activity object with basic data.
      *
-     * @param taskId ID zadania
-     * @param activityType typ aktywności
-     * @return obiekt TaskActivity z uzupełnionymi podstawowymi danymi
+     * @param taskId task ID
+     * @param activityType activity type
+     * @return TaskActivity object with the basic data filled in
      */
     private static TaskActivity createActivity(int taskId, String activityType) {
         TaskActivity activity = new TaskActivity();
@@ -124,11 +124,11 @@ public class ActivityService {
     }
 
     /**
-     * Loguje zmianę hasła użytkownika.
+     * Logs a user password change.
      *
-     * @param userId ID użytkownika
-     * @param changedByAdmin true jeśli hasło zostało zmienione przez administratora
-     * @return true jeśli operacja logowania zakończyła się sukcesem, false w przeciwnym wypadku
+     * @param userId user ID
+     * @param changedByAdmin true if the password was changed by an administrator
+     * @return true if the logging operation succeeded, false otherwise
      */
     public static boolean logPasswordChange(int userId, boolean changedByAdmin) {
         TaskActivity activity = createActivity(0, "PASSWORD");
@@ -146,12 +146,12 @@ public class ActivityService {
     }
 
     /**
-     * Loguje niestandardową aktywność systemową.
+     * Logs a custom system activity.
      *
-     * @param userId ID użytkownika wykonującego akcję
-     * @param activityType typ aktywności
-     * @param description opis aktywności
-     * @return true jeśli operacja logowania zakończyła się sukcesem, false w przeciwnym wypadku
+     * @param userId ID of the user performing the action
+     * @param activityType activity type
+     * @param description activity description
+     * @return true if the logging operation succeeded, false otherwise
      */
     public static boolean logSystemActivity(int userId, String activityType, String description) {
         TaskActivity activity = createActivity(0, activityType);
@@ -161,10 +161,10 @@ public class ActivityService {
     }
 
     /**
-     * Loguje zalogowanie użytkownika do systemu.
+     * Logs a user signing in to the system.
      *
-     * @param userId ID użytkownika
-     * @return true jeśli operacja logowania zakończyła się sukcesem, false w przeciwnym wypadku
+     * @param userId user ID
+     * @return true if the logging operation succeeded, false otherwise
      */
     public static boolean logLogin(int userId) {
         TaskActivity activity = createActivity(0, "LOGIN");
@@ -174,10 +174,10 @@ public class ActivityService {
     }
 
     /**
-     * Loguje wylogowanie użytkownika z systemu.
+     * Logs a user signing out of the system.
      *
-     * @param userId ID użytkownika
-     * @return true jeśli operacja logowania zakończyła się sukcesem, false w przeciwnym wypadku
+     * @param userId user ID
+     * @return true if the logging operation succeeded, false otherwise
      */
     public static boolean logLogout(int userId) {
         TaskActivity activity = createActivity(0, "LOGOUT");
@@ -187,13 +187,13 @@ public class ActivityService {
     }
 
     /**
-     * Loguje akcję zarządzania użytkownikiem wykonaną przez administratora.
+     * Logs a user management action performed by an administrator.
      *
-     * @param adminId ID administratora wykonującego akcję
-     * @param targetUserId ID użytkownika, na którym wykonano akcję
-     * @param action typ akcji (np. "create", "update", "delete")
-     * @param details szczegóły akcji
-     * @return true jeśli operacja logowania zakończyła się sukcesem, false w przeciwnym wypadku
+     * @param adminId ID of the administrator performing the action
+     * @param targetUserId ID of the user the action was performed on
+     * @param action action type (e.g. "create", "update", "delete")
+     * @param details action details
+     * @return true if the logging operation succeeded, false otherwise
      */
     public static boolean logUserManagement(int adminId, int targetUserId, String action, String details) {
         TaskActivity activity = createActivity(0, "USER_MANAGEMENT");
@@ -204,13 +204,13 @@ public class ActivityService {
     }
 
     /**
-     * Loguje akcję zarządzania zespołem.
+     * Logs a team management action.
      *
-     * @param userId ID użytkownika wykonującego akcję
-     * @param teamId ID zespołu
-     * @param action typ akcji (np. "create", "update", "delete")
-     * @param details szczegóły akcji
-     * @return true jeśli operacja logowania zakończyła się sukcesem, false w przeciwnym wypadku
+     * @param userId ID of the user performing the action
+     * @param teamId team ID
+     * @param action action type (e.g. "create", "update", "delete")
+     * @param details action details
+     * @return true if the logging operation succeeded, false otherwise
      */
     public static boolean logTeamManagement(int userId, int teamId, String action, String details) {
         TaskActivity activity = createActivity(0, "TEAM_MANAGEMENT");
@@ -221,12 +221,12 @@ public class ActivityService {
     }
 
     /**
-     * Loguje generowanie raportu.
+     * Logs report generation.
      *
-     * @param userId ID użytkownika generującego raport
-     * @param reportType typ raportu
-     * @param details szczegóły raportu
-     * @return true jeśli operacja logowania zakończyła się sukcesem, false w przeciwnym wypadku
+     * @param userId ID of the user generating the report
+     * @param reportType report type
+     * @param details report details
+     * @return true if the logging operation succeeded, false otherwise
      */
     public static boolean logReportGeneration(int userId, String reportType, String details) {
         TaskActivity activity = createActivity(0, "REPORT");
@@ -237,13 +237,13 @@ public class ActivityService {
     }
 
     /**
-     * Loguje zmianę konfiguracji systemu.
+     * Logs a system configuration change.
      *
-     * @param adminId ID administratora wykonującego zmianę
-     * @param setting nazwa ustawienia
-     * @param oldValue poprzednia wartość
-     * @param newValue nowa wartość
-     * @return true jeśli operacja logowania zakończyła się sukcesem, false w przeciwnym wypadku
+     * @param adminId ID of the administrator making the change
+     * @param setting setting name
+     * @param oldValue previous value
+     * @param newValue new value
+     * @return true if the logging operation succeeded, false otherwise
      */
     public static boolean logConfigChange(int adminId, String setting, String oldValue, String newValue) {
         TaskActivity activity = createActivity(0, "CONFIG");
@@ -254,13 +254,13 @@ public class ActivityService {
     }
 
     /**
-     * Loguje błąd systemowy.
+     * Logs a system error.
      *
-     * @param userId ID użytkownika związany z błędem (0 jeśli systemowy)
-     * @param errorType typ błędu
-     * @param message komunikat błędu
-     * @param stackTrace stack trace błędu (może być null)
-     * @return true jeśli operacja logowania zakończyła się sukcesem, false w przeciwnym wypadku
+     * @param userId ID of the user related to the error (0 if system)
+     * @param errorType error type
+     * @param message error message
+     * @param stackTrace error stack trace (may be null)
+     * @return true if the logging operation succeeded, false otherwise
      */
     public static boolean logSystemError(int userId, String errorType, String message, String stackTrace) {
         TaskActivity activity = createActivity(0, "ERROR");

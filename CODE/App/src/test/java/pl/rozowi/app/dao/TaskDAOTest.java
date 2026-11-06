@@ -15,17 +15,17 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 
 /**
- * Testy jednostkowe dla klasy TaskDAO z wykorzystaniem podklasy testowej.
- * W przeciwieństwie do podejścia z mockami, testy te wykorzystują dziedziczenie
- * i nadpisanie metod w celu izolacji testowanego kodu od rzeczywistej warstwy bazodanowej.
+ * Unit tests for TaskDAO using a test subclass.
+ * Unlike the mock-based approach, these tests use inheritance and method
+ * overriding to isolate the tested code from the real database layer.
  */
 public class TaskDAOTest {
 
     /**
-     * Wewnętrzna klasa TestableTaskDAO, która dziedziczy po TaskDAO
-     * i nadpisuje jej metody, symulując zachowanie warstwy bazodanowej.
-     * Przechowuje parametry ostatnich wywołań metod, co umożliwia weryfikację
-     * poprawności ich użycia w testach.
+     * Inner class TestableTaskDAO, which extends TaskDAO and overrides its
+     * methods, simulating the behavior of the database layer.
+     * Stores the parameters of the most recent method calls, which makes it
+     * possible to verify in tests that the methods were used correctly.
      */
     private class TestableTaskDAO extends TaskDAO {
         private boolean shouldThrowSQLException = false;
@@ -37,7 +37,7 @@ public class TaskDAOTest {
         private Task lastTask = null;
 
         /**
-         * Nadpisana metoda getConnection, która może symulować wyjątki SQL.
+         * Overridden getConnection that can simulate SQL exceptions.
          */
         protected Connection getConnection() throws SQLException {
             if (shouldThrowSQLException) {
@@ -47,8 +47,8 @@ public class TaskDAOTest {
         }
 
         /**
-         * Nadpisana metoda pobierająca zadania dla projektu.
-         * Zamiast rzeczywistego zapytania do bazy danych, zwraca przygotowane dane testowe.
+         * Overridden method fetching tasks for a project.
+         * Instead of a real database query, returns prepared test data.
          */
         @Override
         public List<Task> getTasksByProjectId(int projectId) {
@@ -59,8 +59,8 @@ public class TaskDAOTest {
         }
 
         /**
-         * Nadpisana metoda pobierająca zadania dla zespołu.
-         * Zwraca przygotowane dane testowe zamiast danych z bazy.
+         * Overridden method fetching tasks for a team.
+         * Returns prepared test data instead of data from the database.
          */
         @Override
         public List<Task> getTasksByTeamId(int teamId) {
@@ -71,8 +71,8 @@ public class TaskDAOTest {
         }
 
         /**
-         * Nadpisana metoda pobierająca zadania przypisane do użytkownika.
-         * Zapisuje ID użytkownika i zwraca przygotowane dane testowe.
+         * Overridden method fetching tasks assigned to a user.
+         * Stores the user ID and returns prepared test data.
          */
         @Override
         public List<Task> getTasksForUser(int userId) {
@@ -84,8 +84,8 @@ public class TaskDAOTest {
         }
 
         /**
-         * Nadpisana metoda pobierająca zadania dla lidera zespołu.
-         * Zapisuje ID lidera i zwraca przygotowane dane testowe.
+         * Overridden method fetching tasks for a team leader.
+         * Stores the leader ID and returns prepared test data.
          */
         @Override
         public List<Task> getTasksForLeader(int leaderId) {
@@ -97,8 +97,8 @@ public class TaskDAOTest {
         }
 
         /**
-         * Nadpisana metoda pobierająca zadania kolegów z zespołu.
-         * Zapisuje ID użytkownika i zwraca przygotowane dane testowe.
+         * Overridden method fetching the tasks of team colleagues.
+         * Stores the user ID and returns prepared test data.
          */
         @Override
         public List<Task> getColleagueTasks(int userId, int teamId) {
@@ -110,8 +110,8 @@ public class TaskDAOTest {
         }
 
         /**
-         * Nadpisana metoda wstawiająca nowe zadanie.
-         * Zapisuje zadanie i symuluje przypisanie ID przez bazę danych.
+         * Overridden method inserting a new task.
+         * Stores the task and simulates the database assigning an ID.
          */
         @Override
         public boolean insertTask(Task task) {
@@ -124,8 +124,8 @@ public class TaskDAOTest {
         }
 
         /**
-         * Nadpisana metoda aktualizująca istniejące zadanie.
-         * Zapisuje zadanie dla celów weryfikacji w testach.
+         * Overridden method updating an existing task.
+         * Stores the task for verification in tests.
          */
         @Override
         public boolean updateTask(Task task) {
@@ -137,8 +137,8 @@ public class TaskDAOTest {
         }
 
         /**
-         * Nadpisana metoda usuwająca zadanie.
-         * Zapisuje ID zadania dla celów weryfikacji w testach.
+         * Overridden method deleting a task.
+         * Stores the task ID for verification in tests.
          */
         @Override
         public boolean deleteTask(int taskId) {
@@ -150,8 +150,8 @@ public class TaskDAOTest {
         }
 
         /**
-         * Nadpisana metoda aktualizująca status zadania.
-         * Zapisuje ID zadania i nowy status dla celów weryfikacji.
+         * Overridden method updating a task status.
+         * Stores the task ID and the new status for verification.
          */
         @Override
         public boolean updateTaskStatus(int taskId, String newStatus) {
@@ -164,8 +164,8 @@ public class TaskDAOTest {
         }
 
         /**
-         * Nadpisana metoda przypisująca użytkownika do zadania.
-         * Zapisuje ID zadania i użytkownika dla celów weryfikacji.
+         * Overridden method assigning a user to a task.
+         * Stores the task and user IDs for verification.
          */
         @Override
         public boolean assignTask(int taskId, int userId) {
@@ -178,8 +178,8 @@ public class TaskDAOTest {
         }
 
         /**
-         * Nadpisana metoda pobierająca ID użytkownika przypisanego do zadania.
-         * Zapisuje ID zadania i zwraca stałą wartość testową.
+         * Overridden method fetching the ID of the user assigned to a task.
+         * Stores the task ID and returns a constant test value.
          */
         @Override
         public int getAssignedUserId(int taskId) {
@@ -191,8 +191,8 @@ public class TaskDAOTest {
         }
 
         /**
-         * Nadpisana metoda pobierająca email użytkownika przypisanego do zadania.
-         * Zapisuje ID zadania i zwraca stałą wartość testową.
+         * Overridden method fetching the email of the user assigned to a task.
+         * Stores the task ID and returns a constant test value.
          */
         @Override
         public String getAssignedUserEmail(int taskId) {
@@ -204,8 +204,8 @@ public class TaskDAOTest {
         }
 
         /**
-         * Metoda pomocnicza tworząca testową listę zadań.
-         * Tworzy jedno lub dwa zadania z predefiniowanymi wartościami.
+         * Helper method creating a test list of tasks.
+         * Creates one or two tasks with predefined values.
          */
         private List<Task> createMockTaskList(int projectId, int teamId) {
             Task task1 = new Task();
@@ -241,51 +241,33 @@ public class TaskDAOTest {
                     List.of(task1);
         }
 
-        /**
-         * Metoda ustawiająca flagę do symulowania wyjątków SQL.
-         */
         public void setShouldThrowSQLException(boolean shouldThrow) {
             this.shouldThrowSQLException = shouldThrow;
         }
 
-        /**
-         * Metoda ustawiająca rozmiar zwracanych wyników.
-         */
         public void setMockResultSize(int size) {
             this.mockResultSize = size;
         }
 
         /**
-         * Metoda ustawiająca flagę sukcesu dla operacji bazodanowych.
+         * Sets the success flag for database operations.
          */
         public void setMockOperationSuccess(boolean success) {
             this.mockOperationSuccess = success;
         }
 
-        /**
-         * Metoda zwracająca ID ostatnio użytego zadania.
-         */
         public int getLastTaskId() {
             return lastTaskId;
         }
 
-        /**
-         * Metoda zwracająca ID ostatnio użytego użytkownika.
-         */
         public int getLastUserId() {
             return lastUserId;
         }
 
-        /**
-         * Metoda zwracająca ostatnio użyty status zadania.
-         */
         public String getLastStatus() {
             return lastStatus;
         }
 
-        /**
-         * Metoda zwracająca ostatnio użyte zadanie.
-         */
         public Task getLastTask() {
             return lastTask;
         }
@@ -294,8 +276,8 @@ public class TaskDAOTest {
     private TestableTaskDAO taskDAO;
 
     /**
-     * Inicjalizacja środowiska testowego przed każdym testem.
-     * Tworzy instancję TestableTaskDAO dla celów testowych.
+     * Initializes the test environment before each test.
+     * Creates a TestableTaskDAO instance for testing purposes.
      */
     @Before
     public void setUp() {
@@ -303,9 +285,9 @@ public class TaskDAOTest {
     }
 
     /**
-     * Test sprawdzający metodę getTasksByProjectId.
-     * Weryfikuje, czy zwraca poprawną listę zadań dla podanego projektu
-     * i czy wszystkie właściwości zadań są prawidłowo ustawione.
+     * Tests getTasksByProjectId.
+     * Verifies that it returns the correct task list for the given project and
+     * that all task properties are set correctly.
      */
     @Test
     public void testGetTasksByProjectId() {
@@ -323,9 +305,9 @@ public class TaskDAOTest {
     }
 
     /**
-     * Test sprawdzający metodę getTasksByTeamId.
-     * Weryfikuje, czy zwraca poprawną listę zadań dla podanego zespołu
-     * i czy dane zadań są prawidłowo ustawione.
+     * Tests getTasksByTeamId.
+     * Verifies that it returns the correct task list for the given team and that
+     * the task data is set correctly.
      */
     @Test
     public void testGetTasksByTeamId() {
@@ -341,9 +323,9 @@ public class TaskDAOTest {
     }
 
     /**
-     * Test sprawdzający metodę getTasksForUser.
-     * Weryfikuje, czy zwraca poprawną listę zadań dla danego użytkownika
-     * i czy ID użytkownika jest prawidłowo przekazane do DAO.
+     * Tests getTasksForUser.
+     * Verifies that it returns the correct task list for the given user and that
+     * the user ID is passed to the DAO correctly.
      */
     @Test
     public void testGetTasksForUser() {
@@ -359,9 +341,9 @@ public class TaskDAOTest {
     }
 
     /**
-     * Test sprawdzający pomyślne dodanie nowego zadania.
-     * Weryfikuje, czy metoda insertTask poprawnie zapisuje zadanie
-     * i ustawia wygenerowane ID po dodaniu do bazy.
+     * Tests successfully adding a new task.
+     * Verifies that insertTask saves the task correctly and sets the generated ID
+     * after adding it to the database.
      */
     @Test
     public void testInsertTask_success() {
@@ -387,9 +369,8 @@ public class TaskDAOTest {
     }
 
     /**
-     * Test sprawdzający pomyślną aktualizację istniejącego zadania.
-     * Weryfikuje, czy metoda updateTask poprawnie zapisuje zaktualizowane
-     * dane zadania.
+     * Tests successfully updating an existing task.
+     * Verifies that updateTask correctly saves the updated task data.
      */
     @Test
     public void testUpdateTask_success() {
@@ -415,9 +396,9 @@ public class TaskDAOTest {
     }
 
     /**
-     * Test sprawdzający niepowodzenie aktualizacji zadania.
-     * Symuluje sytuację, gdy operacja aktualizacji kończy się niepowodzeniem
-     * i weryfikuje, czy metoda updateTask poprawnie obsługuje ten przypadek.
+     * Tests a failed task update.
+     * Simulates an update operation that fails and verifies that updateTask
+     * handles this case correctly.
      */
     @Test
     public void testUpdateTask_failure() {
@@ -434,9 +415,9 @@ public class TaskDAOTest {
     }
 
     /**
-     * Test sprawdzający pomyślne usunięcie zadania.
-     * Weryfikuje, czy metoda deleteTask poprawnie obsługuje ID zadania
-     * i zwraca true w przypadku powodzenia operacji.
+     * Tests successfully deleting a task.
+     * Verifies that deleteTask handles the task ID correctly and returns true when
+     * the operation succeeds.
      */
     @Test
     public void testDeleteTask_success() {
@@ -449,9 +430,9 @@ public class TaskDAOTest {
     }
 
     /**
-     * Test sprawdzający niepowodzenie usunięcia zadania.
-     * Symuluje sytuację, gdy operacja usunięcia kończy się niepowodzeniem
-     * i weryfikuje, czy metoda deleteTask poprawnie obsługuje ten przypadek.
+     * Tests a failed task deletion.
+     * Simulates a delete operation that fails and verifies that deleteTask handles
+     * this case correctly.
      */
     @Test
     public void testDeleteTask_failure() {
@@ -465,10 +446,9 @@ public class TaskDAOTest {
     }
 
     /**
-     * Test sprawdzający pomyślną aktualizację statusu zadania.
-     * Weryfikuje, czy metoda updateTaskStatus poprawnie obsługuje
-     * ID zadania i nowy status, a także czy zwraca true w przypadku
-     * powodzenia operacji.
+     * Tests successfully updating a task status.
+     * Verifies that updateTaskStatus handles the task ID and the new status
+     * correctly, and that it returns true when the operation succeeds.
      */
     @Test
     public void testUpdateTaskStatus_success() {
@@ -483,10 +463,9 @@ public class TaskDAOTest {
     }
 
     /**
-     * Test sprawdzający pomyślne przypisanie użytkownika do zadania.
-     * Weryfikuje, czy metoda assignTask poprawnie obsługuje ID
-     * zadania i użytkownika, a także czy zwraca true w przypadku
-     * powodzenia operacji.
+     * Tests successfully assigning a user to a task.
+     * Verifies that assignTask handles the task and user IDs correctly, and that
+     * it returns true when the operation succeeds.
      */
     @Test
     public void testAssignTask_success() {
@@ -501,9 +480,9 @@ public class TaskDAOTest {
     }
 
     /**
-     * Test sprawdzający metodę getTasksForLeader.
-     * Weryfikuje, czy zwraca poprawną listę zadań dla danego lidera
-     * i czy ID lidera jest prawidłowo przekazane do DAO.
+     * Tests getTasksForLeader.
+     * Verifies that it returns the correct task list for the given leader and that
+     * the leader ID is passed to the DAO correctly.
      */
     @Test
     public void testGetTasksForLeader() {
@@ -519,10 +498,9 @@ public class TaskDAOTest {
     }
 
     /**
-     * Test sprawdzający metodę getColleagueTasks.
-     * Weryfikuje, czy zwraca poprawną listę zadań kolegów z zespołu
-     * dla danego użytkownika i czy ID użytkownika jest prawidłowo
-     * przekazane do DAO.
+     * Tests getColleagueTasks.
+     * Verifies that it returns the correct list of team colleagues' tasks for the
+     * given user and that the user ID is passed to the DAO correctly.
      */
     @Test
     public void testGetColleagueTasks() {
@@ -539,9 +517,9 @@ public class TaskDAOTest {
     }
 
     /**
-     * Test sprawdzający metodę getAssignedUserId.
-     * Weryfikuje, czy zwraca poprawne ID użytkownika przypisanego do zadania
-     * i czy ID zadania jest prawidłowo przekazane do DAO.
+     * Tests getAssignedUserId.
+     * Verifies that it returns the correct ID of the user assigned to the task and
+     * that the task ID is passed to the DAO correctly.
      */
     @Test
     public void testGetAssignedUserId() {
@@ -555,9 +533,9 @@ public class TaskDAOTest {
     }
 
     /**
-     * Test sprawdzający metodę getAssignedUserEmail.
-     * Weryfikuje, czy zwraca poprawny email użytkownika przypisanego do zadania
-     * i czy ID zadania jest prawidłowo przekazane do DAO.
+     * Tests getAssignedUserEmail.
+     * Verifies that it returns the correct email of the user assigned to the task
+     * and that the task ID is passed to the DAO correctly.
      */
     @Test
     public void testGetAssignedUserEmail() {

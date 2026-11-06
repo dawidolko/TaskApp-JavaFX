@@ -20,8 +20,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
- * Kontroler odpowiedzialny za zarządzanie zadaniami zespołu przez lidera.
- * Umożliwia wyświetlanie, filtrowanie, dodawanie, usuwanie oraz przeglądanie szczegółów zadań.
+ * Controller through which a leader manages team tasks.
+ * Allows displaying, filtering, adding, deleting and viewing task details.
  */
 public class TeamLeaderTasksController {
 
@@ -52,8 +52,9 @@ public class TeamLeaderTasksController {
     private ObservableList<Task> allTasks = FXCollections.observableArrayList();
 
     /**
-     * Inicjalizacja kontrolera.
-     * Konfiguruje tabelę zadań, ustawia fabrykę wierszy oraz listenera dla pola filtrującego.
+     * Initializes the controller.
+     * Configures the task table, sets the row factory and the listener for the filter
+     * field.
      */
     @FXML
     public void initialize() {
@@ -81,7 +82,7 @@ public class TeamLeaderTasksController {
     }
 
     /**
-     * Ładuje zadania przypisane do zespołów, którymi zarządza aktualny lider.
+     * Loads the tasks assigned to the teams managed by the current leader.
      */
     @FXML
     private void loadTasks() {
@@ -90,8 +91,8 @@ public class TeamLeaderTasksController {
     }
 
     /**
-     * Filtruje zadania w tabeli na podstawie wprowadzonego tekstu.
-     * @param text Tekst do filtrowania (wyszukiwany w tytule, statusie i przypisanym użytkowniku)
+     * Filters the tasks in the table by the entered text.
+     * @param text filter text (searched in the title, status and assigned user)
      */
     private void applyFilter(String text) {
         if (text == null || text.isBlank()) {
@@ -108,8 +109,8 @@ public class TeamLeaderTasksController {
     }
 
     /**
-     * Otwiera okno dialogowe ze szczegółami wybranego zadania.
-     * @param task Zadanie, którego szczegóły mają być wyświetlone
+     * Opens a dialog with the details of the selected task.
+     * @param task task whose details are to be displayed
      */
     private void openDetails(Task task) {
         try {
@@ -130,8 +131,8 @@ public class TeamLeaderTasksController {
     }
 
     /**
-     * Obsługuje usuwanie wybranego zadania.
-     * Wyświetla okno dialogowe z potwierdzeniem przed usunięciem.
+     * Handles deleting the selected task.
+     * Shows a confirmation dialog before deletion.
      */
     @FXML
     private void handleDeleteTask() {
@@ -168,10 +169,10 @@ public class TeamLeaderTasksController {
     }
 
     /**
-     * Wyświetla okno dialogowe z komunikatem.
-     * @param type Typ komunikatu (ERROR, WARNING, INFORMATION, CONFIRMATION)
-     * @param title Tytuł okna dialogowego
-     * @param message Treść komunikatu
+     * Shows a message dialog.
+     * @param type message type (ERROR, WARNING, INFORMATION, CONFIRMATION)
+     * @param title dialog title
+     * @param message message text
      */
     private void showAlert(Alert.AlertType type, String title, String message) {
         Alert alert = new Alert(type);
@@ -188,8 +189,8 @@ public class TeamLeaderTasksController {
     }
 
     /**
-     * Otwiera okno dialogowe do tworzenia nowego zadania.
-     * Po zamknięciu okna odświeża listę zadań.
+     * Opens the dialog for creating a new task.
+     * Refreshes the task list after the dialog closes.
      */
     @FXML
     private void handleAddTask() {

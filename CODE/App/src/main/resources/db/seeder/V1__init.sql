@@ -1,11 +1,9 @@
--- Tabela roles
 INSERT INTO roles (id, role_name, permissions) VALUES
   (1, 'Administrator', 'VIEW_TASKS,CREATE_TASKS,UPDATE_TASKS,DELETE_TASKS,MANAGE_USERS,MANAGE_TEAMS,MANAGE_PROJECTS,VIEW_REPORTS'),
   (2, 'Kierownik', 'VIEW_TASKS,UPDATE_TASKS,MANAGE_TEAMS,MANAGE_PROJECTS,VIEW_REPORTS'),
   (3, 'Team Lider', 'VIEW_TASKS,CREATE_TASKS,ASSIGN_TASKS,UPDATE_TASKS'),
   (4, 'Pracownik', 'VIEW_TASKS,UPDATE_OWN_TASKS');
 
--- Tabela groups
 INSERT INTO groups (id, group_name) VALUES
   (1, 'Developerzy'),
   (2, 'Testerzy'),
@@ -19,9 +17,11 @@ INSERT INTO groups (id, group_name) VALUES
   (10, 'HR'),
   (11, 'Właścicielowie');;
 
--- Tabela users
--- Hasło to: Haslo#12345
--- Administratorzy (3)
+/*
+ * Table users
+ * Password: Haslo#12345
+ * Administrators (3)
+ */
 INSERT INTO users (id, name, last_name, email, password, password_hint, role_id, group_id) VALUES
   (1, 'Jan', 'Kowalski', 'jan.kowalski@firma.pl', '95b49eab894a32254b0990346390a167a45ec751e5e72da9f45abae5f7d9340d', 'podpowiedz1', 3, 5),
   (2, 'Anna', 'Nowak', 'anna.nowak@firma.pl', '95b49eab894a32254b0990346390a167a45ec751e5e72da9f45abae5f7d9340d', 'podpowiedz2', 3, 5),
@@ -73,7 +73,6 @@ INSERT INTO users (id, name, last_name, email, password, password_hint, role_id,
   (39, 'Julia', 'Kowalczyk', 'julia.kowalczyk@firma.pl', '95b49eab894a32254b0990346390a167a45ec751e5e72da9f45abae5f7d9340d', 'podpowiedz39', 4, 6),
   (40, 'Sylwia', 'Głowacka', 'sylwia.glowacka@firma.pl', '95b49eab894a32254b0990346390a167a45ec751e5e72da9f45abae5f7d9340d', 'podpowiedz40', 4, 7);
 
--- Tabela settings
 INSERT INTO settings (user_id, theme, default_view, last_password_change) VALUES
   (1, 'light', 'Zespoły', CURRENT_TIMESTAMP()),
   (2, 'dark', 'Zadania', CURRENT_TIMESTAMP()),
@@ -116,7 +115,6 @@ INSERT INTO settings (user_id, theme, default_view, last_password_change) VALUES
   (39, 'light', 'Zadania', CURRENT_TIMESTAMP()),
   (40, 'dark', 'Zadania', CURRENT_TIMESTAMP());
 
--- Tabela projects
 INSERT INTO projects (id, project_name, description, start_date, end_date, manager_id) VALUES
   (1, 'System CRM', 'Rozwój systemu CRM dla klientów zewnętrznych', '2025-04-01', '2025-07-01', 4),
   (2, 'Aplikacja mobilna', 'Tworzenie aplikacji mobilnej na iOS i Android', '2025-04-05', '2025-07-15', 5),
@@ -149,7 +147,9 @@ INSERT INTO projects (id, project_name, description, start_date, end_date, manag
   (29, 'System do zarządzania magazynem', 'System WMS dla logistyki', '2025-08-20', '2026-04-15', 5),
   (30, 'Portal dla pracowników', 'Portal samoobsługowy dla pracowników', '2025-08-25', '2026-04-30', 6);
 
--- Tabela teams (30 zespołów, po jednym na projekt, z różnorodnymi grupami)
+/*
+ * Table teams (30 teams, one per project, with diverse groups)
+ */
 INSERT INTO teams (id, team_name, project_id) VALUES
   (1, 'Zespół Alfa', 1),
   (2, 'Zespół Beta', 2),
@@ -182,70 +182,134 @@ INSERT INTO teams (id, team_name, project_id) VALUES
   (29, 'Zespół Delta 2', 29),
   (30, 'Zespół Epsilon 2', 30);
 
--- Przypisanie członków do zespołów (różnorodne grupy)
+/*
+ * Assign members to teams (diverse groups)
+ */
 INSERT INTO team_members (team_id, user_id, is_leader) VALUES
-  -- Zespół Alfa (projekt 1): lider + członkowie z różnych grup
+  /*
+   * Team Alfa (project 1): leader + members from different groups
+   */
   (1, 1, 1), (1, 17, 0), (1, 18, 0), (1, 21, 0), (1, 23, 0),
-  -- Zespół Beta (projekt 2)
+  /*
+   * Team Beta (project 2)
+   */
   (2, 2, 1), (2, 19, 0), (2, 20, 0), (2, 22, 0), (2, 24, 0),
-  -- Zespół Gamma (projekt 3)
+  /*
+   * Team Gamma (project 3)
+   */
   (3, 3, 1), (3, 25, 0), (3, 26, 0), (3, 27, 0), (3, 28, 0),
-  -- Zespół Delta (projekt 4)
+  /*
+   * Team Delta (project 4)
+   */
   (4, 1, 1), (4, 29, 0), (4, 30, 0), (4, 31, 0), (4, 32, 0),
-  -- Zespół Epsilon (projekt 5)
+  /*
+   * Team Epsilon (project 5)
+   */
   (5, 2, 1), (5, 33, 0), (5, 34, 0), (5, 35, 0), (5, 36, 0),
-  -- Zespół Zeta (projekt 6)
+  /*
+   * Team Zeta (project 6)
+   */
   (6, 3, 1), (6, 37, 0), (6, 38, 0), (6, 39, 0), (6, 40, 0),
-  -- Zespół Eta (projekt 7)
+  /*
+   * Team Eta (project 7)
+   */
   (7, 1, 1), (7, 17, 0), (7, 19, 0), (7, 21, 0), (7, 23, 0),
-  -- Zespół Theta (projekt 8)
+  /*
+   * Team Theta (project 8)
+   */
   (8, 2, 1), (8, 18, 0), (8, 20, 0), (8, 22, 0), (8, 24, 0),
-  -- Zespół Iota (projekt 9)
+  /*
+   * Team Iota (project 9)
+   */
   (9, 3, 1), (9, 25, 0), (9, 26, 0), (9, 27, 0), (9, 28, 0),
-  -- Zespół Downa (projekt 10)
+  /*
+   * Team Downa (project 10)
+   */
   (10, 1, 1), (10, 29, 0), (10, 30, 0), (10, 31, 0), (10, 32, 0),
-  -- Zespół Kappa (projekt 11)
+  /*
+   * Team Kappa (project 11)
+   */
   (11, 2, 1), (11, 33, 0), (11, 34, 0), (11, 35, 0), (11, 36, 0),
-  -- Zespół Lambda (projekt 12)
+  /*
+   * Team Lambda (project 12)
+   */
   (12, 3, 1), (12, 37, 0), (12, 38, 0), (12, 39, 0), (12, 40, 0),
-  -- Zespół Mu (projekt 13)
+  /*
+   * Team Mu (project 13)
+   */
   (13, 1, 1), (13, 17, 0), (13, 18, 0), (13, 21, 0), (13, 23, 0),
-  -- Zespół Nu (projekt 14)
+  /*
+   * Team Nu (project 14)
+   */
   (14, 2, 1), (14, 19, 0), (14, 20, 0), (14, 22, 0), (14, 24, 0),
-  -- Zespół Xi (projekt 15)
+  /*
+   * Team Xi (project 15)
+   */
   (15, 3, 1), (15, 25, 0), (15, 26, 0), (15, 27, 0), (15, 28, 0),
-  -- Zespół Omicron (projekt 16)
+  /*
+   * Team Omicron (project 16)
+   */
   (16, 1, 1), (16, 29, 0), (16, 30, 0), (16, 31, 0), (16, 32, 0),
-  -- Zespół Pi (projekt 17)
+  /*
+   * Team Pi (project 17)
+   */
   (17, 2, 1), (17, 33, 0), (17, 34, 0), (17, 35, 0), (17, 36, 0),
-  -- Zespół Rho (projekt 18)
+  /*
+   * Team Rho (project 18)
+   */
   (18, 3, 1), (18, 37, 0), (18, 38, 0), (18, 39, 0), (18, 40, 0),
-  -- Zespół Sigma (projekt 19)
+  /*
+   * Team Sigma (project 19)
+   */
   (19, 1, 1), (19, 17, 0), (19, 18, 0), (19, 21, 0), (19, 23, 0),
-  -- Zespół Tau (projekt 20)
+  /*
+   * Team Tau (project 20)
+   */
   (20, 2, 1), (20, 19, 0), (20, 20, 0), (20, 22, 0), (20, 24, 0),
-  -- Zespół Upsilon (projekt 21)
+  /*
+   * Team Upsilon (project 21)
+   */
   (21, 3, 1), (21, 25, 0), (21, 26, 0), (21, 27, 0), (21, 28, 0),
-  -- Zespół Phi (projekt 22)
+  /*
+   * Team Phi (project 22)
+   */
   (22, 1, 1), (22, 29, 0), (22, 30, 0), (22, 31, 0), (22, 32, 0),
-  -- Zespół Chi (projekt 23)
+  /*
+   * Team Chi (project 23)
+   */
   (23, 2, 1), (23, 33, 0), (23, 34, 0), (23, 35, 0), (23, 36, 0),
-  -- Zespół Psi (projekt 24)
+  /*
+   * Team Psi (project 24)
+   */
   (24, 3, 1), (24, 37, 0), (24, 38, 0), (24, 39, 0), (24, 40, 0),
-  -- Zespół Omega (projekt 25)
+  /*
+   * Team Omega (project 25)
+   */
   (25, 1, 1), (25, 17, 0), (25, 18, 0), (25, 21, 0), (25, 23, 0),
-  -- Zespół Alfa 2 (projekt 26)
+  /*
+   * Team Alfa 2 (project 26)
+   */
   (26, 2, 1), (26, 19, 0), (26, 20, 0), (26, 22, 0), (26, 24, 0),
-  -- Zespół Beta 2 (projekt 27)
+  /*
+   * Team Beta 2 (project 27)
+   */
   (27, 3, 1), (27, 25, 0), (27, 26, 0), (27, 27, 0), (27, 28, 0),
-  -- Zespół Gamma 2 (projekt 28)
+  /*
+   * Team Gamma 2 (project 28)
+   */
   (28, 1, 1), (28, 29, 0), (28, 30, 0), (28, 31, 0), (28, 32, 0),
-  -- Zespół Delta 2 (projekt 29)
+  /*
+   * Team Delta 2 (project 29)
+   */
   (29, 2, 1), (29, 33, 0), (29, 34, 0), (29, 35, 0), (29, 36, 0),
-  -- Zespół Epsilon 2 (projekt 30)
+  /*
+   * Team Epsilon 2 (project 30)
+   */
   (30, 3, 1), (30, 37, 0), (30, 38, 0), (30, 39, 0), (30, 40, 0);
 
--- Tabela tasks (200 zadań)
+/*
+ * Table tasks (200 tasks)
+ */
 INSERT INTO tasks (id, project_id, team_id, title, description, status, priority, start_date, end_date) VALUES
 (1, 1, 1, 'Implementacja panelu użytkownika', 'Stworzenie interfejsu użytkownika dla systemu CRM', 'Nowe', 'Wysokie', '2025-04-01', '2025-04-15'),
 (2, 1, 1, 'Testy panelu użytkownika', 'Przeprowadzenie testów użyteczności panelu', 'W toku', 'Średnie', '2025-04-03', '2025-04-17'),
@@ -448,7 +512,9 @@ INSERT INTO tasks (id, project_id, team_id, title, description, status, priority
 (199, 25, 25, 'Moduł logowania procesów', 'Implementacja logowania procesów', 'Nowe', 'Wysokie', '2025-06-25', '2025-07-09'),
 (200, 25, 25, 'Testy logowania procesów', 'Przeprowadzenie testów logowania', 'W toku', 'Średnie', '2025-06-27', '2025-07-11');
 
--- Tabela task_assignments (przypisanie zadań do użytkowników)
+/*
+ * Table task_assignments (assigning tasks to users)
+ */
 INSERT INTO task_assignments (task_id, user_id) VALUES
   (1, 17), (1, 18), (1, 21),
   (2, 18), (2, 21), (2, 23),
@@ -649,7 +715,6 @@ INSERT INTO task_assignments (task_id, user_id) VALUES
   (197, 37), (197, 38), (197, 39),
   (198, 38), (198, 39), (198, 40);
 
--- Tabela task_activities
 INSERT INTO task_activities (task_id, user_id, activity_type, description, created_at) VALUES
   (1, 17, 'Dodanie zadania', 'Dodano uwagi do implementacji panelu użytkownika', NOW()),
   (2, 18, 'Aktualizacja zadania', 'Zmieniono status testów na W toku', NOW()),
@@ -852,7 +917,9 @@ INSERT INTO task_activities (task_id, user_id, activity_type, description, creat
   (199, 17, 'Dodanie zadania', 'Uwagi do logowania procesów', NOW()),
   (200, 18, 'Aktualizacja zadania', 'Rozpoczęto testy logowania procesów', NOW());
 
--- Trigger – aktualizacja pola last_password_change w tabeli settings
+/*
+ * Trigger - updates the last_password_change field in the settings table
+ */
 DELIMITER //
 
 CREATE TRIGGER trg_update_password_change

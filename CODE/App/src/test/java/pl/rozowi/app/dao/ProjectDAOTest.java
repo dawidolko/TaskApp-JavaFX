@@ -14,8 +14,8 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 /**
- * Testy jednostkowe dla klasy ProjectDAO, odpowiedzialnej za operacje
- * na projektach w bazie danych.
+ * Unit tests for ProjectDAO, which handles project operations in the
+ * database.
  */
 public class ProjectDAOTest {
 
@@ -23,9 +23,9 @@ public class ProjectDAOTest {
     private ProjectDAO projectDAO;
 
     /**
-     * Konfiguracja środowiska testowego przed każdym testem.
-     * Tworzy tymczasową bazę danych H2 w pamięci oraz tabele
-     * potrzebne do testowania operacji na projektach.
+     * Sets up the test environment before each test.
+     * Creates a temporary in-memory H2 database and the tables needed to test
+     * project operations.
      */
     @Before
     public void setUp() throws Exception {
@@ -53,8 +53,8 @@ public class ProjectDAOTest {
     }
 
     /**
-     * Czyszczenie zasobów po wykonaniu każdego testu.
-     * Usuwa wszystkie tabele z bazy danych i zamyka połączenie.
+     * Cleans up resources after each test.
+     * Drops all tables from the database and closes the connection.
      */
     @After
     public void tearDown() throws Exception {
@@ -66,9 +66,9 @@ public class ProjectDAOTest {
     }
 
     /**
-     * Test sprawdzający poprawność dodania projektu do bazy danych
-     * oraz odczytania go przez metodę getProjectById.
-     * Weryfikuje, czy wszystkie pola projektu są prawidłowo zapisane i odczytane.
+     * Tests adding a project to the database and reading it back with
+     * getProjectById.
+     * Verifies that all project fields are saved and read correctly.
      */
     @Test
     public void testInsertAndGetById() throws Exception {
@@ -92,9 +92,9 @@ public class ProjectDAOTest {
     }
 
     /**
-     * Test sprawdzający metodę getAllProjects, która powinna zwrócić
-     * wszystkie projekty zapisane w bazie danych.
-     * Dodaje trzy projekty testowe i weryfikuje, czy wszystkie zostały zwrócone.
+     * Tests getAllProjects, which should return all projects stored in the
+     * database.
+     * Adds three test projects and verifies that all of them are returned.
      */
     @Test
     public void testGetAllProjects() throws Exception {
@@ -113,9 +113,9 @@ public class ProjectDAOTest {
     }
 
     /**
-     * Test sprawdzający aktualizację danych projektu w bazie.
-     * Tworzy projekt, zmienia jego wartości, a następnie weryfikuje,
-     * czy zmiany zostały poprawnie zapisane w bazie danych.
+     * Tests updating project data in the database.
+     * Creates a project, changes its values, then verifies that the changes were
+     * saved correctly in the database.
      */
     @Test
     public void testUpdateProject() throws Exception {
@@ -140,10 +140,10 @@ public class ProjectDAOTest {
     }
 
     /**
-     * Test sprawdzający metodę getProjectsForManager, która powinna zwrócić
-     * tylko projekty przypisane do konkretnego menedżera.
-     * Dodaje projekty przypisane do różnych menedżerów i weryfikuje,
-     * czy filtrowanie po ID menedżera działa poprawnie.
+     * Tests getProjectsForManager, which should return only the projects
+     * assigned to a specific manager.
+     * Adds projects assigned to different managers and verifies that filtering
+     * by manager ID works correctly.
      */
     @Test
     public void testGetProjectsForManager() throws Exception {

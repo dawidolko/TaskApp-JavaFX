@@ -9,8 +9,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
- * Klasa odpowiedzialna za logowanie użytkowników do systemu.
- * Zapewnia funkcjonalność uwierzytelniania użytkowników oraz zarządzania ich sesjami.
+ * Class that handles user login to the system.
+ * Provides user authentication and session management.
  */
 public class LoginService {
 
@@ -18,10 +18,10 @@ public class LoginService {
     private final TeamMemberDAO teamMemberDAO;
 
     /**
-     * Konstruktor tworzący serwis logowania.
+     * Constructor creating the login service.
      *
-     * @param userDAO DAO do obsługi użytkowników
-     * @param teamMemberDAO DAO do obsługi członków zespołów
+     * @param userDAO DAO for handling users
+     * @param teamMemberDAO DAO for handling team members
      */
     public LoginService(UserDAO userDAO, TeamMemberDAO teamMemberDAO) {
         this.userDAO = userDAO;
@@ -29,11 +29,11 @@ public class LoginService {
     }
 
     /**
-     * Uwierzytelnia użytkownika na podstawie adresu email i hasła.
+     * Authenticates a user by email address and password.
      *
-     * @param email adres email użytkownika
-     * @param rawPassword hasło w postaci niezaszyfrowanej
-     * @return obiekt User w przypadku poprawnego uwierzytelnienia, null w przeciwnym wypadku
+     * @param email user's email address
+     * @param rawPassword password in plain text
+     * @return the User object on successful authentication, null otherwise
      */
     public User authenticate(String email, String rawPassword) {
         if (email == null || email.isEmpty() || rawPassword == null) {
@@ -49,20 +49,20 @@ public class LoginService {
     }
 
     /**
-     * Pobiera identyfikator zespołu przypisanego do użytkownika.
+     * Gets the ID of the team assigned to the user.
      *
-     * @param userId identyfikator użytkownika
-     * @return identyfikator zespołu lub wartość domyślna jeśli użytkownik nie należy do żadnego zespołu
+     * @param userId user ID
+     * @return team ID, or a default value if the user does not belong to any team
      */
     public int findTeamIdForUser(int userId) {
         return teamMemberDAO.getTeamIdForUser(userId);
     }
 
     /**
-     * Wyszukuje użytkownika na podstawie adresu email.
+     * Finds a user by email address.
      *
-     * @param email adres email użytkownika
-     * @return obiekt User jeśli znaleziono, null w przeciwnym wypadku
+     * @param email user's email address
+     * @return the User object if found, null otherwise
      */
     public User findUserByEmail(String email) {
         if (email == null || email.isEmpty()) {
@@ -72,10 +72,10 @@ public class LoginService {
     }
 
     /**
-     * Haszuje podane hasło algorytmem SHA-256.
+     * Hashes the given password with SHA-256.
      *
-     * @param password hasło do zaszyfrowania
-     * @return zahashowane hasło jako ciąg znaków hex lub null w przypadku błędu
+     * @param password password to hash
+     * @return the hashed password as a hex string, or null on error
      */
     private String hashPassword(String password) {
         try {

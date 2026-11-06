@@ -19,8 +19,8 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Kontroler odpowiedzialny za zarządzanie widokiem zadań przypisanych do aktualnie zalogowanego użytkownika.
- * Umożliwia przeglądanie, wyszukiwanie i zarządzanie zadaniami użytkownika.
+ * Controller that manages the view of tasks assigned to the currently logged-in
+ * user. Allows browsing, searching and managing the user's tasks.
  */
 public class MyTasksController {
 
@@ -47,7 +47,7 @@ public class MyTasksController {
     private ObservableList<Task> filteredTasks = FXCollections.observableArrayList();
 
     /**
-     * Inicjalizuje kontroler, konfigurując tabelę zadań i ładując dane.
+     * Initializes the controller, configuring the task table and loading the data.
      */
     @FXML
     private void initialize() {
@@ -83,7 +83,7 @@ public class MyTasksController {
     }
 
     /**
-     * Konfiguruje kolumny tabeli zadań.
+     * Configures the task table columns.
      */
     private void setupTableColumns() {
         colId.setCellValueFactory(data -> new SimpleIntegerProperty(tasksTable.getItems().indexOf(data.getValue()) + 1));
@@ -95,8 +95,8 @@ public class MyTasksController {
     }
 
     /**
-     * Otwiera okno ze szczegółami wybranego zadania.
-     * @param task Zadanie do wyświetlenia
+     * Opens the details window of the selected task.
+     * @param task task to display
      */
     private void openTaskDetails(Task task) {
         try {
@@ -119,7 +119,7 @@ public class MyTasksController {
     }
 
     /**
-     * Ładuje zadania przypisane do aktualnego użytkownika.
+     * Loads the tasks assigned to the current user.
      */
     private void loadTasks() {
         List<Task> tasks = taskDAO.getTasksForUser(Session.currentUserId);
@@ -129,7 +129,7 @@ public class MyTasksController {
     }
 
     /**
-     * Filtruje zadania na podstawie wprowadzonego tekstu w polu wyszukiwania.
+     * Filters tasks by the text entered in the search field.
      */
     @FXML
     private void handleSearch() {
@@ -154,7 +154,7 @@ public class MyTasksController {
     }
 
     /**
-     * Odświeża listę zadań, resetując filtr wyszukiwania.
+     * Refreshes the task list, resetting the search filter.
      */
     @FXML
     private void handleRefresh() {
@@ -163,10 +163,10 @@ public class MyTasksController {
     }
 
     /**
-     * Wyświetla okno dialogowe z komunikatem.
-     * @param type Typ komunikatu (INFORMATION, WARNING, ERROR)
-     * @param title Tytuł okna dialogowego
-     * @param message Treść komunikatu
+     * Shows a message dialog.
+     * @param type message type (INFORMATION, WARNING, ERROR)
+     * @param title dialog title
+     * @param message message text
      */
     private void showAlert(Alert.AlertType type, String title, String message) {
         Alert alert = new Alert(type);

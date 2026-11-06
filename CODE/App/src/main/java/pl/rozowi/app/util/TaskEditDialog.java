@@ -12,20 +12,24 @@ import pl.rozowi.app.models.Task;
 import java.io.IOException;
 
 /**
- * Klasa odpowiedzialna za wyświetlanie i zarządzanie oknem dialogowym edycji zadania.
- * Okno jest modalne i blokuje interakcję z innymi częściami aplikacji do momentu zamknięcia.
+ * Displays and manages the task edit dialog.
+ * The window is modal and blocks interaction with other parts of the
+ * application until it is closed.
  */
 public class TaskEditDialog {
 
     /**
-     * Wyświetla modalne okno dialogowe do edycji zadania.
-     * Ładuje widok z pliku FXML, ustawia kontroler i przekazuje do niego zadanie do edycji.
-     * Okno jest wyświetlane w trybie modalnym blokującym interakcję z resztą aplikacji.
+     * Shows a modal dialog for editing a task.
+     * Loads the view from an FXML file, sets the controller and passes it the task
+     * to edit.
+     * The window is shown in modal mode, blocking interaction with the rest of the
+     * application.
      *
-     * @param task Zadanie do edycji, które będzie przekazane do kontrolera. Jeśli null, zostanie utworzone nowe zadanie.
-     * @return true jeśli okno zostało poprawnie wyświetlone i zamknięte,
-     *         false w przypadku błędu ładowania widoku FXML
-     * @throws IOException jeśli wystąpi problem z ładowaniem pliku FXML
+     * @param task task to edit, passed to the controller. If null, a new task
+     *         will be created.
+     * @return true if the window was shown and closed correctly,
+     *         false if loading the FXML view failed
+     * @throws IOException if loading the FXML file fails
      * @see TaskEditController
      * @see Task
      */

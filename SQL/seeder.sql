@@ -1,11 +1,9 @@
--- Tabela roles
 INSERT INTO roles (id, role_name, permissions) VALUES
   (1, 'Administrator', 'VIEW_TASKS,CREATE_TASKS,UPDATE_TASKS,DELETE_TASKS,MANAGE_USERS,MANAGE_TEAMS,MANAGE_PROJECTS,VIEW_REPORTS'),
   (2, 'Kierownik', 'VIEW_TASKS,UPDATE_TASKS,MANAGE_TEAMS,MANAGE_PROJECTS,VIEW_REPORTS'),
   (3, 'Team Lider', 'VIEW_TASKS,CREATE_TASKS,ASSIGN_TASKS,UPDATE_TASKS'),
   (4, 'Pracownik', 'VIEW_TASKS,UPDATE_OWN_TASKS');
 
--- Tabela groups
 INSERT INTO groups (id, group_name) VALUES
   (1, 'Developerzy'),
   (2, 'Testerzy'),
@@ -19,9 +17,11 @@ INSERT INTO groups (id, group_name) VALUES
   (10, 'HR'),
   (11, 'Właścicielowie');;
 
--- Tabela users
--- Hasło to: Haslo#12345
--- Administratorzy (3)
+/*
+ * Table users
+ * Password: Haslo#12345
+ * Administrators (3)
+ */
 INSERT INTO users (id, name, last_name, email, password, password_hint, role_id, group_id) VALUES
   (1, 'Jan', 'Kowalski', 'jan.kowalski@firma.pl', '95b49eab894a32254b0990346390a167a45ec751e5e72da9f45abae5f7d9340d', 'podpowiedz1', 3, 5),
   (2, 'Anna', 'Nowak', 'anna.nowak@firma.pl', '95b49eab894a32254b0990346390a167a45ec751e5e72da9f45abae5f7d9340d', 'podpowiedz2', 3, 5),
@@ -73,7 +73,6 @@ INSERT INTO users (id, name, last_name, email, password, password_hint, role_id,
   (39, 'Julia', 'Kowalczyk', 'julia.kowalczyk@firma.pl', '95b49eab894a32254b0990346390a167a45ec751e5e72da9f45abae5f7d9340d', 'podpowiedz39', 4, 6),
   (40, 'Sylwia', 'Głowacka', 'sylwia.glowacka@firma.pl', '95b49eab894a32254b0990346390a167a45ec751e5e72da9f45abae5f7d9340d', 'podpowiedz40', 4, 7);
 
--- Tabela settings
 INSERT INTO settings (user_id, theme, default_view, last_password_change) VALUES
   (1, 'light', 'Zespoły', CURRENT_TIMESTAMP()),
   (2, 'dark', 'Zadania', CURRENT_TIMESTAMP()),
@@ -116,7 +115,6 @@ INSERT INTO settings (user_id, theme, default_view, last_password_change) VALUES
   (39, 'light', 'Zadania', CURRENT_TIMESTAMP()),
   (40, 'dark', 'Zadania', CURRENT_TIMESTAMP());
 
--- Tabela projects
 INSERT INTO projects (id, project_name, description, start_date, end_date, manager_id) VALUES
   (1, 'System CRM', 'Rozwój systemu CRM dla klientów zewnętrznych', '2025-04-01', '2025-07-01', 4),
   (2, 'Aplikacja mobilna', 'Tworzenie aplikacji mobilnej na iOS i Android', '2025-04-05', '2025-07-15', 5),
@@ -149,7 +147,9 @@ INSERT INTO projects (id, project_name, description, start_date, end_date, manag
   (29, 'System do zarządzania magazynem', 'System WMS dla logistyki', '2025-08-20', '2026-04-15', 5),
   (30, 'Portal dla pracowników', 'Portal samoobsługowy dla pracowników', '2025-08-25', '2026-04-30', 6);
 
--- Tabela teams (30 zespołów, po jednym na projekt, z różnorodnymi grupami)
+/*
+ * Table teams (30 teams, one per project, with diverse groups)
+ */
 INSERT INTO teams (id, team_name, project_id) VALUES
   (1, 'Zespół Alfa', 1),
   (2, 'Zespół Beta', 2),
@@ -182,7 +182,9 @@ INSERT INTO teams (id, team_name, project_id) VALUES
   (29, 'Zespół Delta 2', 29),
   (30, 'Zespół Epsilon 2', 30);
 
--- Przypisanie członków do zespołów (różnorodne grupy)
+/*
+ * Assign members to teams (diverse groups)
+ */
 INSERT INTO team_members (team_id, user_id, is_leader) VALUES
   (1, 1, 1), (1, 17, 0), (1, 18, 0), (1, 21, 0), (1, 23, 0),
   (2, 2, 1), (2, 19, 0), (2, 20, 0), (2, 22, 0), (2, 24, 0),
@@ -215,7 +217,9 @@ INSERT INTO team_members (team_id, user_id, is_leader) VALUES
   (29, 2, 1), (29, 33, 0), (29, 34, 0), (29, 35, 0), (29, 36, 0),
   (30, 3, 1), (30, 37, 0), (30, 38, 0), (30, 39, 0), (30, 40, 0);
 
--- Tabela tasks (200 zadań)
+/*
+ * Table tasks (200 tasks)
+ */
 INSERT INTO tasks (id, project_id, team_id, title, description, status, priority, start_date, end_date) VALUES
 (1, 1, 1, 'Implementacja panelu użytkownika', 'Stworzenie interfejsu użytkownika dla systemu CRM', 'Nowe', 'Wysokie', '2025-04-01', '2025-04-15'),
 (2, 1, 1, 'Testy panelu użytkownika', 'Przeprowadzenie testów użyteczności panelu', 'W toku', 'Średnie', '2025-04-03', '2025-04-17'),
@@ -418,7 +422,9 @@ INSERT INTO tasks (id, project_id, team_id, title, description, status, priority
 (199, 25, 25, 'Moduł logowania procesów', 'Implementacja logowania procesów', 'Nowe', 'Wysokie', '2025-06-25', '2025-07-09'),
 (200, 25, 25, 'Testy logowania procesów', 'Przeprowadzenie testów logowania', 'W toku', 'Średnie', '2025-06-27', '2025-07-11');
 
--- Tabela task_assignments (przypisanie zadań do użytkowników)
+/*
+ * Table task_assignments (assigning tasks to users)
+ */
 INSERT INTO task_assignments (task_id, user_id) VALUES
   (1, 17), (1, 18), (1, 21),
   (2, 18), (2, 21), (2, 23),
@@ -619,7 +625,6 @@ INSERT INTO task_assignments (task_id, user_id) VALUES
   (197, 37), (197, 38), (197, 39),
   (198, 38), (198, 39), (198, 40);
 
--- Tabela task_activities
 INSERT INTO task_activities (task_id, user_id, activity_type, description, created_at) VALUES
   (1, 17, 'Dodanie zadania', 'Dodano uwagi do implementacji panelu użytkownika', NOW()),
   (2, 18, 'Aktualizacja zadania', 'Zmieniono status testów na W toku', NOW()),

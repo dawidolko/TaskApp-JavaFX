@@ -16,18 +16,18 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Klasa dostępu do danych dla użytkowników systemu.
- * Zawiera metody do zarządzania użytkownikami, ich uprawnieniami i preferencjami.
+ * Data access class for system users.
+ * Contains methods for managing users, their permissions and preferences.
  */
 public class UserDAO {
 
     private static final Logger LOGGER = Logger.getLogger(UserDAO.class.getName());
 
     /**
-     * Dodaje nowego użytkownika do bazy danych.
+     * Adds a new user to the database.
      *
-     * @param user Obiekt User zawierający dane użytkownika
-     * @return true jeśli operacja się powiodła, false w przeciwnym przypadku
+     * @param user User object containing the user's data
+     * @return true if the operation succeeded, false otherwise
      */
     public boolean insertUser(User user) {
         String sql = "INSERT INTO users (name, last_name, password, email, role_id, group_id, password_hint) VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -49,10 +49,10 @@ public class UserDAO {
     }
 
     /**
-     * Pobiera użytkownika na podstawie adresu email.
+     * Gets a user by email address.
      *
-     * @param email Adres email użytkownika
-     * @return Obiekt User lub null jeśli nie znaleziono
+     * @param email user's email address
+     * @return User object, or null if not found
      */
     public User getUserByEmail(String email) {
         String sql = "SELECT u.*, s.theme, s.default_view " +
@@ -86,10 +86,10 @@ public class UserDAO {
     }
 
     /**
-     * Pobiera użytkownika na podstawie ID.
+     * Gets a user by ID.
      *
-     * @param userId ID użytkownika
-     * @return Obiekt User lub null jeśli nie znaleziono
+     * @param userId user ID
+     * @return User object, or null if not found
      */
     public User getUserById(int userId) {
         String sql = "SELECT u.*, s.theme, s.default_view " +
@@ -123,10 +123,10 @@ public class UserDAO {
     }
 
     /**
-     * Aktualizuje dane użytkownika w bazie danych.
+     * Updates a user's data in the database.
      *
-     * @param user Obiekt User zawierający zaktualizowane dane
-     * @return true jeśli operacja się powiodła, false w przeciwnym przypadku
+     * @param user User object containing the updated data
+     * @return true if the operation succeeded, false otherwise
      */
     public boolean updateUser(User user) {
         String sqlUser = "UPDATE users SET email = ?, password = ?, password_hint = ?, name = ?, last_name = ?, role_id = ?, group_id = ? WHERE id = ?";
@@ -178,10 +178,10 @@ public class UserDAO {
     }
 
     /**
-     * Pobiera listę wszystkich użytkowników systemu.
+     * Gets the list of all system users.
      *
-     * @return Lista obiektów User
-     * @throws SQLException w przypadku błędu dostępu do bazy danych
+     * @return list of User objects
+     * @throws SQLException on a database access error
      */
     public List<User> getAllUsers() throws SQLException {
         List<User> list = new ArrayList<>();
@@ -205,9 +205,9 @@ public class UserDAO {
     }
 
     /**
-     * Pobiera listę wszystkich menedżerów systemu (użytkowników z rolą ID=2).
+     * Gets the list of all system managers (users with role ID=2).
      *
-     * @return Lista obiektów User będących menedżerami
+     * @return list of User objects who are managers
      */
     public List<User> getAllManagers() {
         List<User> list = new ArrayList<>();
@@ -233,9 +233,9 @@ public class UserDAO {
     }
 
     /**
-     * Pobiera mapę wszystkich ról użytkowników.
+     * Gets a map of all user roles.
      *
-     * @return Mapa gdzie kluczem jest ID roli a wartością jej nazwa
+     * @return map with the role ID as key and its name as value
      */
     public Map<Integer, String> getAllRolesMap() {
         Map<Integer, String> roles = new HashMap<>();
@@ -253,9 +253,9 @@ public class UserDAO {
     }
 
     /**
-     * Pobiera mapę wszystkich grup użytkowników.
+     * Gets a map of all user groups.
      *
-     * @return Mapa gdzie kluczem jest ID grupy a wartością jej nazwa
+     * @return map with the group ID as key and its name as value
      */
     public Map<Integer, String> getAllGroupsMap() {
         Map<Integer, String> groups = new HashMap<>();
@@ -273,10 +273,10 @@ public class UserDAO {
     }
 
     /**
-     * Usuwa użytkownika z systemu.
+     * Deletes a user from the system.
      *
-     * @param userId ID użytkownika do usunięcia
-     * @return true jeśli operacja się powiodła, false w przeciwnym przypadku
+     * @param userId ID of the user to delete
+     * @return true if the operation succeeded, false otherwise
      */
     public boolean deleteUser(int userId) {
         String sqlSettings = "DELETE FROM settings WHERE user_id = ?";
@@ -310,9 +310,9 @@ public class UserDAO {
     }
 
     /**
-     * Pobiera listę nazw wszystkich grup użytkowników.
+     * Gets the list of names of all user groups.
      *
-     * @return Lista nazw grup posortowana alfabetycznie
+     * @return list of group names sorted alphabetically
      */
     public List<String> getAllGroupNames() {
         List<String> groups = new ArrayList<>();
@@ -330,10 +330,10 @@ public class UserDAO {
     }
 
     /**
-     * Pobiera listę ID użytkowników należących do określonej grupy.
+     * Gets the list of IDs of users belonging to the given group.
      *
-     * @param groupName Nazwa grupy
-     * @return Lista ID użytkowników
+     * @param groupName group name
+     * @return list of user IDs
      */
     public List<Integer> getUsersByGroupName(String groupName) {
         List<Integer> userIds = new ArrayList<>();

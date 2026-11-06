@@ -18,8 +18,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Kontroler odpowiedzialny za proces rejestracji nowego użytkownika w systemie.
- * Zapewnia walidację danych wejściowych i bezpieczne tworzenie kont użytkowników.
+ * Controller that handles registering a new user in the system.
+ * Provides input validation and secure creation of user accounts.
  */
 public class RegisterController {
 
@@ -33,15 +33,15 @@ public class RegisterController {
     private UserDAO userDAO = new UserDAO();
 
     /**
-     * Inicjalizuje kontroler, ustawiając obsługę zdarzeń klawiatury.
-     * Naciśnięcie Enter w dowolnym polu formularza wywołuje próbę rejestracji.
+     * Initializes the controller by setting up keyboard event handling.
+     * Pressing Enter in any form field triggers a registration attempt.
      */
     public void initialize() {
         addEnterKeyHandlers();
     }
 
     /**
-     * Obsługuje zdarzenie naciśnięcia klawisza Enter w polach formularza.
+     * Handles the Enter key press event in the form fields.
      */
     private void addEnterKeyHandlers() {
         firstNameField.setOnKeyPressed(event -> {
@@ -62,8 +62,8 @@ public class RegisterController {
     }
 
     /**
-     * Obsługuje proces rejestracji nowego użytkownika.
-     * Wykonuje walidację danych i tworzy nowe konto użytkownika.
+     * Handles the new user registration process.
+     * Validates the data and creates a new user account.
      */
     @FXML
     private void handleRegister() {
@@ -117,8 +117,8 @@ public class RegisterController {
     }
 
     /**
-     * Przekierowuje użytkownika z powrotem do ekranu logowania.
-     * @throws IOException w przypadku problemów z załadowaniem widoku logowania
+     * Redirects the user back to the login screen.
+     * @throws IOException if loading the login view fails
      */
     @FXML
     private void goBack() throws IOException {
@@ -126,17 +126,17 @@ public class RegisterController {
     }
 
     /**
-     * Wyświetla komunikat o błędzie w interfejsie użytkownika.
-     * @param message Treść komunikatu o błędzie
+     * Shows an error message in the user interface.
+     * @param message error message text
      */
     private void showError(String message) {
         errorLabel.setText(message);
     }
 
     /**
-     * Wyświetla okno dialogowe z informacją o sukcesie.
-     * @param title Tytuł okna dialogowego
-     * @param message Treść komunikatu
+     * Shows a dialog with a success message.
+     * @param title dialog title
+     * @param message message text
      */
     private void showSuccessAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -147,9 +147,9 @@ public class RegisterController {
     }
 
     /**
-     * Haszuje podane hasło algorytmem SHA-256.
-     * @param password Hasło do zahaszowania
-     * @return Zahaszowane hasło w postaci ciągu znaków hex
+     * Hashes the given password with SHA-256.
+     * @param password password to hash
+     * @return the hashed password as a hex string
      */
     private String hashPassword(String password) {
         try {
@@ -169,9 +169,9 @@ public class RegisterController {
     }
 
     /**
-     * Sprawdza czy tekst zaczyna się od wielkiej litery.
-     * @param text Tekst do sprawdzenia
-     * @return true jeśli tekst zaczyna się od wielkiej litery, false w przeciwnym przypadku
+     * Checks whether the text starts with an uppercase letter.
+     * @param text text to check
+     * @return true if the text starts with an uppercase letter, false otherwise
      */
     private boolean isCapitalized(String text) {
         if (text == null || text.isEmpty()) return false;
@@ -179,9 +179,9 @@ public class RegisterController {
     }
 
     /**
-     * Sprawdza poprawność formatu adresu email.
-     * @param email Adres email do walidacji
-     * @return true jeśli email jest poprawny, false w przeciwnym przypadku
+     * Validates the email address format.
+     * @param email email address to validate
+     * @return true if the email is valid, false otherwise
      */
     private boolean isValidEmail(String email) {
         if (email == null) return false;
@@ -190,9 +190,9 @@ public class RegisterController {
     }
 
     /**
-     * Sprawdza czy hasło zawiera przynajmniej jeden znak specjalny.
-     * @param password Hasło do sprawdzenia
-     * @return true jeśli hasło zawiera znak specjalny, false w przeciwnym przypadku
+     * Checks whether the password contains at least one special character.
+     * @param password password to check
+     * @return true if the password contains a special character, false otherwise
      */
     private boolean hasSpecialChar(String password) {
         if (password == null) return false;

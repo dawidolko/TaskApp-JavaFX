@@ -8,16 +8,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Klasa dostępu do danych dla członków zespołów.
- * Zawiera metody do zarządzania przypisaniami użytkowników do zespołów.
+ * Data access class for team members.
+ * Contains methods for managing user assignments to teams.
  */
 public class TeamMemberDAO {
 
     /**
-     * Pobiera listę członków określonego zespołu.
+     * Gets the list of members of the given team.
      *
-     * @param teamId ID zespołu
-     * @return Lista obiektów User reprezentujących członków zespołu
+     * @param teamId team ID
+     * @return list of User objects representing the team members
      */
     public List<User> getTeamMembers(int teamId) {
         String sql = """
@@ -46,10 +46,10 @@ public class TeamMemberDAO {
     }
 
     /**
-     * Pobiera ID zespołu, do którego przypisany jest użytkownik.
+     * Gets the ID of the team the user is assigned to.
      *
-     * @param userId ID użytkownika
-     * @return ID zespołu lub 0 jeśli użytkownik nie jest przypisany do żadnego zespołu
+     * @param userId user ID
+     * @return team ID, or 0 if the user is not assigned to any team
      */
     public int getTeamIdForUser(int userId) {
         String sql = "SELECT team_id FROM team_members WHERE user_id = ? LIMIT 1";
@@ -67,11 +67,11 @@ public class TeamMemberDAO {
     }
 
     /**
-     * Sprawdza czy użytkownik jest liderem zespołu.
+     * Checks whether the user is a team leader.
      *
-     * @param teamId ID zespołu
-     * @param userId ID użytkownika
-     * @return true jeśli użytkownik jest liderem, false w przeciwnym przypadku
+     * @param teamId team ID
+     * @param userId user ID
+     * @return true if the user is the leader, false otherwise
      */
     public boolean isTeamLeader(int teamId, int userId) {
         String sql = "SELECT is_leader FROM team_members WHERE team_id = ? AND user_id = ?";
@@ -90,13 +90,13 @@ public class TeamMemberDAO {
     }
 
     /**
-     * Dodaje użytkownika do zespołu.
+     * Adds a user to a team.
      *
-     * @param teamId ID zespołu
-     * @param userId ID użytkownika
-     * @param isLeader flaga określająca czy użytkownik ma być liderem
-     * @return true jeśli operacja się powiodła, false w przeciwnym przypadku
-     * @throws SQLException w przypadku błędu dostępu do bazy danych
+     * @param teamId team ID
+     * @param userId user ID
+     * @param isLeader flag indicating whether the user is to be a leader
+     * @return true if the operation succeeded, false otherwise
+     * @throws SQLException on a database access error
      */
     public boolean insertTeamMember(int teamId, int userId, boolean isLeader) throws SQLException {
         String sql = "INSERT INTO team_members (team_id, user_id, is_leader) VALUES (?, ?, ?)";
@@ -111,11 +111,11 @@ public class TeamMemberDAO {
     }
 
     /**
-     * Usuwa użytkownika z zespołu.
+     * Removes a user from a team.
      *
-     * @param teamId ID zespołu
-     * @param userId ID użytkownika
-     * @return true jeśli operacja się powiodła, false w przeciwnym przypadku
+     * @param teamId team ID
+     * @param userId user ID
+     * @return true if the operation succeeded, false otherwise
      */
     public boolean deleteTeamMember(int teamId, int userId) {
         String sql = "DELETE FROM team_members WHERE team_id = ? AND user_id = ?";
@@ -132,12 +132,12 @@ public class TeamMemberDAO {
     }
 
     /**
-     * Aktualizuje przypisanie użytkownika do zespołu.
-     * Jeśli użytkownik jest już przypisany do innego zespołu, stare przypisanie jest usuwane.
+     * Updates a user's team assignment.
+     * If the user is already assigned to another team, the old assignment is removed.
      *
-     * @param userId ID użytkownika
-     * @param newTeamId ID nowego zespołu
-     * @return true jeśli operacja się powiodła, false w przeciwnym przypadku
+     * @param userId user ID
+     * @param newTeamId ID of the new team
+     * @return true if the operation succeeded, false otherwise
      */
     public boolean updateUserTeam(int userId, int newTeamId) {
         try (Connection conn = DatabaseManager.getConnection()) {
@@ -181,10 +181,10 @@ public class TeamMemberDAO {
     }
 
     /**
-     * Pobiera listę ID wszystkich zespołów, do których należy użytkownik.
+     * Gets the list of IDs of all teams the user belongs to.
      *
-     * @param userId ID użytkownika
-     * @return Lista ID zespołów
+     * @param userId user ID
+     * @return list of team IDs
      */
     public List<Integer> getAllTeamIdsForUser(int userId) {
         List<Integer> teamIds = new ArrayList<>();
@@ -203,10 +203,10 @@ public class TeamMemberDAO {
     }
 
     /**
-     * Pobiera listę ID zespołów, w których użytkownik jest liderem.
+     * Gets the list of IDs of teams in which the user is the leader.
      *
-     * @param userId ID użytkownika
-     * @return Lista ID zespołów
+     * @param userId user ID
+     * @return list of team IDs
      */
     public List<Integer> getTeamIdsForTeamLeader(int userId) {
         List<Integer> teamIds = new ArrayList<>();

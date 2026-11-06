@@ -11,8 +11,9 @@ import pl.rozowi.app.MainApplication;
 import java.io.IOException;
 
 /**
- * Kontroler odpowiedzialny za wyświetlanie ekranu powitalnego (splash screen) aplikacji.
- * Zarządza animacjami pojawiania się i zanikania ekranu oraz przejściem do ekranu logowania.
+ * Controller that displays the application's splash screen.
+ * Manages the screen's fade-in and fade-out animations and the transition to the
+ * login screen.
  */
 public class SplashScreenController {
 
@@ -23,9 +24,9 @@ public class SplashScreenController {
     private ImageView logoImageView;
 
     /**
-     * Inicjalizacja kontrolera - uruchamia animacje ekranu powitalnego.
-     * Wykonuje animację powiększenia logo oraz płynne zanikanie całego ekranu.
-     * Po zakończeniu animacji automatycznie przełącza na ekran logowania.
+     * Initializes the controller - starts the splash screen animations.
+     * Runs the logo zoom animation and a smooth fade-out of the whole screen.
+     * When the animation ends, automatically switches to the login screen.
      */
     public void initialize() {
         ScaleTransition scaleTransition = new ScaleTransition(Duration.seconds(2), logoImageView);
